@@ -1,6 +1,7 @@
 import type { BlogPost, City, ContentBlock, Review, SiteSettings, Venue } from "@/types";
 import { blogPosts, cities, venues } from "./data";
 import { SITE } from "./site";
+import { getConfig } from "@/lib/config";
 
 /**
  * Data access for the public website.
@@ -9,8 +10,7 @@ import { SITE } from "./site";
  * Browser submissions use a same-origin `/api` path, which Nginx proxies to
  * the API service. This keeps cookies first-party and avoids public CORS.
  */
-const SERVER_BASE = (process.env.API_INTERNAL_URL || process.env.NEXT_PUBLIC_API_URL || "").replace(/\/+$/, "");
-const PUBLIC_BASE = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/+$/, "");
+const { publicApiBase: PUBLIC_BASE, internalApiBase: SERVER_BASE } = getConfig();
 
 async function backend<T>(path: string, init?: RequestInit): Promise<T | null> {
   if (!SERVER_BASE) return null;

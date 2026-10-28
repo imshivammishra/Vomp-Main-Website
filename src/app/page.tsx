@@ -1,33 +1,29 @@
-import Image from "next/image";
-import Link from "next/link";
+import type { ContentBlock, Faq } from "@/types";
 import {
-  BadgePercent,
-  Building2,
-  Castle,
-  Landmark,
-  Palmtree,
-  PhoneCall,
-  Sparkles,
-  Star,
-  TentTree,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
-import BlogCard from "@/components/venues/BlogCard";
-import CTASection from "@/components/home/CTASection";
-import CityCard from "@/components/venues/CityCard";
-import EnquiryForm from "@/components/forms/EnquiryForm";
-import FAQ from "@/components/forms/FAQ";
-import Hero, { type HeroSlide } from "@/components/home/Hero";
-import HomeTabs from "@/components/home/HomeTabs";
-import Reveal from "@/components/ui/Reveal";
-import VideoCard from "@/components/home/VideoCard";
-import CinematicBand from "@/components/home/CinematicBand";
-import SectionHeading, { SectionLink } from "@/components/home/SectionHeading";
-import { getBlogs, getCities, getContentBlocks, getReviews, getVenues } from "@/lib/api";
+  getBlogs,
+  getCities,
+  getContentBlocks,
+  getReviews,
+  getVenues,
+} from "@/lib/api";
 import { generalFaqs } from "@/lib/data";
 import { faqJsonLd } from "@/lib/seo";
-import type { ContentBlock, Faq } from "@/types";
+import TickerSection from "@/components/home/sections/TickerSection";
+import HeroSection from "@/components/home/sections/HeroSection";
+import HighlightsSection from "@/components/home/sections/HighlightsSection";
+import AboutSection from "@/components/home/sections/AboutSection";
+import CitiesSection from "@/components/home/sections/CitiesSection";
+import CategoriesSection from "@/components/home/sections/CategoriesSection";
+import FeaturesSection from "@/components/home/sections/FeaturesSection";
+import StepsSection from "@/components/home/sections/StepsSection";
+import GallerySection from "@/components/home/sections/GallerySection";
+import FilmsSection from "@/components/home/sections/FilmsSection";
+import TestimonialsSection from "@/components/home/sections/TestimonialsSection";
+import BlogSection from "@/components/home/sections/BlogSection";
+import EnquirySection from "@/components/home/sections/EnquirySection";
+import SEOSection from "@/components/home/sections/SEOSection";
+import CTASection from "@/components/home/CTASection";
+import { localMedia, localVideo } from "@/lib/home-media";
 
 const TICKER = [
   "Mehendi",
@@ -66,18 +62,18 @@ const GALLERY = [
 ];
 
 const CATEGORIES: Category[] = [
-  { icon: Castle, t: "Palaces & heritage", d: "Royal palaces and heritage properties for weddings and receptions.", href: "/venues?event=Wedding" },
-  { icon: Palmtree, t: "Resorts & lawns", d: "Green resorts, farmhouses and open lawns for haldi, sangeet and pheras.", href: "/venues" },
-  { icon: Landmark, t: "Banquets & ballrooms", d: "Premium indoor halls for receptions, anniversaries and large guest lists.", href: "/venues" },
-  { icon: TentTree, t: "Beach & destination", d: "Goa, Udaipur, Jaipur and beyond — venues worth travelling for.", href: "/cities" },
-  { icon: Building2, t: "Corporate venues", d: "Conferences, offsites and annual days with rooms, AV and banquets.", href: "/venues?event=Corporate event" },
-  { icon: Users, t: "Private party venues", d: "Birthdays, anniversaries and intimate gatherings at verified venues.", href: "/venues?event=Birthday / Anniversary" },
+  { icon: "castle", t: "Palaces & heritage", d: "Royal palaces and heritage properties for weddings and receptions.", href: "/venues?event=Wedding" },
+  { icon: "palm", t: "Resorts & lawns", d: "Green resorts, farmhouses and open lawns for haldi, sangeet and pheras.", href: "/venues" },
+  { icon: "landmark", t: "Banquets & ballrooms", d: "Premium indoor halls for receptions, anniversaries and large guest lists.", href: "/venues" },
+  { icon: "tent", t: "Beach & destination", d: "Goa, Udaipur, Jaipur and beyond — venues worth travelling for.", href: "/cities" },
+  { icon: "building", t: "Corporate venues", d: "Conferences, offsites and annual days with rooms, AV and banquets.", href: "/venues?event=Corporate event" },
+  { icon: "users", t: "Private party venues", d: "Birthdays, anniversaries and intimate gatherings at verified venues.", href: "/venues?event=Birthday / Anniversary" },
 ];
 
 const FEATURES: Feature[] = [
-  { icon: BadgePercent, t: "Exclusive pricing", d: "Get a private quote-led proposal shaped around date, guest count, rooms, menu preferences, and service level." },
-  { icon: Sparkles, t: "Expert insights", d: "Compare venue flow, ceremony zones, guest arrival, privacy, hospitality depth, and visit questions before you go." },
-  { icon: PhoneCall, t: "Discreet follow-up", d: "Your enquiry stays request-led. Our team follows up by call to refine fit, options, and next steps." },
+  { icon: "badge", t: "Exclusive pricing", d: "Get a private quote-led proposal shaped around date, guest count, rooms, menu preferences, and service level." },
+  { icon: "sparkles", t: "Expert insights", d: "Compare venue flow, ceremony zones, guest arrival, privacy, hospitality depth, and visit questions before you go." },
+  { icon: "phone", t: "Discreet follow-up", d: "Your enquiry stays request-led. Our team follows up by call to refine fit, options, and next steps." },
 ];
 
 const STEPS = [
@@ -93,18 +89,9 @@ const FILMS = [
   { src: "/videos/hero-bg.mp4", poster: "/images/wedding-dance.jpg", startAt: 21, caption: "Aisle walks" },
 ];
 
-const HERO_VIDEO = "/videos/hero-bg.mp4";
 const HERO_POSTER = "/images/hero-poster.jpg";
 
-function localMedia(src: string | undefined, fallback: string) {
-  return src && src.startsWith("/") ? src : fallback;
-}
-
-function localVideo(src: string | undefined) {
-  return src && src.startsWith("/") && /\.(mp4|webm|mov|m4v)(\?|$)/i.test(src) ? src : HERO_VIDEO;
-}
-
-const HEADING_FALLBACKS: Record<string, Heading> = {
+const HEADING_FALLBACKS: Record<string, { eyebrow: string; title: string; copy?: string; linkLabel?: string; linkHref?: string }> = {
   highlights: {
     eyebrow: "This season's highlights",
     title: "Every celebration starts with the right venue",
@@ -208,47 +195,18 @@ const CTA_FALLBACK = {
   secondaryLabel: "Explore venues",
 };
 
-interface Heading {
-  eyebrow: string;
-  title: string;
-  copy?: string;
-  linkLabel?: string;
-  linkHref?: string;
-}
-
 interface Category {
-  icon: LucideIcon;
+  icon: string;
   t: string;
   d: string;
   href: string;
 }
 
 interface Feature {
-  icon: LucideIcon;
+  icon: string;
   t: string;
   d: string;
 }
-
-interface Testimonial {
-  id: string;
-  name: string;
-  context: string;
-  quote: string;
-  rating: number;
-  image: string;
-}
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  castle: Castle,
-  palm: Palmtree,
-  landmark: Landmark,
-  tent: TentTree,
-  building: Building2,
-  users: Users,
-  badge: BadgePercent,
-  sparkles: Sparkles,
-  phone: PhoneCall,
-};
 
 function bySection(blocks: ContentBlock[], section: ContentBlock["section"]) {
   return blocks.filter((block) => block.section === section);
@@ -273,7 +231,7 @@ function metaStats(meta: Record<string, unknown> | undefined, fallback: { value:
   return stats.length > 0 ? stats : fallback;
 }
 
-function headingFor(blocks: ContentBlock[], key: string): Heading {
+function headingFor(blocks: ContentBlock[], key: string) {
   const block = blocks.find((item) => item.section === "heading" && item.blockKey === key);
   if (!block) return HEADING_FALLBACKS[key];
   return {
@@ -294,9 +252,10 @@ export default async function HomePage() {
     getReviews(),
   ]);
 
+  // ---- Hero ----
   const heroBlocks = bySection(content, "hero");
   const heroVideoBlock = heroBlocks.find((block) => block.blockKey === "video");
-  const heroSlides: HeroSlide[] = heroBlocks
+  const heroSlides = heroBlocks
     .filter((block) => block.blockKey !== "video")
     .map((block, index) => ({
       eyebrow: block.subtitle,
@@ -310,10 +269,15 @@ export default async function HomePage() {
         href: metaString(block.meta, "secondaryHref", "/contact"),
       },
     }));
+  const heroVideo = localVideo(heroVideoBlock?.title);
+  const heroPoster = localMedia(heroVideoBlock?.image, HERO_POSTER);
+  const heroPosterAlt = heroVideoBlock?.imageAlt;
 
+  // ---- Ticker ----
   const tickerBlocks = bySection(content, "ticker").map((block) => block.title).filter(Boolean);
   const ticker = tickerBlocks.length > 0 ? tickerBlocks : TICKER;
 
+  // ---- About ----
   const aboutBlock = bySection(content, "about")[0];
   const aboutMeta = aboutBlock?.meta;
   const about = aboutBlock
@@ -331,30 +295,34 @@ export default async function HomePage() {
       }
     : ABOUT_FALLBACK;
 
+  // ---- Categories ----
   const categoryBlocks = bySection(content, "category");
-  const categories: Category[] = categoryBlocks.length
+  const categories = categoryBlocks.length
     ? categoryBlocks.map((block) => ({
-        icon: ICON_MAP[block.icon] || Castle,
+        icon: block.icon || "castle",
         t: block.title,
         d: block.body,
         href: block.linkHref || "/venues",
       }))
     : CATEGORIES;
 
+  // ---- Features ----
   const featureBlocks = bySection(content, "feature");
-  const features: Feature[] = featureBlocks.length
+  const features = featureBlocks.length
     ? featureBlocks.map((block) => ({
-        icon: ICON_MAP[block.icon] || Sparkles,
+        icon: block.icon || "sparkles",
         t: block.title,
         d: block.body,
       }))
     : FEATURES;
 
+  // ---- Steps ----
   const stepBlocks = bySection(content, "step");
-  const steps = stepBlocks.length
-    ? stepBlocks.map((block) => [block.subtitle || "01", block.title, block.body] as const)
+  const steps: string[][] = stepBlocks.length
+    ? stepBlocks.map((block) => [block.subtitle || "01", block.title, block.body])
     : STEPS;
 
+  // ---- Gallery ----
   const galleryBlocks = bySection(content, "gallery");
   const galleryItems = galleryBlocks.map((block, index) => ({
     src: localMedia(block.image, GALLERY[index % GALLERY.length].src),
@@ -363,6 +331,7 @@ export default async function HomePage() {
   }));
   const gallery = galleryItems.length > 0 ? galleryItems : GALLERY;
 
+  // ---- Films / Cinematic band ----
   const filmBlocks = bySection(content, "film");
   const bandBlock = filmBlocks.find((block) => metaString(block.meta, "placement", "grid") === "band");
   const band = bandBlock
@@ -389,18 +358,21 @@ export default async function HomePage() {
     .filter((item) => item.src);
   const films = filmItems.length > 0 ? filmItems : FILMS;
 
+  // ---- FAQs ----
   const faqBlocks = bySection(content, "faq");
   const faqs: Faq[] = faqBlocks.length
     ? faqBlocks.map((block) => ({ question: block.title, answer: block.body }))
     : generalFaqs.slice(0, 6);
 
+  // ---- City cards ----
   const cityCards = cities.map((city) => {
     if (city.image?.startsWith("/")) return city;
     const venue = venues.find((item) => item.citySlug === city.slug && item.image?.startsWith("https://"));
     return venue?.image ? { ...city, image: venue.image } : city;
   });
 
-  const testimonials: Testimonial[] = reviewRows.map((review) => ({
+  // ---- Testimonials ----
+  const testimonials = reviewRows.map((review) => ({
     id: review.id,
     name: review.name,
     context: review.context,
@@ -409,6 +381,7 @@ export default async function HomePage() {
     image: review.image,
   }));
 
+  // ---- SEO ----
   const seoBlock = bySection(content, "seo")[0];
   const seo = seoBlock
     ? {
@@ -418,6 +391,7 @@ export default async function HomePage() {
     : SEO_FALLBACK;
   if (seo.paragraphs.length === 0) seo.paragraphs = SEO_FALLBACK.paragraphs;
 
+  // ---- CTA ----
   const ctaBlock = bySection(content, "cta")[0];
   const cta = ctaBlock
     ? {
@@ -430,6 +404,7 @@ export default async function HomePage() {
       }
     : CTA_FALLBACK;
 
+  // ---- Headings ----
   const highlightsHeading = headingFor(content, "highlights");
   const aboutHeading = headingFor(content, "about");
   const citiesHeading = headingFor(content, "cities");
@@ -444,304 +419,39 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Royal wedding ribbon */}
-      <div className="border-y border-[#c6a04a]/60 bg-[#f4e6c9]">
-        <div
-          aria-label="Wedding celebrations"
-          className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-center gap-x-4 gap-y-1 px-4 py-2.5 md:gap-x-7"
-        >
-          {ticker.slice(0, 6).map((t, i) => (
-            <span
-              key={t}
-              className="flex items-center gap-4 font-display text-[11px] font-semibold tracking-[0.24em] text-[#4a0719] uppercase md:gap-7 md:text-[12px]"
-            >
-              {i > 0 && (
-                <span aria-hidden="true" className="text-[8px] leading-none text-[#a67c1a]">
-                  ❖
-                </span>
-              )}
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
+      <TickerSection ticker={ticker} />
 
-      <Hero
+      <HeroSection
         slides={heroSlides}
-        video={localVideo(heroVideoBlock?.title)}
-        poster={localMedia(heroVideoBlock?.image, HERO_POSTER)}
-        posterAlt={heroVideoBlock?.imageAlt}
+        video={heroVideo}
+        poster={heroPoster}
+        posterAlt={heroPosterAlt}
+        band={band}
       />
 
-      <CinematicBand
-        src={band.src}
-        poster={band.poster}
-        eyebrow={band.eyebrow}
-        title={band.title}
-        linkLabel={band.linkLabel}
-        linkHref={band.linkHref}
-      />
+      <HighlightsSection venues={venues} heading={highlightsHeading} />
 
-      {/* Tab highlights */}
-      <section aria-labelledby="highlights-heading" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-        <SectionHeading eyebrow={highlightsHeading.eyebrow} title={highlightsHeading.title} copy={highlightsHeading.copy} />
-        <h2 id="highlights-heading" className="sr-only">Highlights by occasion</h2>
-        <HomeTabs venues={venues} />
-      </section>
+      <AboutSection about={about} heading={aboutHeading} />
 
-      {/* Luxury banner — Samsung split feature */}
-      <section aria-label="About Venue On My Plate" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-        <Reveal scale>
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <div className="img-zoom relative aspect-[4/3] overflow-hidden rounded-3xl bg-black/10 ring-1 ring-[#e8e8ed]">
-            <Image
-              src={about.image}
-              alt={about.alt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              loading="lazy"
-              quality={70}
-              className="object-cover"
-            />
-            <div className="absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_18px_40px_-16px_rgba(18,21,33,0.5)] ring-1 ring-[#e8e8ed] backdrop-blur">
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[#7f0f2e]" />
-              <span className="text-[13px] font-semibold text-[#1d1d1f]">{about.badge}</span>
-            </div>
-          </div>
-          <div>
-            <p className="s-eyebrow text-neutral-500">{about.eyebrow || aboutHeading.eyebrow}</p>
-            <h2 className="s-headline mt-3 text-[32px] text-balance md:text-[44px]">
-              {about.title}
-            </h2>
-            <p className="mt-4 leading-relaxed text-neutral-600">{about.body}</p>
-            <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-[#e8e8ed] pt-6">
-              {about.stats.map((stat) => (
-                <div key={`${stat.value}-${stat.label}`}>
-                  <dt className="text-gold-gradient text-2xl font-bold tracking-tight md:text-3xl">{stat.value}</dt>
-                  <dd className="mt-1 text-[13px] text-neutral-500">{stat.label}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-              <Link href={about.linkHref} className="s-link text-[15px]">{about.linkLabel} &rsaquo;</Link>
-              <a href={`tel:${about.phone.replace(/[^\d+]/g, "")}`} className="s-btn-dark btn-sheen px-6 py-2.5 text-[13px] font-semibold">
-                {about.phone}
-              </a>
-            </div>
-          </div>
-        </div>
-        </Reveal>
-      </section>
+      <CitiesSection cityCards={cityCards} heading={citiesHeading} />
 
-      {/* Destinations — Samsung horizontal scroll */}
-      <section id="cities" aria-labelledby="cities-heading" className="border-t border-black/10">
-        <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading align="left" eyebrow={citiesHeading.eyebrow} title={citiesHeading.title} copy={citiesHeading.copy} />
-            {citiesHeading.linkLabel && <SectionLink href={citiesHeading.linkHref || "/cities"}>{citiesHeading.linkLabel}</SectionLink>}
-          </div>
-          <h2 id="cities-heading" className="sr-only">Popular destinations</h2>
-          <Reveal delay={120}>
-          <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
-            {cityCards.map((c) => (
-              <div key={c.slug} className="w-[85%] shrink-0 snap-center sm:w-[60%] md:w-auto">
-                <CityCard city={c} />
-              </div>
-            ))}
-          </div>
-          </Reveal>
-        </div>
-      </section>
+      <CategoriesSection categories={categories} heading={categoriesHeading} />
 
-      {/* Venue categories — we provide venues only */}
-      <section aria-label="Venue categories" className="band-sage border-t border-[#eed9a3]">
-        <div className="mx-auto max-w-[1024px] px-5 py-14 md:px-6 md:py-20">
-          <SectionHeading eyebrow={categoriesHeading.eyebrow} title={categoriesHeading.title} copy={categoriesHeading.copy} />
-          <Reveal delay={120}>
-            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {categories.map(({ icon: Icon, t, d, href }) => (
-                <Link key={t} href={href} className="group rounded-[18px] bg-[#f5f5f7] p-7 transition duration-300 hover:bg-[#e8e8ed]">
-                  <span className="grid h-11 w-11 place-items-center rounded-full bg-[#5c0a20] text-[#f6de9a]">
-                    <Icon size={20} />
-                  </span>
-                  <p className="mt-4 text-[17px] font-bold tracking-tight text-[#1d1d1f]">{t}</p>
-                  <p className="mt-1.5 text-[14px] leading-relaxed text-[#424245]">{d}</p>
-                  <span className="mt-3 inline-block text-[14px] text-[#1d1d1f] underline decoration-black/30 underline-offset-4 group-hover:decoration-black">Browse venues &rsaquo;</span>
-                </Link>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <FeaturesSection features={features} heading={whyHeading} />
 
-      {/* Why — 3 Samsung feature columns */}
-      <section aria-label="Why Venue On My Plate" className="band-cream border-t border-[#eed9a3]">
-        <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-          <SectionHeading eyebrow={whyHeading.eyebrow} title={whyHeading.title} copy={whyHeading.copy} />
-          <Reveal delay={120}>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {features.map(({ icon: Icon, t, d }) => (
-              <div key={t} className="rounded-[18px] bg-white p-8 shadow-[0_4px_16px_-8px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-16px_rgba(0,0,0,0.22)]">
-                <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#1d1d1f] text-white">
-                  <Icon size={22} />
-                </span>
-                <p className="mt-5 text-[17px] font-bold tracking-tight text-[#1d1d1f]">{t}</p>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#424245]">{d}</p>
-                <Link href="/contact" className="s-link mt-4 inline-block text-[15px]">Learn more &rsaquo;</Link>
-              </div>
-            ))}
-          </div>
-          </Reveal>
-        </div>
-      </section>
+      <StepsSection steps={steps} heading={stepsHeading} />
 
-      {/* How it works — Samsung 3 steps */}
-      <section id="how-it-works" aria-label="How it works" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-        <SectionHeading eyebrow={stepsHeading.eyebrow} title={stepsHeading.title} copy={stepsHeading.copy} />
-        <Reveal delay={120}>
-        <ol className="mt-10 grid gap-5 md:grid-cols-3">
-          {steps.map(([n, t, d]) => (
-            <li key={n} className="s-card p-8 text-center">
-              <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#f5f5f7]">
-                <span className="text-[20px] font-bold text-[#1d1d1f]">{n}</span>
-              </span>
-              <p className="mt-3 text-[18px] font-bold tracking-tight">{t}</p>
-              <p className="mx-auto mt-2 max-w-xs text-[14px] leading-relaxed text-neutral-600">{d}</p>
-            </li>
-          ))}
-        </ol>
-        </Reveal>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link href="/venues" className="s-btn-dark btn-sheen px-6 py-2.5 text-[15px]">Explore venues</Link>
-          <Link href="/contact" className="s-link px-4 py-2.5 text-[15px]">Request bespoke proposal &rsaquo;</Link>
-        </div>
-      </section>
+      <GallerySection gallery={gallery} heading={galleryHeading} />
 
-      {/* Gallery — white mats, champagne frames */}
-      <section aria-label="Events gallery" className="band-blush border-t border-[#eed9a3]">
-        <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-          <SectionHeading eyebrow={galleryHeading.eyebrow} title={galleryHeading.title} copy={galleryHeading.copy} />
-          <Reveal delay={120}>
-          <div className="no-scrollbar -mx-5 mt-10 flex snap-x gap-5 overflow-x-auto px-5 pb-2 md:mx-0 md:grid md:grid-cols-4 md:px-0">
-            {gallery.map((g) => (
-              <figure key={`${g.src}-${g.mood}`} className="gold-frame w-72 shrink-0 snap-center overflow-hidden rounded-2xl p-2 md:w-auto">
-                <div className="img-zoom relative h-72 overflow-hidden rounded-xl md:h-80">
-                  <Image src={g.src} alt={g.alt || g.mood} fill sizes="400px" loading="lazy" quality={65} className="object-cover" />
-                </div>
-                <figcaption className="flex items-center justify-between px-2 py-3">
-                  <span className="text-[15px] font-semibold text-[#1d1d1f]">{g.mood}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          </Reveal>
-        </div>
-      </section>
+      <FilmsSection films={films} heading={filmsHeading} />
 
-      {/* Celebrations in motion */}
-      <section aria-label="Celebration films" className="band-cream border-t border-[#eed9a3]">
-        <div className="mx-auto max-w-[1024px] px-5 py-14 md:px-6 md:py-20">
-          <SectionHeading eyebrow={filmsHeading.eyebrow} title={filmsHeading.title} copy={filmsHeading.copy} />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {films.map((v, i) => (
-              <Reveal key={`${v.src}-${v.caption}`} delay={(i % 4) * 90} scale>
-                <VideoCard src={v.src} poster={v.poster} startAt={v.startAt} caption={v.caption} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialsSection testimonials={testimonials} heading={testimonialsHeading} />
 
-      {/* Testimonials — shown only when real reviews are published */}
-      {testimonials.length > 0 && (
-      <section aria-label="Testimonials" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-        <SectionHeading eyebrow={testimonialsHeading.eyebrow} title={testimonialsHeading.title} copy={testimonialsHeading.copy} />
-        <Reveal delay={120}>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.id} className="s-card relative overflow-hidden p-8">
-              <span aria-hidden="true" className="pointer-events-none absolute -top-3 right-4 text-[88px] leading-none text-black/10">
-                &ldquo;
-              </span>
-              <div className="flex items-center gap-3">
-                <div className="relative h-12 w-12 overflow-hidden rounded-full bg-[#f5f5f7]">
-                  {t.image ? (
-                    <Image src={t.image} alt={t.name} fill sizes="56px" loading="lazy" className="object-cover" />
-                  ) : (
-                    <span className="grid h-full w-full place-items-center text-[13px] font-semibold text-[#6e6e73]">
-                      {t.name.slice(0, 1)}
-                    </span>
-                  )}
-                </div>
-                <span className="flex items-center gap-0.5" aria-label={`Rated ${t.rating} out of 5`}>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={13} className={i < t.rating ? "fill-[#86868b] text-[#86868b]" : "fill-neutral-200 text-neutral-200"} />
-                  ))}
-                </span>
-              </div>
-              <blockquote className="mt-4 text-[15px] leading-relaxed text-[#1d1d1f]">&ldquo;{t.quote}&rdquo;</blockquote>
-              <figcaption className="mt-3 text-[14px] text-[#1d1d1f]">
-                <span className="font-semibold">{t.name}</span>
-                {t.context ? <span className="text-[#6e6e73]"> · {t.context}</span> : null}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
-        </Reveal>
-      </section>
-      )}
+      <BlogSection blogs={blogs} heading={journalHeading} />
 
-      {/* Journal */}
-      <section aria-labelledby="journal-heading" className="band-blush border-t border-[#eed9a3]">
-        <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading align="left" eyebrow={journalHeading.eyebrow} title={journalHeading.title} copy={journalHeading.copy} />
-            {journalHeading.linkLabel && <SectionLink href={journalHeading.linkHref || "/blogs"}>{journalHeading.linkLabel}</SectionLink>}
-          </div>
-          <h2 id="journal-heading" className="sr-only">Latest articles</h2>
-          <Reveal delay={120}>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {blogs.slice(0, 3).map((p) => (
-              <BlogCard key={p.slug} post={p} />
-            ))}
-          </div>
-          </Reveal>
-        </div>
-      </section>
+      <EnquirySection faqs={faqs} heading={supportHeading} />
 
-      {/* Enquiry + FAQ — Samsung support style */}
-      <section aria-labelledby="enquiry-heading" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
-        <Reveal>
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <SectionHeading align="left" eyebrow={supportHeading.eyebrow} title={supportHeading.title} copy={supportHeading.copy} />
-            <h2 id="enquiry-heading" className="sr-only">Enquiry form</h2>
-            <div className="mt-8">
-              <FAQ faqs={faqs} />
-            </div>
-          </div>
-          <div className="h-fit rounded-[18px] bg-white p-6 shadow-[0_4px_16px_-8px_rgba(0,0,0,0.12)] ring-1 ring-black/5 md:p-8 lg:sticky lg:top-24">
-            <EnquiryForm />
-          </div>
-        </div>
-        </Reveal>
-      </section>
-
-      {/* SEO content */}
-      <section aria-label="About finding venues in India" className="border-t border-black/10">
-        <div className="mx-auto max-w-4xl px-5 py-14 text-center md:py-20">
-          <Reveal>
-          <h2 className="text-[28px] leading-[1.1] font-bold tracking-[-0.022em] text-balance text-[#1d1d1f] md:text-[36px]">
-            {seo.title}
-          </h2>
-          </Reveal>
-          <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-[#424245]">
-            {seo.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SEOSection seo={seo} />
 
       <CTASection
         title={cta.title}

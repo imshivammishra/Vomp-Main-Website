@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Phone, Send, X } from "lucide-react";
 import { conciergeReply, QUICK_QUESTIONS, type BotLink, type ChatVenue } from "@/lib/concierge";
+import { getConfig } from "@/lib/config";
 import type { Venue } from "@/types";
 
 interface Msg {
@@ -92,7 +93,7 @@ export default function ConciergeChat({ venues }: { venues: Venue[] }) {
             setLead("idle");
             // Forward lead to the workspace API (same-origin in production).
             try {
-              const API = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/+$/, "");
+              const API = getConfig().publicApiBase;
               fetch(`${API}/api/v1/public/enquiries`, {
                 method: "POST",
                 credentials: "same-origin",

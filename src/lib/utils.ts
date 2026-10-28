@@ -1,3 +1,5 @@
+import { getConfig } from "@/lib/config";
+
 export function cn(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(" ");
 }
@@ -18,8 +20,7 @@ export function slugify(input: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") || "https://venueonmyplate.in";
+export const SITE_URL = getConfig().siteUrl;
 
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
