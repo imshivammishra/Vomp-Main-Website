@@ -100,15 +100,27 @@ export async function getReviews(venue?: string): Promise<Review[]> {
 }
 
 export async function submitEnquiry(payload: Record<string, string>): Promise<{ ok: boolean }> {
-  try {
-    const res = await fetch(`${PUBLIC_BASE}/api/v1/public/enquiries`, {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, source: "website" }),
-    });
-    return { ok: res.ok };
-  } catch {
-    return { ok: false };
+  const body = JSON.stringify({ ...payload, source: "website" });
+  const headers = { "Content-Type": "application/json" };
+  // Try the same-origin path first: in every environment /api is proxied to the
+  // backend (Next.js rewrites in dev, Nginx in production), so the browser never
+  // makes a cross-origin request and cannot be blocked by CORS. Fall back to the
+  // configured public API base only if the same-origin attempt is unavailable.
+  const endpoints = Array.from(
+    new Set(["/api/v1/public/enquiries", `${PUBLIC_BASE}/api/v1/public/enquiries`])
+  );
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        credentials: "same-origin",
+        headers,
+        body,
+      });
+      if (res.ok) return { ok: true };
+    } catch {
+      // Network/CORS failure — try the next candidate endpoint.
+    }
   }
+  return { ok: false };
 }
