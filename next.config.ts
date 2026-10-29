@@ -45,12 +45,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   experimental: { optimizePackageImports: ["lucide-react"] },
+
   images: {
-    // Route venue photography through our own origin. Some guest networks
-    // block the S3 host directly, which left cards blank even though the
-    // assets were healthy. Local artwork is returned unchanged by the loader.
     loader: "custom",
     loaderFile: "./src/lib/image-loader.ts",
+    // Declare all quality values used across the project
+    qualities: [70, 72, 75, 80, 85, 88, 90, 95],
   },
   async rewrites() {
     return [

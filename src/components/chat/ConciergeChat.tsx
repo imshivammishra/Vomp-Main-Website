@@ -45,7 +45,8 @@ function VenueMini({ v }: { v: ChatVenue }) {
   );
 }
 
-export default function ConciergeChat({ venues }: { venues: Venue[] }) {
+export default function ConciergeChat({ venues: initialVenues = [] }: { venues?: Venue[] }) {
+  const [venues, setVenues] = useState<Venue[]>(initialVenues);
   const [open, setOpen] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
@@ -53,6 +54,15 @@ export default function ConciergeChat({ venues }: { venues: Venue[] }) {
   const [chips, setChips] = useState<string[]>(QUICK_QUESTIONS);
   const [nudge, setNudge] = useState(false);
   const [lead, setLead] = useState<LeadStep>("idle");
+
+  // Fetch venues client-side so layout.tsx doesn't block on getVenues()
+  useEffect(() => {
+    if (initialVenues.length > 0) return;
+    fetch("/api/v1/public/venues?limit=500")
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => { if (d?.data?.length) setVenues(d.data); })
+      .catch(() => {});
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [leadData, setLeadData] = useState({ name: "", phone: "", city: "" });
   const bodyRef = useRef<HTMLDivElement>(null);
   const greeted = useRef(false);

@@ -3,7 +3,6 @@ import Image from "next/image";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import CTASection from "@/components/home/CTASection";
 import Reveal from "@/components/ui/Reveal";
-import SectionHeading from "@/components/home/SectionHeading";
 import VideoCard from "@/components/home/VideoCard";
 import { getContentBlocks } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
@@ -82,77 +81,87 @@ export default async function AboutPage() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-7xl px-5 pt-28 md:px-8 md:pt-36">
-        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "About" }]} />
-        <div className="mt-6 grid gap-10 md:grid-cols-2 md:items-center">
-          <Reveal>
-            <p className="s-eyebrow text-[#6e6e73]">{hero.eyebrow}</p>
-            <h1 className="s-headline font-display mt-4 text-4xl leading-tight text-balance text-[#1d1d1f] md:text-5xl">
+      {/* ── Cinematic header ── */}
+      <div className="relative overflow-hidden bg-[#1d1d1f]">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#1d1d1f]/80 via-[#1d1d1f]/60 to-[#1d1d1f]" />
+          <Image
+            src={hero.image}
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className="kenburns object-cover opacity-40"
+          />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-5 pt-36 pb-24 md:px-8 md:pt-44 md:pb-32">
+          <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "About" }]} light />
+          <Reveal className="mt-10">
+            <div className="flex items-center gap-3 text-[#a67c1a]">
+              <span className="h-px w-8 bg-[#a67c1a] opacity-70" />
+              <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">{hero.eyebrow}</p>
+            </div>
+            <h1 className="font-display mt-5 max-w-3xl text-[44px] leading-[1.05] text-white md:text-[64px]">
               {hero.title}
             </h1>
-            <div aria-hidden="true" className="lux-divider mt-6 w-40" />
-            <p className="mt-4 max-w-xl text-[15px] leading-relaxed whitespace-pre-line text-[#424245] md:text-base">
+            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-white/60">
               {hero.body}
             </p>
           </Reveal>
-          <Reveal delay={120} scale className="relative">
-            <div className="gold-frame relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#f5f5f7]">
-              <Image
-                src={hero.image}
-                alt={hero.alt}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                loading="lazy"
-                className="kenburns object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-5 left-5 rounded-2xl border border-black/10 bg-white/95 px-5 py-3 shadow-lg backdrop-blur">
-              <p className="text-[13px] font-semibold text-[#6e6e73]">Visited &amp; verified</p>
-              <p className="font-display mt-0.5 text-lg text-[#1d1d1f]">{hero.badge}</p>
-            </div>
-          </Reveal>
         </div>
+      </div>
 
-        <Reveal delay={80}>
-          <div className="mt-16 overflow-hidden rounded-3xl bg-black">
-            <dl className="grid gap-px sm:grid-cols-3">
-              {hero.stats.map((stat) => (
-                <div key={`${stat.value}-${stat.label}`} className="flex flex-col px-8 py-10 text-center">
-                  <dt className="order-2 mt-2 block text-[13px] font-medium text-white/60">{stat.label}</dt>
-                  <dd className="font-display order-1 text-4xl font-semibold text-white md:text-5xl">{stat.value}</dd>
-                </div>
-              ))}
-            </dl>
+      <div className="mx-auto max-w-7xl px-5 pt-16 md:px-8 md:pt-24">
+        {/* Badge row */}
+        <Reveal>
+          <div className="flex flex-wrap gap-3">
+            {hero.stats.map((stat) => (
+              <div
+                key={`${stat.value}-${stat.label}`}
+                className="rounded-2xl border border-[#e8e8ed] bg-[#fdf9f4] px-5 py-3"
+              >
+                <p className="font-display text-xl text-[#1d1d1f]">{stat.value}</p>
+                <p className="mt-0.5 text-[12px] text-[#86868b]">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </Reveal>
 
-        <div className="mt-16">
+        {/* Film / visual */}
+        <div className="mt-14">
           <Reveal scale>
             <VideoCard src={film.src} caption={film.caption} />
           </Reveal>
         </div>
 
-        <div className="mt-16">
+        {/* Values */}
+        <div className="mt-20">
           <Reveal>
-            <SectionHeading
-              eyebrow="What we stand for"
-              title="Principles before properties."
-              copy="Every recommendation is measured against the same three promises."
-            />
+            <div className="section-ornament">
+              <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">What we stand for</span>
+            </div>
+            <h2 className="font-display text-[36px] leading-tight text-[#1d1d1f] md:text-[48px]">
+              Principles before properties.
+            </h2>
+            <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-[#424245]">
+              Every recommendation is measured against the same three promises.
+            </p>
           </Reveal>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {values.map(([title, copy], index) => (
               <Reveal key={`${title}-${index}`} delay={(index % 3) * 90}>
-                <div className="s-card h-full p-8">
-                  <h2 className="font-display text-2xl text-[#1d1d1f]">{title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-[#424245]">{copy}</p>
+                <div className="card-hover s-card h-full p-8">
+                  <div className="mb-4 h-px w-10 bg-[#a67c1a]" />
+                  <h3 className="font-display text-[22px] text-[#1d1d1f]">{title}</h3>
+                  <p className="mt-3 text-[14px] leading-relaxed text-[#424245]">{copy}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
       </div>
-      <div className="mt-16">
+
+      <div className="mt-20">
         <CTASection title="Meet us over your requirements." copy="Two minutes of details — one business day to a shortlist." />
       </div>
     </div>

@@ -3,16 +3,15 @@ import { Suspense } from "react";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import CTASection from "@/components/home/CTASection";
 import Reveal from "@/components/ui/Reveal";
-import SectionHeading from "@/components/home/SectionHeading";
 import VenueFilters from "@/components/venues/VenueFilters";
 import VenueGrid from "@/components/venues/VenueGrid";
 import { getVenues } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Explore wedding & celebration venues across India",
+  title: "Explore wedding & celebration venues worldwide",
   description:
-    "Browse curated palaces, resorts, lawns, hotels and banquets across Udaipur, Jaipur, Jodhpur, Jaisalmer, Sawai Madhopur and Goa. Filter by city, size and type.",
+    "Browse curated palaces, resorts, lawns, hotels and banquets across India, Italy and beyond. Filter by country, city, size and type.",
   path: "/venues",
 });
 
@@ -33,27 +32,58 @@ export default async function VenuesPage({
 }) {
   const params = await searchParams;
   const venues = await getVenues();
+  const country = params.country?.trim() || null;
   const city = params.city?.trim() || null;
   const guests = params.guests?.trim() || null;
   const type = params.type?.trim() || null;
   const event = params.event?.trim() || null;
+  const q = params.q?.trim() || null;
 
   const filtered = venues.filter(
     (v) =>
+      (!q ||
+        v.name.toLowerCase().includes(q.toLowerCase()) ||
+        v.city.toLowerCase().includes(q.toLowerCase()) ||
+        v.area.toLowerCase().includes(q.toLowerCase())) &&
+      (!country ||
+        (v.countryCode ?? "IN").toUpperCase() === country.toUpperCase() ||
+        (v.country ?? "India").toLowerCase() === country.toLowerCase()) &&
       (!city || v.city.toLowerCase() === city.toLowerCase()) &&
       (!type || v.type === type) &&
-      (!event || v.eventTypes.some((e) => e.toLowerCase().includes(event.toLowerCase().split(" ")[0]))) &&
+      (!event ||
+        v.eventTypes.some((e) =>
+          e.toLowerCase().includes(event.toLowerCase().split(" ")[0])
+        )) &&
       matchesGuests(v.capacityMax, guests)
   );
 
-  const cities = [...new Set(venues.map((v) => v.city))].sort();
+  const countries = [
+    ...new Map(
+      venues
+        .filter((v) => v.countryCode && v.country)
+        .map((v) => [v.countryCode!, { code: v.countryCode!, name: v.country! }])
+    ).values(),
+  ].sort((a, b) => a.name.localeCompare(b.name));
+
+  const cities = [...new Set(
+    venues
+      .filter((v) => !country || (v.countryCode ?? "IN").toUpperCase() === country.toUpperCase())
+      .map((v) => v.city)
+  )].sort();
+
   const types = [...new Set(venues.map((v) => v.type).filter(Boolean))].sort();
+
+  const isFiltered = country || city || guests || type || event || q;
+  const locationLabel = city ? ` in ${city}` : country ? ` in ${venues.find(v => (v.countryCode ?? "IN") === country)?.country ?? country}` : " worldwide";
+
   const summary =
     filtered.length > 0
-      ? `${filtered.length} ${filtered.length === 1 ? "venue" : "venues"}${city ? ` in ${city}` : " across India"} — every one visited or vetted by our team.`
+      ? `${filtered.length} ${filtered.length === 1 ? "venue" : "venues"}${locationLabel} — every one visited or vetted by our team.`
       : venues.length === 0
         ? "Every property is visited or vetted before it appears here. Share your brief and we will send a private shortlist of real venues."
-        : "No venues match these filters yet. Widen the city or guest count — or ask us for a personal shortlist.";
+        : isFiltered
+          ? "No venues match these filters. Try widening your search — or ask us for a personal shortlist."
+          : "No venues published here yet. Share your brief and we will send a private shortlist of real venues that fit.";
 
   return (
     <>
@@ -63,27 +93,31 @@ export default async function VenuesPage({
             <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Venues" }]} />
           </Reveal>
           <Reveal delay={100}>
-            <div className="mt-6">
-              <SectionHeading
-                eyebrow="Directory"
-                title="Venues, curated."
-                copy={summary}
-              />
+            <div className="mt-8 border-b border-[#f0f0f0] pb-10">
+              {/* Decorative rule */}
+              <div className="mb-5 flex items-center gap-3">
+                <div className="h-px w-8 bg-[#a67c1a]" />
+                <p className="text-[10px] font-semibold tracking-[0.28em] text-[#a67c1a] uppercase">Venue Collection</p>
+              </div>
+              <h1 className="font-display text-[44px] leading-[1.0] text-[#1d1d1f] md:text-[62px]">
+                Venues, curated<span className="text-[#a67c1a]">.</span>
+              </h1>
+              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-[#525252]">
+                {summary}
+              </p>
             </div>
           </Reveal>
           <Reveal delay={200}>
-            <div className="mt-10 rounded-[18px] bg-[#f5f5f7] px-5 py-5 md:px-7 md:py-6">
+            <div className="mt-8 overflow-hidden rounded-2xl border border-[#e8e8ed] bg-white px-5 py-5 shadow-sm md:px-7 md:py-6">
               <Suspense fallback={<p className="text-sm text-[#6e6e73]">Loading filters…</p>}>
-                <VenueFilters cities={cities} types={types} />
+                <VenueFilters cities={cities} types={types} countries={countries} />
               </Suspense>
             </div>
           </Reveal>
           <div aria-hidden="true" className="mt-10 border-t border-black/10" />
-          <Reveal delay={100}>
-            <div className="py-10">
-              <VenueGrid venues={filtered} />
-            </div>
-          </Reveal>
+          <div className="py-10">
+            <VenueGrid venues={filtered} />
+          </div>
         </div>
       </div>
       <CTASection

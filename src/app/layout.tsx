@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
-import ConciergeChat from "@/components/chat/ConciergeChat";
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
-import { getVenues } from "@/lib/api";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 import { SITE_URL } from "@/lib/utils";
 import "./globals.css";
@@ -62,7 +60,6 @@ const homeScrollReset = `(function () {
 })();`;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const venues = await getVenues();
   return (
     <html lang="en-IN" className={body.variable}>
       <body className="min-h-screen">
@@ -86,7 +83,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <ConciergeChat venues={venues} />
       </body>
     </html>
   );

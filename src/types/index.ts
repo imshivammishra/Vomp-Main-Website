@@ -1,6 +1,8 @@
 export interface Venue {
   slug: string;
   name: string;
+  country?: string;       // e.g. "India", "Italy"
+  countryCode?: string;   // e.g. "IN", "IT"
   city: string;
   citySlug: string;
   area: string;
@@ -16,17 +18,27 @@ export interface Venue {
   amenities: string[];
   eventTypes: string[];
   featured?: boolean;
+  status?: "published" | "draft";
 }
 
 export interface City {
   slug: string;
   name: string;
+  country?: string;
+  countryCode?: string;
   tagline: string;
   description: string;
   image: string;
   imageAlt: string;
   venueCountLabel: string;
   popularTypes: string[];
+}
+
+export interface Country {
+  code: string;     // "IN", "IT"
+  name: string;     // "India", "Italy"
+  flag: string;     // "🇮🇳", "🇮🇹"
+  active: boolean;
 }
 
 export interface BlogPost {

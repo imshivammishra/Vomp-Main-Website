@@ -1,4 +1,4 @@
-import type { BlogPost, City, ContentBlock, Review, SiteSettings, Venue } from "@/types";
+﻿import type { BlogPost, City, ContentBlock, Review, SiteSettings, Venue } from "@/types";
 import { blogPosts, cities, venues } from "./data";
 import { SITE } from "./site";
 import { getConfig } from "@/lib/config";
@@ -6,9 +6,9 @@ import { getConfig } from "@/lib/config";
 /**
  * Data access for the public website.
  *
- * Server-side reads use the private API address (never exposed to browsers).
- * Browser submissions use a same-origin `/api` path, which Nginx proxies to
- * the API service. This keeps cookies first-party and avoids public CORS.
+ * Server-side reads use API_INTERNAL_URL (the admin panel at port 3200)
+ * which serves as the combined CMS + API backend.
+ * Cache revalidates every 30 seconds so changes from admin panel appear quickly.
  */
 const { publicApiBase: PUBLIC_BASE, internalApiBase: SERVER_BASE } = getConfig();
 
@@ -18,10 +18,11 @@ async function backend<T>(path: string, init?: RequestInit): Promise<T | null> {
     const res = await fetch(`${SERVER_BASE}${path}`, {
       ...init,
       headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
-      next: { revalidate: 60 },
+      next: { revalidate: 30, tags: ["vomp-content"] },
     });
     if (!res.ok) return null;
     const payload = (await res.json()) as T | { data: T };
+    // Admin API wraps lists in { data: [...], total: N } — unwrap automatically
     if (payload && typeof payload === "object" && "data" in payload) {
       return (payload as { data: T }).data;
     }
@@ -32,8 +33,6 @@ async function backend<T>(path: string, init?: RequestInit): Promise<T | null> {
 }
 
 export async function getVenues(): Promise<Venue[]> {
-  // The explicit limit keeps the full published catalogue in the build cache
-  // even when the API's default page size changes.
   const remote = await backend<Venue[]>("/api/v1/public/venues?limit=500");
   return remote && remote.length > 0 ? remote : venues;
 }

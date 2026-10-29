@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { MapPin, Users, Layers, ArrowLeft } from "lucide-react";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import CTASection from "@/components/home/CTASection";
 import EnquiryForm from "@/components/forms/EnquiryForm";
@@ -49,6 +50,11 @@ export default async function VenueDetailPage({
   const similar = all.filter((v) => v.slug !== venue.slug && v.citySlug === venue.citySlug).slice(0, 3);
   const fallbackSimilar = similar.length > 0 ? similar : all.filter((v) => v.slug !== venue.slug).slice(0, 3);
 
+  const COUNTRY_FLAGS: Record<string, string> = {
+    IN: "🇮🇳", IT: "🇮🇹", FR: "🇫🇷", AE: "🇦🇪", TH: "🇹🇭", US: "🇺🇸", GB: "🇬🇧",
+  };
+  const flag = COUNTRY_FLAGS[(venue.countryCode ?? "IN").toUpperCase()];
+
   const faqs = [
     {
       question: `What is the capacity of ${venue.name}?`,
@@ -56,176 +62,230 @@ export default async function VenueDetailPage({
     },
     {
       question: "How do I check availability and pricing?",
-      answer:
-        "Send an enquiry with your date and guest count. The venue team responds with availability, a detailed quote and what the advance locks — dates, spaces and rooms.",
+      answer: "Send an enquiry with your date and guest count. The venue team responds with availability, a detailed quote and what the advance locks — dates, spaces and rooms.",
     },
     {
       question: "Can I visit before deciding?",
-      answer:
-        "Yes — we coordinate site visits on working days and weekends. Visits are most useful when you carry your function flow (haldi, sangeet, pheras) and a rough guest count.",
+      answer: "Yes — we coordinate site visits on working days and weekends. Visits are most useful when you carry your function flow (haldi, sangeet, pheras) and a rough guest count.",
     },
   ];
 
   return (
     <>
       <div className="bg-white">
-        <div className="mx-auto max-w-7xl px-5 pt-28 md:px-8 md:pt-36">
-          <Reveal>
-            <Breadcrumbs
-              items={[
-                { name: "Home", href: "/" },
-                { name: "Venues", href: "/venues" },
-                { name: venue.name },
-              ]}
-            />
-          </Reveal>
 
-          <Reveal delay={100}>
-            <div className="mt-6 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
+        {/* ── Full-bleed hero ── */}
+        <div className="relative overflow-hidden bg-[#120709]" style={{ aspectRatio: "21/9", maxHeight: "78vh", minHeight: "420px" }}>
+          <Image
+            src={venue.image}
+            alt={venue.imageAlt}
+            fill
+            priority
+            sizes="100vw"
+            quality={88}
+            className="kenburns object-cover opacity-75"
+          />
+          <div aria-hidden={true} className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-black/35" />
+          <div aria-hidden={true} className="absolute inset-0" style={{ background: "radial-gradient(ellipse 110% 100% at 50% 50%, transparent 50%, rgba(10,4,7,0.45) 100%)" }} />
+
+          {/* Back nav */}
+          <div className="absolute left-5 top-5 md:left-8 md:top-7">
+            <Link href="/venues" className="inline-flex items-center gap-2 rounded-full bg-black/30 px-4 py-2 text-[12px] font-medium text-white/75 backdrop-blur-md ring-1 ring-white/10 transition hover:text-white">
+              <ArrowLeft size={13} />
+              All venues
+            </Link>
+          </div>
+
+          {/* Venue name + meta overlay */}
+          <div className="absolute bottom-0 left-0 right-0 px-5 pb-7 md:px-8 md:pb-10">
+            <div className="mx-auto max-w-7xl flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-[15px] font-semibold text-[#6e6e73]">
-                  {venue.city} · {venue.type}
-                </p>
-                <h1 className="font-display mt-4 text-4xl leading-tight text-[#1d1d1f] md:text-6xl">
+                {/* Badges row */}
+                <div className="mb-3 flex flex-wrap items-center gap-2">
+                  <span className="rounded-full bg-white/12 px-3.5 py-1.5 text-[11px] font-semibold text-white/85 backdrop-blur-sm ring-1 ring-white/10">
+                    {venue.type}
+                  </span>
+                  <span className="rounded-full bg-white/12 px-3.5 py-1.5 text-[11px] font-semibold text-white/85 backdrop-blur-sm ring-1 ring-white/10">
+                    {flag && <span className="mr-1">{flag}</span>}{venue.city}
+                  </span>
+                  {venue.priceHint && (
+                    <span className="rounded-full bg-[#7f0f2e]/85 px-3.5 py-1.5 text-[11px] font-semibold text-white backdrop-blur-sm">
+                      {venue.priceHint}
+                    </span>
+                  )}
+                </div>
+
+                <h1 className="font-display text-[34px] leading-tight text-white md:text-[56px]"
+                  style={{ textShadow: "0 2px 30px rgba(0,0,0,0.5)" }}>
                   {venue.name}
                 </h1>
-                <p className="mt-3 text-[#424245]">
-                  {venue.area}, {venue.city} · {formatGuests(venue.capacityMin, venue.capacityMax)} ·{" "}
-                  {venue.setting}
+                <p className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-[13px] text-white/55">
+                  <span className="flex items-center gap-1.5"><MapPin size={12} />{venue.area}, {venue.city}</span>
+                  <span className="flex items-center gap-1.5"><Users size={12} />{formatGuests(venue.capacityMin, venue.capacityMax)}</span>
+                  <span className="flex items-center gap-1.5"><Layers size={12} />{venue.setting}</span>
                 </p>
               </div>
-              <div className="md:justify-self-end">
-                <a
-                  href="#enquire"
-                  className="s-btn-dark btn-sheen inline-block px-8 py-4"
-                >
+              <div className="mt-4 shrink-0 md:mt-0">
+                <a href="#enquire" className="s-btn-dark btn-sheen inline-flex items-center gap-2 px-7 py-3.5 text-[15px] font-semibold">
                   Request a proposal
                 </a>
               </div>
             </div>
-          </Reveal>
+          </div>
+        </div>
 
-          <Reveal delay={200} scale>
-            <div className="img-zoom relative mt-8 aspect-[16/9] overflow-hidden rounded-[18px] bg-[#f5f5f7] ring-1 ring-black/5">
-              <Image
-                src={venue.image}
-                alt={venue.imageAlt}
-                fill
-                priority
-                sizes="(max-width: 1280px) 100vw, 1200px"
-                className="kenburns object-cover"
-              />
-              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-              <div className="float-slow absolute bottom-4 left-4 rounded-full bg-white/85 px-5 py-2.5 text-[13px] font-semibold tracking-wide text-[#1d1d1f] shadow-lg ring-1 ring-black/5 backdrop-blur-md md:bottom-6 md:left-6">
-                {venue.priceHint ?? venue.type} · {venue.city}
-              </div>
-            </div>
-          </Reveal>
+        {/* Breadcrumb bar */}
+        <div className="border-b border-[#e8e8ed] bg-[#fafaf8]">
+          <div className="mx-auto max-w-7xl px-5 py-3 md:px-8">
+            <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Venues", href: "/venues" }, { name: venue.name }]} />
+          </div>
+        </div>
 
-          <div className="mt-12 grid gap-12 md:grid-cols-[1.5fr_1fr]">
-            <div>
+        {/* ── Main content ── */}
+        <div className="mx-auto max-w-7xl px-5 py-12 md:px-8 md:py-16">
+          <div className="grid gap-14 md:grid-cols-[1.5fr_1fr]">
+
+            {/* Content column */}
+            <div className="space-y-10">
+
+              {/* Overview */}
               <Reveal>
-                <h2 className="font-display text-3xl text-[#1d1d1f]">Overview</h2>
-                <p className="mt-4 leading-relaxed text-[#424245]">
-                  {venue.shortDescription} The estate works across {venue.setting.toLowerCase()}{" "}
-                  settings and suits {venue.eventTypes.join(", ").toLowerCase()} particularly well.
-                </p>
+                <div>
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="h-px w-6 bg-[#a67c1a]" />
+                    <p className="text-[10px] font-semibold tracking-[0.25em] text-[#a67c1a] uppercase">Overview</p>
+                  </div>
+                  <p className="text-[16px] leading-[1.85] text-[#3f3f3f]">
+                    {venue.shortDescription} The estate works across {venue.setting.toLowerCase()} settings
+                    and is particularly suited for {venue.eventTypes.join(", ").toLowerCase()}.
+                  </p>
+                </div>
               </Reveal>
 
-              <Reveal delay={100}>
-                <div className="mt-8 grid gap-px overflow-hidden rounded-[18px] bg-[#e8e8ed] ring-1 ring-[#e8e8ed] sm:grid-cols-3">
+              {/* Quick specs */}
+              <Reveal delay={60}>
+                <div className="grid grid-cols-3 gap-px overflow-hidden rounded-2xl bg-[#e8e8ed] ring-1 ring-[#e8e8ed]">
                   {[
-                    ["Capacity", formatGuests(venue.capacityMin, venue.capacityMax)],
-                    ["Setting", venue.setting],
-                    ["Guide price", venue.priceHint ?? "On request"],
-                  ].map(([k, v]) => (
-                    <div key={k} className="bg-white p-5">
-                      <p className="text-sm font-medium text-[#6e6e73]">{k}</p>
-                      <p className="mt-1 text-lg font-bold text-[#1d1d1f]">{v}</p>
+                    { label: "Capacity", value: formatGuests(venue.capacityMin, venue.capacityMax) },
+                    { label: "Setting", value: venue.setting },
+                    { label: "Guide price", value: venue.priceHint ?? "On request" },
+                  ].map(({ label, value }) => (
+                    <div key={label} className="bg-white px-5 py-5">
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-[#86868b]">{label}</p>
+                      <p className="mt-1.5 text-[16px] font-bold text-[#1d1d1f]">{value}</p>
                     </div>
                   ))}
                 </div>
               </Reveal>
 
-              <Reveal delay={100}>
-                <h2 className="font-display mt-10 text-3xl text-[#1d1d1f]">Suited for</h2>
-                <ul className="mt-4 flex flex-wrap gap-2">
+              {/* Suited for */}
+              <Reveal delay={60}>
+                <h2 className="font-display mb-4 text-[28px] text-[#1d1d1f]">Suited for</h2>
+                <ul className="flex flex-wrap gap-2">
                   {venue.eventTypes.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-full border border-black/10 bg-white px-4 py-2 text-sm text-[#424245] transition-colors hover:border-black/20 hover:text-[#1d1d1f]"
-                    >
+                    <li key={t} className="rounded-full border border-[#e8e8ed] bg-[#fafaf8] px-4 py-2 text-[13px] text-[#424245] transition hover:border-[#7f0f2e]/30 hover:text-[#7f0f2e]">
                       {t}
                     </li>
                   ))}
                 </ul>
               </Reveal>
 
-              <Reveal delay={100}>
-                <h2 className="font-display mt-10 text-3xl text-[#1d1d1f]">Amenities</h2>
-                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {/* Amenities */}
+              <Reveal delay={60}>
+                <h2 className="font-display mb-4 text-[28px] text-[#1d1d1f]">Amenities</h2>
+                <ul className="grid gap-2.5 sm:grid-cols-2">
                   {venue.amenities.map((a) => (
-                    <li key={a} className="flex items-center gap-3 text-sm text-[#424245]">
-                      <span aria-hidden="true" className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#86868b]" /> {a}
+                    <li key={a} className="flex items-center gap-3 text-[14px] text-[#424245]">
+                      <span aria-hidden={true} className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#f0fdf4]">
+                        <span className="text-[9px] font-bold text-[#16a34a]">✓</span>
+                      </span>
+                      {a}
                     </li>
                   ))}
                 </ul>
               </Reveal>
 
-              <Reveal delay={100}>
-                <h2 className="font-display mt-10 text-3xl text-[#1d1d1f]">Food & catering</h2>
-                <p className="mt-4 text-sm leading-relaxed text-[#424245]">
+              {/* Food & catering */}
+              <Reveal delay={60}>
+                <h2 className="font-display mb-4 text-[28px] text-[#1d1d1f]">Food &amp; catering</h2>
+                <p className="text-[15px] leading-relaxed text-[#525252]">
                   Catering is handled in-house or through the venue&apos;s preferred partners, with
                   tastings arranged before you confirm. Dietary formats — Jain, sattvik, continental —
-                  are planned per function, not per venue default. Confirm kitchen placement and
-                  service staff ratios in your written quote.
+                  are planned per function. Confirm kitchen placement and service staff ratios
+                  in your written quote.
                 </p>
               </Reveal>
 
-              <Reveal delay={100}>
-                <h2 className="font-display mt-10 text-3xl text-[#1d1d1f]">Questions, answered</h2>
-                <div className="mt-4">
-                  <FAQ faqs={faqs} />
-                </div>
+              {/* FAQ */}
+              <Reveal delay={60}>
+                <h2 className="font-display mb-5 text-[28px] text-[#1d1d1f]">Questions, answered</h2>
+                <FAQ faqs={faqs} />
               </Reveal>
             </div>
 
-            <Reveal delay={150} className="md:sticky md:top-28 md:self-start">
-              <aside aria-label="Enquiry">
-                <div id="enquire" className="scroll-mt-32 overflow-hidden rounded-[18px] bg-white shadow-xl shadow-black/5 ring-1 ring-black/5">
-                  <div aria-hidden="true" className="h-1 rounded-t-[18px] bg-black" />
+            {/* Sticky enquiry form */}
+            <Reveal delay={120} className="md:sticky md:top-28 md:self-start">
+              <aside aria-label="Enquiry form">
+                <div id="enquire" className="scroll-mt-32 overflow-hidden rounded-2xl bg-white shadow-2xl shadow-black/[0.08] ring-1 ring-black/[0.07]">
+                  <div aria-hidden={true} className="h-1.5 bg-gradient-to-r from-[#5c0a20] via-[#7f0f2e] to-[#a67c1a]" />
                   <div className="p-6 md:p-8">
-                    <p className="text-[15px] font-semibold text-[#6e6e73]">Enquire now</p>
-                    <p className="font-display mt-2 text-2xl text-[#1d1d1f]">
-                      Check availability for {venue.name}
+                    <p className="text-[10px] font-semibold tracking-[0.25em] text-[#a67c1a] uppercase mb-1">Enquire now</p>
+                    <p className="font-display text-[24px] leading-snug text-[#1d1d1f]">
+                      Check availability for<br />{venue.name}
                     </p>
+                    <p className="mt-2 text-[13px] text-[#86868b]">Free · No commitment · Replies within 1 business day</p>
                     <div className="mt-6">
-                      <Suspense fallback={<p className="text-sm text-[#6e6e73]">Loading form…</p>}>
+                      <Suspense fallback={<p className="text-[13px] text-[#6e6e73]">Loading form…</p>}>
                         <EnquiryForm venueName={venue.name} />
                       </Suspense>
                     </div>
                   </div>
                 </div>
+
+                {/* Trust signals */}
+                <div className="mt-4 rounded-xl border border-[#e8e8ed] bg-[#fafaf8] px-5 py-4">
+                  <ul className="space-y-2.5">
+                    {[
+                      "Every venue personally visited or vetted",
+                      "Private pricing — no public rate cards",
+                      "Human-assisted shortlisting & site visits",
+                    ].map((t) => (
+                      <li key={t} className="flex items-start gap-2.5 text-[13px] text-[#525252]">
+                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#f0fdf4]">
+                          <span className="text-[8px] font-bold text-[#16a34a]">✓</span>
+                        </span>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </aside>
             </Reveal>
           </div>
 
-          <Reveal delay={100}>
-            <section aria-labelledby="similar-heading" className="py-16 md:py-20">
-              <div aria-hidden="true" className="mb-10 border-t border-black/10" />
-              <div className="flex items-end justify-between gap-6">
-                <h2 id="similar-heading" className="font-display text-3xl text-[#1d1d1f] md:text-4xl">
-                  Similar venues
-                </h2>
-                <Link href="/venues" className="s-link hidden text-sm sm:block">
-                  All venues ›
-                </Link>
-              </div>
-              <div className="mt-8">
+          {/* Similar venues */}
+          {fallbackSimilar.length > 0 && (
+            <Reveal delay={80}>
+              <section aria-labelledby="similar-heading" className="mt-20 md:mt-24">
+                <div aria-hidden={true} className="mb-10 border-t border-[#e8e8ed]" />
+                <div className="mb-8 flex items-end justify-between gap-6">
+                  <div>
+                    <div className="mb-3 flex items-center gap-3">
+                      <div className="h-px w-6 bg-[#a67c1a]" />
+                      <p className="text-[10px] font-semibold tracking-[0.25em] text-[#a67c1a] uppercase">You might also like</p>
+                    </div>
+                    <h2 id="similar-heading" className="font-display text-[32px] text-[#1d1d1f] md:text-[40px]">
+                      Similar venues
+                    </h2>
+                  </div>
+                  <Link href="/venues" className="hidden text-[13px] text-[#1d1d1f] underline decoration-black/25 underline-offset-4 hover:decoration-black sm:block">
+                    All venues &rsaquo;
+                  </Link>
+                </div>
                 <VenueGrid venues={fallbackSimilar} />
-              </div>
-            </section>
-          </Reveal>
+              </section>
+            </Reveal>
+          )}
         </div>
       </div>
 
@@ -235,29 +295,29 @@ export default async function VenueDetailPage({
         primaryHref="#enquire"
         primaryLabel="Enquire now"
       />
-      <div aria-hidden="true" className="h-16 md:hidden" />
-      <FloatingEnquire venueName={venue.name} />
+            <div aria-hidden={true} className="h-16 md:hidden" />
+            <FloatingEnquire venueName={venue.name} />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            breadcrumbJsonLd([
-              { name: "Home", path: "/" },
-              { name: "Venues", path: "/venues" },
-              { name: venue.name, path: `/venues/${venue.slug}` },
-            ]),
-            {
-              "@context": "https://schema.org",
-              "@type": "Place",
-              name: venue.name,
-              address: { "@type": "PostalAddress", addressLocality: venue.city, addressRegion: "IN" },
-              image: venue.image,
-              description: venue.shortDescription,
-            },
-          ]),
-        }}
-      />
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify([
+                  breadcrumbJsonLd([
+                    { name: "Home", path: "/" },
+                    { name: "Venues", path: "/venues" },
+                    { name: venue.name, path: `/venues/${venue.slug}` },
+                  ]),
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "Place",
+                    name: venue.name,
+                    address: { "@type": "PostalAddress", addressLocality: venue.city, addressRegion: "IN" },
+                    image: venue.image,
+                    description: venue.shortDescription,
+                  },
+                ]),
+              }}
+            />
     </>
   );
 }

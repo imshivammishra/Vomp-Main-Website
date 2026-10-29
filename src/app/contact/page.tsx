@@ -28,46 +28,61 @@ export default async function ContactPage() {
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-5 pt-28 pb-16 md:px-8 md:pt-36">
         <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Contact" }]} />
-        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.3fr] lg:gap-16">
+          {/* ── Left: contact info ── */}
           <div>
             <Reveal>
-              <div className="relative overflow-hidden rounded-3xl bg-black p-8 text-white md:p-10">
-                <div className="relative">
-                  <p className="s-eyebrow text-white/60">Expert help · Find my venue</p>
-                  <h1 className="s-headline font-display mt-3 text-3xl leading-tight text-balance md:text-4xl">
-                    Tell us the occasion.
-                  </h1>
-                  <div aria-hidden="true" className="mt-5 h-px w-32 bg-white/20" />
-                  <p className="mt-4 text-[15px] leading-relaxed text-white/70">
-                    Share the essentials below. For anything urgent, write to {settings.email} with
-                    your event date in the subject.
-                  </p>
-                  <dl className="mt-8 space-y-5 text-sm">
-                    <div className="border-t border-white/15 pt-4">
-                      <dt className="text-[13px] font-semibold text-white/60">Email</dt>
-                      <dd className="mt-1 font-medium break-all text-white">{settings.email}</dd>
-                    </div>
-                    <div className="border-t border-white/15 pt-4">
-                      <dt className="text-[13px] font-semibold text-white/60">Phone</dt>
-                      <dd className="mt-1">
-                        <a href={phoneHref} className="font-medium text-white hover:underline">
-                          {settings.phone}
-                        </a>
-                      </dd>
-                    </div>
-                    <div className="border-t border-white/15 pt-4">
-                      <dt className="text-[13px] font-semibold text-white/60">Hours</dt>
-                      <dd className="mt-1 text-white/80">{settings.hours}</dd>
-                    </div>
-                  </dl>
-                  <div className="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-5 py-3 backdrop-blur">
-                    <p className="text-[13px] font-medium text-white">{settings.responseNote}</p>
-                  </div>
+              <div className="flex items-center gap-3 text-[#a67c1a]">
+                <span className="h-px w-8 bg-[#a67c1a] opacity-70" />
+                <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">Expert venue advisory</p>
+              </div>
+              <h1 className="font-display mt-4 text-[36px] leading-tight text-[#1d1d1f] md:text-[48px]">
+                Tell us the occasion.
+              </h1>
+              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#424245]">
+                Share the essentials below. For anything urgent, write to{" "}
+                <a href={`mailto:${settings.email}`} className="link-elegant">{settings.email}</a>{" "}
+                with your event date in the subject.
+              </p>
+            </Reveal>
+
+            <Reveal delay={80}>
+              <dl className="mt-10 space-y-0 divide-y divide-[#e8e8ed] rounded-2xl border border-[#e8e8ed] bg-[#fdf9f4] overflow-hidden">
+                <div className="px-6 py-5">
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Email</dt>
+                  <dd className="mt-1.5 font-medium text-[#1d1d1f] break-all">{settings.email}</dd>
                 </div>
+                <div className="px-6 py-5">
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Phone</dt>
+                  <dd className="mt-1.5">
+                    <a href={phoneHref} className="link-elegant font-medium">{settings.phone}</a>
+                  </dd>
+                </div>
+                <div className="px-6 py-5">
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Hours</dt>
+                  <dd className="mt-1.5 text-[#424245]">{settings.hours}</dd>
+                </div>
+              </dl>
+            </Reveal>
+
+            {/* Trust signals */}
+            <Reveal delay={120}>
+              <div className="mt-8 space-y-3">
+                {[
+                  "Every venue personally visited or verified",
+                  "Private shortlist delivered within one business day",
+                  "No booking fees — ever",
+                ].map((signal) => (
+                  <div key={signal} className="flex items-start gap-3">
+                    <span aria-hidden="true" className="mt-1 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#a67c1a]" />
+                    <p className="text-[14px] text-[#424245]">{signal}</p>
+                  </div>
+                ))}
               </div>
             </Reveal>
-            <Reveal delay={100}>
-              <div className="mt-8">
+
+            <Reveal delay={140}>
+              <div className="mt-10">
                 <h2 className="font-display text-2xl text-[#1d1d1f]">Good to know</h2>
                 <div className="mt-4">
                   <FAQ faqs={faqs} />
@@ -75,12 +90,19 @@ export default async function ContactPage() {
               </div>
             </Reveal>
           </div>
-          <Reveal delay={120} scale className="md:sticky md:top-28 md:self-start">
-            <div className="rounded-[18px] bg-white p-6 shadow-sm ring-1 ring-black/5 md:p-10">
-              <p className="s-eyebrow text-[#6e6e73]">Request proposal</p>
-              <h2 className="font-display mt-2 text-2xl text-[#1d1d1f]">Your celebration, in brief</h2>
-              <div aria-hidden="true" className="mt-4 h-px w-32 bg-[#e8e8ed]" />
-              <div className="mt-6">
+
+          {/* ── Right: form ── */}
+          <Reveal delay={100} scale className="lg:sticky lg:top-28 lg:self-start">
+            <div className="overflow-hidden rounded-2xl border border-[#e8e8ed] bg-white shadow-sm">
+              <div className="border-b border-[#e8e8ed] bg-[#fdf9f4] px-7 py-6">
+                <div className="flex items-center gap-3 text-[#a67c1a]">
+                  <span className="h-px w-6 bg-[#a67c1a] opacity-70" />
+                  <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">Request proposal</p>
+                </div>
+                <h2 className="font-display mt-2 text-[26px] text-[#1d1d1f]">Your celebration, in brief</h2>
+                <p className="mt-1 text-[13px] text-[#86868b]">{settings.responseNote}</p>
+              </div>
+              <div className="px-7 py-7">
                 <Suspense fallback={<p className="text-sm text-[#6e6e73]">Loading form…</p>}>
                   <EnquiryForm />
                 </Suspense>

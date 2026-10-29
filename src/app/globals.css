@@ -329,6 +329,98 @@ details[open] .faq-a {
   background-clip: border-box;
 }
 
+/* ── Refined prose ── */
+.prose-venue {
+  font-size: 16px;
+  line-height: 1.85;
+  color: #3f3f3f;
+  letter-spacing: -0.005em;
+}
+
+/* ── Ornamental section divider ── */
+.section-ornament {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #a67c1a;
+  margin-bottom: 20px;
+}
+.section-ornament::before,
+.section-ornament::after {
+  content: "";
+  height: 1px;
+  width: 24px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* ── Premium page header band ── */
+.page-header-band {
+  background: linear-gradient(180deg, #fdf9f4 0%, #ffffff 100%);
+  border-bottom: 1px solid #e8e8ed;
+}
+
+/* ── Better link style ── */
+.link-elegant {
+  color: #7f0f2e;
+  text-decoration: none;
+  border-bottom: 1px solid #7f0f2e40;
+  transition: border-color 0.2s;
+}
+.link-elegant:hover {
+  border-color: #7f0f2e;
+}
+
+/* ── Card hover ── */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.2, 0.6, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 48px -16px rgba(0, 0, 0, 0.16);
+}
+
+/* ── Refined input ── */
+.input-elegant {
+  height: 48px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1.5px solid #e8e8ed;
+  padding: 0 16px;
+  font-size: 15px;
+  color: #1d1d1f;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-elegant:focus {
+  outline: none;
+  border-color: #7f0f2e;
+  box-shadow: 0 0 0 3px rgba(127, 15, 46, 0.1);
+}
+
+/* ── Luxury section spacing ── */
+.section-luxury {
+  padding-top: clamp(64px, 8vw, 120px);
+  padding-bottom: clamp(64px, 8vw, 120px);
+}
+
+/* ── Gold shimmer text ── */
+.text-gold-shimmer {
+  background: linear-gradient(135deg, #d4a437 0%, #f0c862 40%, #a67c1a 70%, #d4a437 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Smooth scroll snap for mobile ── */
+.snap-luxury {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-luxury > * {
+  scroll-snap-align: start;
+}
+
 /* Section bands — pure white canvas */
 .band-blush {
   background: #ffffff;
@@ -473,4 +565,238 @@ details[open] .faq-a {
   .btn-sheen::after {
     display: none;
   }
+}
+
+/* ── Premium section separators ── */
+.lux-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #a67c1a;
+}
+.lux-rule::before,
+.lux-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: 0.4;
+}
+
+/* ── Text balance ── */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ── Luxury additions ── */
+.text-gold-shimmer {
+  background: linear-gradient(135deg, #d4a437 0%, #f0c862 40%, #a67c1a 70%, #d4a437 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-luxury {
+  padding-top: clamp(64px, 8vw, 120px);
+  padding-bottom: clamp(64px, 8vw, 120px);
+}
+
+/* Fluid type scale for luxury headings */
+.heading-xl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.93;
+  letter-spacing: -0.01em;
+  font-size: clamp(44px, 7vw, 96px);
+}
+.heading-2xl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  font-size: clamp(52px, 9vw, 128px);
+}
+
+/* ── Luxury design system ── */
+
+/* Elegant primary button — thin maroon border on white */
+.lux-btn {
+  @apply inline-flex items-center justify-center rounded-full border border-[#7f0f2e]/30 bg-white px-9 py-3.5 text-[14px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:bg-[#f5efe6] hover:border-[#7f0f2e]/60 hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Elegant outline button */
+.lux-btn-outline {
+  @apply inline-flex items-center justify-center rounded-full border border-[#e8ded2] bg-white px-7 py-3 text-[12px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:border-[#c6a04a]/60 hover:text-[#7f0f2e] hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Luxury link */
+.lux-link {
+  @apply text-[#8c736f] underline decoration-[#c6a04a]/30 underline-offset-4 transition-all duration-300 hover:text-[#7f0f2e] hover:decoration-[#7f0f2e]/60;
+}
+
+/* Hairline divider */
+.lux-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
+}
+
+/* Ornamental divider */
+.lux-ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #c6a04a;
+}
+.lux-ornament-divider::before,
+.lux-ornament-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
+}
+
+/* Cream card */
+.lux-card {
+  @apply rounded-[24px] border border-[#e8ded2] bg-white transition-all duration-500 hover:border-[#c6a04a]/40 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(15,8,10,0.06)];
+}
+
+/* Body text color */
+.lux-text-body {
+  color: #4a3a3c;
+}
+.lux-text-muted {
+  color: #8c736f;
+}
+
+/* Elegant input */
+.lux-input {
+  @apply w-full rounded-[14px] border border-[#e8ded2] bg-[#fffaf0] px-5 py-3.5 text-[14px] text-[#1a0a0d] placeholder:text-[#8c736f] focus:outline-none focus:ring-2 focus:ring-[#7f0f2e]/30 focus:border-[#7f0f2e] transition-all duration-300;
+}
+
+/* Section spacing */
+.lux-section {
+  @apply py-24 md:py-32 border-y border-[#f1eae0];
+}
+
+/* Partyslate-style masonry grid */
+.ps-masonry-2 {
+  column-count: 2;
+  column-gap: 2rem;
+}
+.ps-masonry-3 {
+  column-count: 3;
+  column-gap: 2rem;
+}
+.ps-masonry-item {
+  break-inside: avoid-column;
+  page-break-inside: avoid;
+}
+
+/* Luxury button */
+.lux-btn {
+  @apply inline-flex items-center justify-center rounded-full border border-[#7f0f2e]/30 bg-white px-9 py-3.5 text-[14px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:bg-[#f5efe6] hover:border-[#7f0f2e]/60 hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Luxury outline button */
+.lux-btn-outline {
+  @apply inline-flex items-center justify-center rounded-full border border-[#e8ded2] bg-white px-8 py-3 text-[12px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:border-[#c6a04a]/60 hover:text-[#7f0f2e] hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Luxury link */
+.lux-link {
+  @apply text-[#8c736f] underline decoration-[#c6a04a]/30 underline-offset-4 transition-all duration-300 hover:text-[#7f0f2e] hover:decoration-[#7f0f2e]/60;
+}
+
+/* Hairline divider */
+.lux-hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
+}
+
+/* Ornamental divider */
+.lux-ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #c6a04a;
+}
+.lux-ornament-divider::before,
+.lux-ornament-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
+}
+
+/* Luxury card */
+.lux-card {
+  @apply rounded-[24px] border border-[#e8ded2] bg-white transition-all duration-500 hover:border-[#c6a04a]/40 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(15,8,10,0.06)];
+}
+
+/* Body text colors */
+.lux-text-body {
+  color: #4a3a3c;
+}
+.lux-text-muted {
+  color: #8c736f;
+}
+
+/* Elegant input */
+.lux-input {
+  @apply w-full rounded-[14px] border border-[#e8ded2] bg-[#fffaf0] px-5 py-3.5 text-[14px] text-[#1a0a0d] placeholder:text-[#8c736f] focus:outline-none focus:ring-2 focus:ring-[#7f0f2e]/30 focus:border-[#7f0f2e] transition-all duration-300;
+}
+
+/* ── Partyslate-inspired utilities ── */
+
+/* Clean primary button */
+.ps-btn {
+  @apply inline-flex items-center justify-center rounded-full border border-transparent bg-[#7f0f2e] px-6 py-3 text-[14px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#5c0a20] hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Clean outline button */
+.ps-btn-outline {
+  @apply inline-flex items-center justify-center rounded-full border border-[#e2e8f0] bg-white px-6 py-3 text-[14px] font-semibold text-[#334155] shadow-sm transition-all duration-200 hover:border-[#7f0f2e] hover:text-[#7f0f2e] hover:shadow-sm hover:-translate-y-0.5 active:scale-[0.98];
+}
+
+/* Masonry-style column count */
+.ps-masonry-2 {
+  column-count: 2;
+  column-gap: 1.5rem;
+}
+.ps-masonry-3 {
+  column-count: 3;
+  column-gap: 1.5rem;
+}
+.ps-masonry-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* Clean section divider */
+.ps-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+}
+
+/* Soft glow */
+.ps-glow {
+  box-shadow: 0 0 40px -12px rgba(127, 15, 46, 0.10);
+}
+
+/* Body text colour for bright theme */
+.ps-text-muted {
+  color: #64748b;
+}
+.ps-text-body {
+  color: #334155;
 }

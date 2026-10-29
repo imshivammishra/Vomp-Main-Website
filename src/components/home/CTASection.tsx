@@ -1,10 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
-
-const CTA_VIDEO = "/videos/hero-bg.mp4";
 
 export default function CTASection({
   title,
@@ -21,47 +17,59 @@ export default function CTASection({
   secondaryHref?: string;
   secondaryLabel?: string;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      videoRef.current?.pause();
-    }
-  }, []);
-
   return (
-    <section aria-label="Call to action" className="relative overflow-hidden bg-[#2b1218] text-white">
-      <Image
-        src="/images/hero-poster.jpg"
-        alt=""
-        aria-hidden="true"
-        fill
-        sizes="100vw"
-        className="object-cover opacity-45"
+    <section aria-label="Call to action" className="relative overflow-hidden bg-[#faf7f2] border-t border-[#f1eae0]">
+      {/* Warm side glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-[#d4a437]/8 rounded-full blur-[120px]"
       />
-      <video
-        ref={videoRef}
-        aria-hidden="true"
-        tabIndex={-1}
-        className="absolute inset-0 h-full w-full object-cover opacity-35"
-        src={CTA_VIDEO}
-        poster="/images/hero-poster.jpg"
-        autoPlay
-        muted
-        loop
-        playsInline
-        disablePictureInPicture
-        preload="metadata"
-      />
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-black/80" />
-      <div className="relative mx-auto flex max-w-[1024px] flex-col items-center px-5 py-20 text-center md:py-28">
-        <h2 className="font-display max-w-2xl text-[34px] leading-[1.06] font-semibold text-balance md:text-[50px]">{title}</h2>
-        <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/70">{copy}</p>
-        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row">
-          <Link href={primaryHref} className="s-btn-dark btn-sheen px-6 py-2.5 text-[15px]">
+
+      <div className="relative mx-auto flex max-w-[860px] flex-col items-center px-6 py-24 text-center md:py-32">
+
+        {/* Gold ornament */}
+        <div className="mb-8 flex items-center gap-4">
+          <div className="h-px w-10 bg-[#c6a04a]/50" />
+          <span
+            className="text-[#c6a04a]/60 text-[14px]"
+            style={{
+              display: "inline-block",
+              width: "7px",
+              height: "7px",
+              background: "#c6a04a",
+              transform: "rotate(45deg)",
+            }}
+            aria-hidden="true"
+          />
+          <div className="h-px w-10 bg-[#c6a04a]/50" />
+        </div>
+
+        <h2 className="font-display max-w-2xl text-[40px] leading-[1.04] font-semibold text-balance text-[#1a0a0d] md:text-[56px]">
+          {title}
+        </h2>
+        <p className="mt-6 max-w-lg text-[15px] leading-relaxed text-[#4a3a3c]">{copy}</p>
+        <p className="mt-2 text-[12px] text-[#8c736f] italic tracking-[0.1em] uppercase">
+          — No commitment · Human response within one business day —
+        </p>
+
+        {/* Bottom ornament */}
+        <div className="my-10 flex items-center justify-center gap-2 text-[#c6a04a]/50">
+          <span className="text-[12px]">·</span>
+          <span className="text-[9px]">◆</span>
+          <span className="text-[12px]">·</span>
+        </div>
+
+        <div className="flex flex-col items-center gap-4 sm:flex-row">
+          <Link
+            href={primaryHref}
+            className="rounded-full border border-[#7f0f2e]/30 bg-white px-9 py-3.5 text-[14px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:bg-[#f5efe6] hover:border-[#7f0f2e]/60 hover:-translate-y-0.5 active:scale-[0.98]"
+          >
             {primaryLabel}
           </Link>
-          <Link href={secondaryHref} className="px-2 py-2 text-[15px] text-white underline decoration-white/50 underline-offset-4 hover:decoration-white">
+          <Link
+            href={secondaryHref}
+            className="px-4 py-3 text-[13px] text-[#8c736f] underline decoration-[#c6a04a]/30 underline-offset-4 transition hover:text-[#7f0f2e] hover:decoration-[#7f0f2e]/60"
+          >
             {secondaryLabel} &rsaquo;
           </Link>
         </div>
