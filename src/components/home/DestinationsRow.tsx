@@ -14,7 +14,6 @@ export default function DestinationsRow({ cities }: { cities: City[] }) {
       style={{ boxShadow: "0 40px 80px -30px rgba(0,0,0,0.5)" }}
     >
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-
         {/* ── Header ── */}
         <Reveal>
           <div className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
@@ -48,7 +47,11 @@ export default function DestinationsRow({ cities }: { cities: City[] }) {
         {/* ── Horizontal scrolling gallery on mobile, magazine grid on desktop ── */}
         <div className="no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0">
           {display.map((city, i) => (
-            <Reveal key={city.slug} delay={i * 55} className="w-[72vw] shrink-0 snap-center md:w-auto">
+            <Reveal
+              key={city.slug}
+              delay={i * 55}
+              className="w-[72vw] shrink-0 snap-center md:w-auto"
+            >
               <Link
                 href={`/cities/${city.slug}`}
                 className="group relative block overflow-hidden rounded-2xl bg-[#1a0c0f]"
@@ -70,14 +73,20 @@ export default function DestinationsRow({ cities }: { cities: City[] }) {
                   <div
                     aria-hidden
                     className="absolute inset-0"
-                    style={{ background: "linear-gradient(180deg, transparent 38%, rgba(8,3,5,0.4) 62%, rgba(8,3,5,0.92) 100%)" }}
+                    style={{
+                      background:
+                        "linear-gradient(180deg, transparent 38%, rgba(8,3,5,0.4) 62%, rgba(8,3,5,0.92) 100%)",
+                    }}
                   />
 
                   {/* Number */}
                   <div className="absolute left-4 top-4">
                     <p
                       className="font-display text-[72px] leading-none font-semibold"
-                      style={{ color: "rgba(212,164,55,0.15)", WebkitTextStroke: "1px rgba(212,164,55,0.2)" }}
+                      style={{
+                        color: "rgba(212,164,55,0.15)",
+                        WebkitTextStroke: "1px rgba(212,164,55,0.2)",
+                      }}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </p>
@@ -87,7 +96,9 @@ export default function DestinationsRow({ cities }: { cities: City[] }) {
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="mb-2 h-px w-6 bg-gradient-to-r from-[#d4a437]/50 to-transparent" />
                     <p className="font-display text-[22px] leading-tight text-white">{city.name}</p>
-                    <p className="mt-1 text-[11px] leading-snug text-white/40 line-clamp-2">{city.tagline}</p>
+                    <p className="mt-1 text-[11px] leading-snug text-white/40 line-clamp-2">
+                      {city.tagline}
+                    </p>
                     {/* Hover reveal */}
                     <div className="mt-3 flex items-center gap-2">
                       <span className="text-[10px] font-semibold tracking-[0.15em] text-[#d4a437]/0 uppercase transition-all duration-300 group-hover:text-[#d4a437]">

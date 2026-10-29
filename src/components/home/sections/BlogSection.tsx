@@ -29,12 +29,19 @@ export default function BlogSection({
     <section aria-labelledby="journal-heading" className="band-blush border-t border-[#eed9a3]">
       <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading align="left" eyebrow={heading.eyebrow} title={heading.title} copy={heading.copy} />
+          <SectionHeading
+            align="left"
+            eyebrow={heading.eyebrow}
+            title={heading.title}
+            copy={heading.copy}
+          />
           {heading.linkLabel && (
             <SectionLink href={heading.linkHref || "/blogs"}>{heading.linkLabel}</SectionLink>
           )}
         </div>
-        <h2 id="journal-heading" className="sr-only">Latest articles</h2>
+        <h2 id="journal-heading" className="sr-only">
+          Latest articles
+        </h2>
         <Reveal delay={120}>
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {blogs.slice(0, 3).map((p) => (

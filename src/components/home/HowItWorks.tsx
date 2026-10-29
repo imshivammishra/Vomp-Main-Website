@@ -32,13 +32,14 @@ export default function HowItWorks() {
       aria-labelledby="how-heading"
       className="relative overflow-hidden bg-[#faf7f2] py-24 md:py-32 border-y border-[#f1eae0]"
     >
-      <div aria-hidden className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#c6a04a]/30 to-transparent" />
+      <div
+        aria-hidden
+        className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#c6a04a]/30 to-transparent"
+      />
 
       <div className="mx-auto max-w-7xl px-6 md:px-10">
-
         {/* Two-column layout */}
         <div className="grid gap-20 md:grid-cols-[1fr_1.1fr] md:gap-24">
-
           {/* Left — heading + trust stats */}
           <Reveal>
             <div className="flex flex-col justify-between gap-10 md:sticky md:top-28 md:self-start">
@@ -52,14 +53,19 @@ export default function HowItWorks() {
                 <p className="mb-6 text-[13px] italic text-[#8c736f]">
                   &ldquo;Two minutes is all it takes.&rdquo;
                 </p>
-                <h2 id="how-heading" className="font-display text-[40px] leading-[0.96] text-[#1a0a0d] md:text-[56px] lg:text-[68px]">
-                  Your perfect<br />
-                  venue, without<br />
+                <h2
+                  id="how-heading"
+                  className="font-display text-[40px] leading-[0.96] text-[#1a0a0d] md:text-[56px] lg:text-[68px]"
+                >
+                  Your perfect
+                  <br />
+                  venue, without
+                  <br />
                   <em className="not-italic text-[#7f0f2e]">the legwork.</em>
                 </h2>
                 <p className="mt-7 max-w-sm text-[15px] leading-relaxed text-[#4a3a3c]">
-                  We replace weeks of venue hunting with a single brief and a
-                  curated shortlist built around your celebration — not a generic catalogue.
+                  We replace weeks of venue hunting with a single brief and a curated shortlist
+                  built around your celebration — not a generic catalogue.
                 </p>
               </div>
 
@@ -67,8 +73,12 @@ export default function HowItWorks() {
               <div className="grid grid-cols-3 gap-[1px] overflow-hidden rounded-[24px] border border-[#e8ded2] bg-[#e8ded2]">
                 {TRUST_MARKS.map(({ stat, label }) => (
                   <div key={label} className="flex flex-col bg-white px-6 py-6">
-                    <p className="font-display text-[26px] leading-none text-[#1a0a0d] md:text-[30px]">{stat}</p>
-                    <p className="mt-2.5 text-[10px] leading-snug text-[#8c736f] tracking-tight uppercase">{label}</p>
+                    <p className="font-display text-[26px] leading-none text-[#1a0a0d] md:text-[30px]">
+                      {stat}
+                    </p>
+                    <p className="mt-2.5 text-[10px] leading-snug text-[#8c736f] tracking-tight uppercase">
+                      {label}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -91,7 +101,9 @@ export default function HowItWorks() {
                   </div>
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="font-display text-[19px] leading-snug font-semibold text-[#1a0a0d] mb-3 tracking-tight">{title}</h3>
+                    <h3 className="font-display text-[19px] leading-snug font-semibold text-[#1a0a0d] mb-3 tracking-tight">
+                      {title}
+                    </h3>
                     <p className="text-[15px] leading-[1.8] text-[#4a3a3c]">{body}</p>
                   </div>
                 </div>
@@ -125,7 +137,10 @@ export default function HowItWorks() {
         </div>
       </div>
 
-      <div aria-hidden className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c6a04a]/20 to-transparent" />
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#c6a04a]/20 to-transparent"
+      />
     </section>
   );
 }

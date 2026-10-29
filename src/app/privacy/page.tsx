@@ -46,9 +46,7 @@ export default function PrivacyPage() {
           {SECTIONS.map((s, i) => (
             <Reveal key={s.title} delay={(i % 3) * 90}>
               <section className="rounded-[18px] bg-white p-6 shadow-sm ring-1 ring-black/5 md:p-7">
-                <h2 className="font-display text-xl text-[#1d1d1f]">
-                  {s.title}
-                </h2>
+                <h2 className="font-display text-xl text-[#1d1d1f]">{s.title}</h2>
                 <p className="mt-2 text-sm leading-relaxed text-[#424245]">{s.body}</p>
               </section>
             </Reveal>

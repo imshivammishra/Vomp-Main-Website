@@ -60,7 +60,6 @@ export default function CategoryTiles() {
       className="relative overflow-hidden bg-[#faf7f2] py-24 md:py-32 border-y border-[#f1eae0]"
     >
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
-
         {/* Header */}
         <Reveal>
           <div className="mb-16 flex flex-col items-center gap-6 text-center md:mb-24">
@@ -71,7 +70,10 @@ export default function CategoryTiles() {
               </p>
               <div className="h-px w-8 bg-[#c6a04a]" />
             </div>
-            <h2 id="categories-heading" className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]">
+            <h2
+              id="categories-heading"
+              className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]"
+            >
               Choose your celebration<span className="text-[#7f0f2e]">.</span>
             </h2>
           </div>
@@ -111,7 +113,9 @@ export default function CategoryTiles() {
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="font-display text-[20px] leading-tight text-white">{cat.label}</p>
+                      <p className="font-display text-[20px] leading-tight text-white">
+                        {cat.label}
+                      </p>
                       <p className="mt-1 text-[10px] leading-snug text-[#d9cbb8]">{cat.sub}</p>
                     </div>
                     <div className="h-9 w-9 rounded-full bg-white flex items-center justify-center shadow-sm transition-transform group-hover:scale-110">

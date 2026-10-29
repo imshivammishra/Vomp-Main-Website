@@ -6,11 +6,7 @@ import type { Venue } from "@/types";
 import Reveal from "@/components/ui/Reveal";
 import { MapPin, Star, Clock } from "lucide-react";
 
-export default function VenueGridMasonry({
-  venues,
-}: {
-  venues: Venue[];
-}) {
+export default function VenueGridMasonry({ venues }: { venues: Venue[] }) {
   if (venues.length === 0) return null;
 
   const display = venues.slice(0, 12);
@@ -27,7 +23,6 @@ export default function VenueGridMasonry({
       />
 
       <div className="relative mx-auto max-w-[1400px] px-6 md:px-8">
-
         {/* Header with category count */}
         <div className="mb-14 flex flex-col items-center gap-4 text-center">
           <div className="flex items-center gap-3">
@@ -105,7 +100,9 @@ export default function VenueGridMasonry({
                 <div className="p-5 pt-4">
                   <div className="flex items-center gap-1.5 mb-2 text-[10px] text-[#8c736f] uppercase tracking-[0.15em]">
                     <MapPin size={11} className="shrink-0" aria-hidden />
-                    <span className="truncate">{venue.area}, {venue.city}</span>
+                    <span className="truncate">
+                      {venue.area}, {venue.city}
+                    </span>
                   </div>
                   <h3 className="font-display text-[16px] leading-snug text-[#1a0a0d] mb-2 group-hover:text-[#7f0f2e]/70 transition-colors">
                     <Link href={`/venues/${venue.slug}`}>{venue.name}</Link>

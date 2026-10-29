@@ -20,7 +20,9 @@ export default async function DestinationsPage() {
   for (const venue of venues) counts.set(venue.citySlug, (counts.get(venue.citySlug) || 0) + 1);
   const cards = cities.map((city) => {
     if (city.image?.startsWith("/")) return city;
-    const venue = venues.find((item) => item.citySlug === city.slug && item.image?.startsWith("https://"));
+    const venue = venues.find(
+      (item) => item.citySlug === city.slug && item.image?.startsWith("https://")
+    );
     return venue?.image ? { ...city, image: venue.image } : city;
   });
 

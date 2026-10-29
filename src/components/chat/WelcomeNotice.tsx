@@ -52,7 +52,8 @@ export default function WelcomeNotice() {
         India&apos;s private venue experts.
       </p>
       <p className="mx-auto mt-1 max-w-sm text-[13px] leading-relaxed text-white/70">
-        Palaces, resorts and garden venues — shortlisted for your date, guests and budget within one business day.
+        Palaces, resorts and garden venues — shortlisted for your date, guests and budget within one
+        business day.
       </p>
       <Link
         href="/venues"

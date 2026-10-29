@@ -23,7 +23,10 @@ export default function AboutSection({
   heading: { eyebrow: string; title: string; copy?: string };
 }) {
   return (
-    <section aria-label="About Venue On My Plate" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
+    <section
+      aria-label="About Venue On My Plate"
+      className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20"
+    >
       <Reveal scale>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="img-zoom relative aspect-[4/3] overflow-hidden rounded-3xl bg-black/10 ring-1 ring-[#e8e8ed]">
@@ -43,12 +46,16 @@ export default function AboutSection({
           </div>
           <div>
             <p className="s-eyebrow text-neutral-500">{about.eyebrow || heading.eyebrow}</p>
-            <h2 className="s-headline mt-3 text-[32px] text-balance md:text-[44px]">{about.title}</h2>
+            <h2 className="s-headline mt-3 text-[32px] text-balance md:text-[44px]">
+              {about.title}
+            </h2>
             <p className="mt-4 leading-relaxed text-neutral-600">{about.body}</p>
             <dl className="mt-8 grid grid-cols-3 gap-6 border-t border-[#e8e8ed] pt-6">
               {about.stats.map((stat) => (
                 <div key={`${stat.value}-${stat.label}`}>
-                  <dt className="text-gold-gradient text-2xl font-bold tracking-tight md:text-3xl">{stat.value}</dt>
+                  <dt className="text-gold-gradient text-2xl font-bold tracking-tight md:text-3xl">
+                    {stat.value}
+                  </dt>
                   <dd className="mt-1 text-[13px] text-neutral-500">{stat.label}</dd>
                 </div>
               ))}

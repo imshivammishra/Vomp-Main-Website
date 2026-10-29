@@ -16,7 +16,9 @@ export default function FAQ({ faqs }: { faqs: Faq[] }) {
           </summary>
           <div className="faq-a">
             <div>
-              <p className="max-w-3xl pt-3 text-[15px] leading-relaxed text-[#424245]">{f.answer}</p>
+              <p className="max-w-3xl pt-3 text-[15px] leading-relaxed text-[#424245]">
+                {f.answer}
+              </p>
             </div>
           </div>
         </details>

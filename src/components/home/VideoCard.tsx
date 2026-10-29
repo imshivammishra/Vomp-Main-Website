@@ -79,7 +79,10 @@ export default function VideoCard({
             className="object-cover"
           />
         )}
-        <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#2b1218]/20 to-transparent" />
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-[#2b1218]/20 to-transparent"
+        />
       </div>
       <figcaption className="flex items-center justify-between gap-3 px-5 py-4">
         <span className="text-[15px] font-semibold text-[#2b1218]">{caption}</span>

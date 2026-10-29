@@ -68,7 +68,10 @@ export default function CinematicBand({
         />
       )}
       {!isVideo && <div aria-hidden="true" className="relative h-[62vh] min-h-[420px] w-full" />}
-      <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#2b1218]/65 via-[#2b1218]/20 to-[#2b1218]/80" />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-b from-[#2b1218]/65 via-[#2b1218]/20 to-[#2b1218]/80"
+      />
       <div className="absolute inset-0 flex flex-col items-center justify-center px-5 text-center">
         <p className="text-[11px] font-bold tracking-[0.32em] text-[#f3e5c3] uppercase md:text-[13px]">
           {eyebrow}

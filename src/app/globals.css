@@ -128,7 +128,9 @@ body {
   border: 1px solid #e8e8ed;
   border-radius: 18px;
   box-shadow: 0 4px 16px -8px rgba(0, 0, 0, 0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .s-card:hover {
   transform: translateY(-3px);
@@ -144,7 +146,9 @@ body {
   border: 0;
   border-radius: 9999px;
   box-shadow: none;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 .s-btn-dark:hover {
   background: #5c0a20;
@@ -237,7 +241,12 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 70%
+  );
   transform: translateX(-130%);
   pointer-events: none;
 }
@@ -373,7 +382,9 @@ details[open] .faq-a {
 
 /* ── Card hover ── */
 .card-hover {
-  transition: transform 0.3s cubic-bezier(0.2, 0.6, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.6, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 .card-hover:hover {
   transform: translateY(-3px);
@@ -390,7 +401,9 @@ details[open] .faq-a {
   font-size: 15px;
   color: #1d1d1f;
   background: #ffffff;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 .input-elegant:focus {
   outline: none;
@@ -467,7 +480,9 @@ details[open] .faq-a {
   background: #fff;
   border: 1px solid #e8e8ed;
   box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.25);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
 }
 .gold-frame:hover {
   transform: translateY(-4px);
@@ -519,7 +534,11 @@ details[open] .faq-a {
   transform: scale(1.04);
 }
 .btn-lux {
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 .btn-lux:hover {
   transform: translateY(-1px);
@@ -735,7 +754,7 @@ details[open] .faq-a {
 
 /* Soft glow */
 .ps-glow {
-  box-shadow: 0 0 40px -12px rgba(127, 15, 46, 0.10);
+  box-shadow: 0 0 40px -12px rgba(127, 15, 46, 0.1);
 }
 
 /* Body text colour for bright theme */
@@ -744,4 +763,47 @@ details[open] .faq-a {
 }
 .ps-text-body {
   color: #334155;
+}
+
+/* ── Luxury text animations (no font changes) ── */
+@keyframes lux-text-in {
+  from { opacity: 0; transform: translateY(22px) skewY(1deg); letter-spacing: 0.02em; }
+  to   { opacity: 1; transform: none; letter-spacing: inherit; }
+}
+.lux-text-in {
+  animation: lux-text-in 1.1s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+@keyframes lux-word-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.lux-word-in > * {
+  display: inline-block;
+  animation: lux-word-in 0.9s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+.lux-word-in > *:nth-child(1) { animation-delay: 0.05s; }
+.lux-word-in > *:nth-child(2) { animation-delay: 0.12s; }
+.lux-word-in > *:nth-child(3) { animation-delay: 0.19s; }
+.lux-word-in > *:nth-child(4) { animation-delay: 0.26s; }
+.lux-word-in > *:nth-child(5) { animation-delay: 0.33s; }
+.lux-word-in > *:nth-child(6) { animation-delay: 0.40s; }
+
+/* Subtle gold shimmer sweep on luxury headings */
+@keyframes lux-shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.lux-shimmer-text {
+  background-image: linear-gradient(100deg, #1d1d1f 30%, #a67c1a 50%, #1d1d1f 70%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: lux-shimmer 4s linear infinite;
+}
+
+/* Review button spacing helper */
+.review-cta-wrap {
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-bottom: clamp(24px, 3vw, 40px);
 }

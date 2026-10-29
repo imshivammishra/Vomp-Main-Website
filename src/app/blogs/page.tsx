@@ -26,11 +26,13 @@ export default async function BlogsPage() {
               <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">Journal</span>
             </div>
             <h1 className="font-display text-[44px] leading-[1.05] text-[#1d1d1f] md:text-[62px]">
-              Notes on celebrating<br />
+              Notes on celebrating
+              <br />
               <em className="not-italic text-[#a67c1a]">well.</em>
             </h1>
             <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-[#424245]">
-              Venue selection, destination planning and guest experience — written for humans, not algorithms.
+              Venue selection, destination planning and guest experience — written for humans, not
+              algorithms.
             </p>
           </Reveal>
         </div>
@@ -46,7 +48,9 @@ export default async function BlogsPage() {
           <>
             <div className="mt-14 flex items-center gap-4">
               <div className="h-px flex-1 bg-[#e8e8ed]" />
-              <span className="text-[10px] font-semibold tracking-[0.28em] text-[#a67c1a] uppercase">More from the journal</span>
+              <span className="text-[10px] font-semibold tracking-[0.28em] text-[#a67c1a] uppercase">
+                More from the journal
+              </span>
               <div className="h-px flex-1 bg-[#e8e8ed]" />
             </div>
             <div className="mt-10 grid gap-8 md:grid-cols-2">

@@ -27,12 +27,19 @@ export default function CitiesSection({
     <section id="cities" aria-labelledby="cities-heading" className="border-t border-black/10">
       <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading align="left" eyebrow={heading.eyebrow} title={heading.title} copy={heading.copy} />
+          <SectionHeading
+            align="left"
+            eyebrow={heading.eyebrow}
+            title={heading.title}
+            copy={heading.copy}
+          />
           {heading.linkLabel && (
             <SectionLink href={heading.linkHref || "/cities"}>{heading.linkLabel}</SectionLink>
           )}
         </div>
-        <h2 id="cities-heading" className="sr-only">Popular destinations</h2>
+        <h2 id="cities-heading" className="sr-only">
+          Popular destinations
+        </h2>
         <Reveal delay={120}>
           <div className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0">
             {cityCards.map((c) => (

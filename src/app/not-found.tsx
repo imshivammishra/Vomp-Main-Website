@@ -4,7 +4,9 @@ export default function NotFound() {
   return (
     <div className="mx-auto max-w-3xl px-5 pt-36 pb-24 text-center md:px-8">
       <p className="s-eyebrow text-[#6e6e73]">404</p>
-      <h1 className="s-headline font-display mt-4 text-5xl text-[#1d1d1f]">This page isn&apos;t on the menu.</h1>
+      <h1 className="s-headline font-display mt-4 text-5xl text-[#1d1d1f]">
+        This page isn&apos;t on the menu.
+      </h1>
       <p className="mx-auto mt-4 max-w-md leading-relaxed text-[#424245]">
         The venue or article you were looking for has moved — or never existed. Let&apos;s get you
         back to something beautiful.

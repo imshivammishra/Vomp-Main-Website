@@ -1,12 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  BadgePercent,
-  PhoneCall,
-  Sparkles,
-  type LucideIcon,
-} from "lucide-react";
+import { BadgePercent, PhoneCall, Sparkles, type LucideIcon } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/home/SectionHeading";
 
@@ -38,7 +33,10 @@ export default function FeaturesSection({
             {features.map(({ icon: iconKey, t, d }) => {
               const Icon = ICON_MAP[iconKey] || Sparkles;
               return (
-                <div key={t} className="rounded-[18px] bg-white p-8 shadow-[0_4px_16px_-8px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-16px_rgba(0,0,0,0.22)]">
+                <div
+                  key={t}
+                  className="rounded-[18px] bg-white p-8 shadow-[0_4px_16px_-8px_rgba(0,0,0,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_-16px_rgba(0,0,0,0.22)]"
+                >
                   <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#1d1d1f] text-white">
                     <Icon size={22} />
                   </span>

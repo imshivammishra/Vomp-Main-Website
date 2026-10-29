@@ -16,9 +16,18 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const FALLBACK_VALUES: Array<[string, string]> = [
-  ["Curated, not listed", "Fewer venues, each vetted for capacity, access, food and guest comfort."],
-  ["Trade-offs, stated", "Every shortlist explains what you gain and what you give up — season, distance, cost."],
-  ["You decide", "We coordinate visits and quotes. Nothing is booked without your written approval."],
+  [
+    "Curated, not listed",
+    "Fewer venues, each vetted for capacity, access, food and guest comfort.",
+  ],
+  [
+    "Trade-offs, stated",
+    "Every shortlist explains what you gain and what you give up — season, distance, cost.",
+  ],
+  [
+    "You decide",
+    "We coordinate visits and quotes. Nothing is booked without your written approval.",
+  ],
 ];
 
 const FALLBACK_STATS: Array<{ value: string; label: string }> = [
@@ -36,7 +45,10 @@ function metaStats(meta: Record<string, unknown> | undefined, fallback: typeof F
   if (!Array.isArray(meta?.stats)) return fallback;
   const rows = meta.stats
     .filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === "object")
-    .map((item) => ({ value: typeof item.value === "string" ? item.value : "", label: typeof item.label === "string" ? item.label : "" }))
+    .map((item) => ({
+      value: typeof item.value === "string" ? item.value : "",
+      label: typeof item.label === "string" ? item.label : "",
+    }))
     .filter((item) => item.value || item.label);
   return rows.length > 0 ? rows : fallback;
 }
@@ -58,10 +70,7 @@ export default async function AboutPage() {
     body:
       aboutBlock?.body ||
       "Venue On My Plate began with a simple frustration: beautiful venues, scattered information, and quotes that arrive too late. We visit venues, verify capacity and logistics, and present honest trade-offs — so you decide with confidence.",
-    image:
-      aboutBlock?.image?.startsWith("/")
-        ? aboutBlock.image
-        : "/images/wedding-decor.jpg",
+    image: aboutBlock?.image?.startsWith("/") ? aboutBlock.image : "/images/wedding-decor.jpg",
     alt: aboutBlock?.imageAlt || "Wedding reception decor with florals and warm lighting",
     badge: metaString(aboutBlock?.meta, "badge", "Private, quote-led shortlists"),
     stats: metaStats(aboutBlock?.meta, FALLBACK_STATS),
@@ -99,14 +108,14 @@ export default async function AboutPage() {
           <Reveal className="mt-10">
             <div className="flex items-center gap-3 text-[#a67c1a]">
               <span className="h-px w-8 bg-[#a67c1a] opacity-70" />
-              <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">{hero.eyebrow}</p>
+              <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">
+                {hero.eyebrow}
+              </p>
             </div>
             <h1 className="font-display mt-5 max-w-3xl text-[44px] leading-[1.05] text-white md:text-[64px]">
               {hero.title}
             </h1>
-            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-white/60">
-              {hero.body}
-            </p>
+            <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-white/60">{hero.body}</p>
           </Reveal>
         </div>
       </div>
@@ -138,7 +147,9 @@ export default async function AboutPage() {
         <div className="mt-20">
           <Reveal>
             <div className="section-ornament">
-              <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">What we stand for</span>
+              <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">
+                What we stand for
+              </span>
             </div>
             <h2 className="font-display text-[36px] leading-tight text-[#1d1d1f] md:text-[48px]">
               Principles before properties.
@@ -162,7 +173,10 @@ export default async function AboutPage() {
       </div>
 
       <div className="mt-20">
-        <CTASection title="Meet us over your requirements." copy="Two minutes of details — one business day to a shortlist." />
+        <CTASection
+          title="Meet us over your requirements."
+          copy="Two minutes of details — one business day to a shortlist."
+        />
       </div>
     </div>
   );

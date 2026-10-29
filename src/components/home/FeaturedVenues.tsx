@@ -6,7 +6,14 @@ import { MapPin } from "lucide-react";
 import { formatGuests } from "@/lib/utils";
 
 const COUNTRY_FLAGS: Record<string, string> = {
-  IN: "🇮🇳", IT: "🇮🇹", FR: "🇫🇷", AE: "🇦🇪", TH: "🇹🇭", US: "🇺🇸", GB: "🇬🇧", MV: "🇲🇻",
+  IN: "🇮🇳",
+  IT: "🇮🇹",
+  FR: "🇫🇷",
+  AE: "🇦🇪",
+  TH: "🇹🇭",
+  US: "🇺🇸",
+  GB: "🇬🇧",
+  MV: "🇲🇻",
 };
 
 function LuxuryVenueCard({ venue, size = "normal" }: { venue: Venue; size?: "large" | "normal" }) {
@@ -19,7 +26,9 @@ function LuxuryVenueCard({ venue, size = "normal" }: { venue: Venue; size?: "lar
       className="group relative block overflow-hidden rounded-2xl bg-[#1a0c0f]"
       aria-label={`View ${venue.name}`}
     >
-      <div className={`relative w-full overflow-hidden ${size === "large" ? "aspect-[3/4] md:aspect-auto md:h-full" : "aspect-[4/3]"}`}>
+      <div
+        className={`relative w-full overflow-hidden ${size === "large" ? "aspect-[3/4] md:aspect-auto md:h-full" : "aspect-[4/3]"}`}
+      >
         <Image
           src={venue.image}
           alt={venue.imageAlt}
@@ -33,7 +42,10 @@ function LuxuryVenueCard({ venue, size = "normal" }: { venue: Venue; size?: "lar
         <div
           aria-hidden
           className="absolute inset-0"
-          style={{ background: "linear-gradient(180deg, transparent 30%, rgba(8,3,5,0.5) 65%, rgba(8,3,5,0.92) 100%)" }}
+          style={{
+            background:
+              "linear-gradient(180deg, transparent 30%, rgba(8,3,5,0.5) 65%, rgba(8,3,5,0.92) 100%)",
+          }}
         />
         {/* Top badges */}
         <div className="absolute left-4 top-4 flex items-center gap-2">
@@ -41,7 +53,12 @@ function LuxuryVenueCard({ venue, size = "normal" }: { venue: Venue; size?: "lar
             {venue.type}
           </span>
           {isInternational && flag && (
-            <span className="rounded-full bg-black/40 px-2 py-1 text-[13px] backdrop-blur-md" title={venue.country}>{flag}</span>
+            <span
+              className="rounded-full bg-black/40 px-2 py-1 text-[13px] backdrop-blur-md"
+              title={venue.country}
+            >
+              {flag}
+            </span>
           )}
         </div>
         {venue.priceHint && (
@@ -56,9 +73,14 @@ function LuxuryVenueCard({ venue, size = "normal" }: { venue: Venue; size?: "lar
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
           {/* Thin gold rule */}
           <div className="mb-3 h-px w-8 bg-gradient-to-r from-[#d4a437]/60 to-transparent" />
-          <p className="font-display text-[22px] leading-tight text-white md:text-[26px]">{venue.name}</p>
+          <p className="font-display text-[22px] leading-tight text-white md:text-[26px]">
+            {venue.name}
+          </p>
           <div className="mt-2 flex items-center gap-4 text-[12px] text-white/50">
-            <span className="flex items-center gap-1"><MapPin size={11} />{venue.area}, {venue.city}</span>
+            <span className="flex items-center gap-1">
+              <MapPin size={11} />
+              {venue.area}, {venue.city}
+            </span>
             <span>{formatGuests(venue.capacityMin, venue.capacityMax)}</span>
           </div>
           {/* Hover CTA */}
@@ -83,7 +105,6 @@ export default function FeaturedVenues({ venues }: { venues: Venue[] }) {
   return (
     <section id="venues" aria-labelledby="featured-heading" className="bg-[#faf7f2] py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-
         {/* ── Section header ── */}
         <Reveal>
           <div className="mb-16 flex flex-col gap-6 md:mb-20 md:flex-row md:items-end md:justify-between">
@@ -91,14 +112,21 @@ export default function FeaturedVenues({ venues }: { venues: Venue[] }) {
               {/* Ornament */}
               <div className="mb-5 flex items-center gap-4">
                 <div className="h-px w-6 bg-[#a67c1a]" />
-                <p className="text-[9px] font-semibold tracking-[0.38em] text-[#a67c1a] uppercase">Curated collection</p>
+                <p className="text-[9px] font-semibold tracking-[0.38em] text-[#a67c1a] uppercase">
+                  Curated collection
+                </p>
               </div>
-              <h2 id="featured-heading" className="font-display text-[52px] leading-[0.97] text-[#1d1d1f] md:text-[72px] lg:text-[86px]">
-                Venues,<br />curated<span className="text-[#a67c1a]">.</span>
+              <h2
+                id="featured-heading"
+                className="font-display text-[52px] leading-[0.97] text-[#1d1d1f] md:text-[72px] lg:text-[86px]"
+              >
+                Venues,
+                <br />
+                curated<span className="text-[#a67c1a]">.</span>
               </h2>
               <p className="mt-5 text-[15px] leading-relaxed text-[#525252]">
-                Every property is personally visited or vetted before it appears here.
-                No sponsored listings. No compromises.
+                Every property is personally visited or vetted before it appears here. No sponsored
+                listings. No compromises.
               </p>
               <div className="mt-6 h-px w-16 bg-gradient-to-r from-[#a67c1a]/40 to-transparent" />
             </div>
@@ -168,10 +196,7 @@ export default function FeaturedVenues({ venues }: { venues: Venue[] }) {
               >
                 All venues
               </Link>
-              <Link
-                href="/contact"
-                className="s-btn-dark btn-sheen px-6 py-2.5 text-[13px]"
-              >
+              <Link href="/contact" className="s-btn-dark btn-sheen px-6 py-2.5 text-[13px]">
                 Request shortlist
               </Link>
             </div>

@@ -10,7 +10,9 @@ export default function VenueGrid({ venues }: { venues: Venue[] }) {
         <div className="rounded-2xl border border-[#e8e8ed] bg-[#fdf9f4] px-8 py-20 text-center">
           <div className="mx-auto mb-5 flex items-center justify-center gap-3 text-[#a67c1a]">
             <span className="h-px w-10 bg-[#a67c1a] opacity-50" />
-            <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">Private shortlists</span>
+            <span className="text-[10px] font-semibold tracking-[0.28em] uppercase">
+              Private shortlists
+            </span>
             <span className="h-px w-10 bg-[#a67c1a] opacity-50" />
           </div>
           <p className="font-display text-[30px] leading-tight text-[#1d1d1f] md:text-[36px]">

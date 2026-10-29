@@ -51,9 +51,7 @@ export default async function VenuesPage({
       (!city || v.city.toLowerCase() === city.toLowerCase()) &&
       (!type || v.type === type) &&
       (!event ||
-        v.eventTypes.some((e) =>
-          e.toLowerCase().includes(event.toLowerCase().split(" ")[0])
-        )) &&
+        v.eventTypes.some((e) => e.toLowerCase().includes(event.toLowerCase().split(" ")[0]))) &&
       matchesGuests(v.capacityMax, guests)
   );
 
@@ -65,16 +63,22 @@ export default async function VenuesPage({
     ).values(),
   ].sort((a, b) => a.name.localeCompare(b.name));
 
-  const cities = [...new Set(
-    venues
-      .filter((v) => !country || (v.countryCode ?? "IN").toUpperCase() === country.toUpperCase())
-      .map((v) => v.city)
-  )].sort();
+  const cities = [
+    ...new Set(
+      venues
+        .filter((v) => !country || (v.countryCode ?? "IN").toUpperCase() === country.toUpperCase())
+        .map((v) => v.city)
+    ),
+  ].sort();
 
   const types = [...new Set(venues.map((v) => v.type).filter(Boolean))].sort();
 
   const isFiltered = country || city || guests || type || event || q;
-  const locationLabel = city ? ` in ${city}` : country ? ` in ${venues.find(v => (v.countryCode ?? "IN") === country)?.country ?? country}` : " worldwide";
+  const locationLabel = city
+    ? ` in ${city}`
+    : country
+      ? ` in ${venues.find((v) => (v.countryCode ?? "IN") === country)?.country ?? country}`
+      : " worldwide";
 
   const summary =
     filtered.length > 0
@@ -97,14 +101,14 @@ export default async function VenuesPage({
               {/* Decorative rule */}
               <div className="mb-5 flex items-center gap-3">
                 <div className="h-px w-8 bg-[#a67c1a]" />
-                <p className="text-[10px] font-semibold tracking-[0.28em] text-[#a67c1a] uppercase">Venue Collection</p>
+                <p className="text-[10px] font-semibold tracking-[0.28em] text-[#a67c1a] uppercase">
+                  Venue Collection
+                </p>
               </div>
               <h1 className="font-display text-[44px] leading-[1.0] text-[#1d1d1f] md:text-[62px]">
                 Venues, curated<span className="text-[#a67c1a]">.</span>
               </h1>
-              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-[#525252]">
-                {summary}
-              </p>
+              <p className="mt-4 max-w-2xl text-[16px] leading-relaxed text-[#525252]">{summary}</p>
             </div>
           </Reveal>
           <Reveal delay={200}>

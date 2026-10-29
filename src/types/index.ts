@@ -1,8 +1,8 @@
 export interface Venue {
   slug: string;
   name: string;
-  country?: string;       // e.g. "India", "Italy"
-  countryCode?: string;   // e.g. "IN", "IT"
+  country?: string; // e.g. "India", "Italy"
+  countryCode?: string; // e.g. "IN", "IT"
   city: string;
   citySlug: string;
   area: string;
@@ -35,9 +35,9 @@ export interface City {
 }
 
 export interface Country {
-  code: string;     // "IN", "IT"
-  name: string;     // "India", "Italy"
-  flag: string;     // "🇮🇳", "🇮🇹"
+  code: string; // "IN", "IT"
+  name: string; // "India", "Italy"
+  flag: string; // "🇮🇳", "🇮🇹"
   active: boolean;
 }
 

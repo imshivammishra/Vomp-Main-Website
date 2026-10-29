@@ -21,7 +21,11 @@ export default function VenuesLoading() {
           <div className="h-10 w-full max-w-md animate-pulse rounded-full bg-[#e8e8ed]" />
           <div className="mt-3 flex flex-wrap gap-3">
             {[80, 72, 68, 88].map((w) => (
-              <div key={w} className="h-9 animate-pulse rounded-full bg-[#e8e8ed]" style={{ width: w + 80 }} />
+              <div
+                key={w}
+                className="h-9 animate-pulse rounded-full bg-[#e8e8ed]"
+                style={{ width: w + 80 }}
+              />
             ))}
           </div>
         </div>
@@ -32,7 +36,10 @@ export default function VenuesLoading() {
         <div className="py-10">
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="overflow-hidden rounded-[18px] border border-[#e8e8ed] bg-white">
+              <div
+                key={i}
+                className="overflow-hidden rounded-[18px] border border-[#e8e8ed] bg-white"
+              >
                 <div className="aspect-[16/10] animate-pulse bg-[#f5f5f7]" />
                 <div className="px-5 pt-4 pb-5">
                   <div className="h-3.5 w-36 animate-pulse rounded bg-[#e8e8ed]" />

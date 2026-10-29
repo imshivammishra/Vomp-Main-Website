@@ -39,7 +39,13 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   return (
     <div className="bg-white">
       <article className="mx-auto max-w-3xl px-5 pt-28 md:pt-36">
-        <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Journal", href: "/blogs" }, { name: post.title }]} />
+        <Breadcrumbs
+          items={[
+            { name: "Home", href: "/" },
+            { name: "Journal", href: "/blogs" },
+            { name: post.title },
+          ]}
+        />
         <Reveal className="mt-6 text-center">
           <p className="s-eyebrow text-[#6e6e73]">
             {post.category} · {post.readingMinutes} min read
@@ -82,10 +88,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         </Reveal>
         <Reveal delay={100}>
           <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-black/10 pt-6">
-            <Link
-              href="/blogs"
-              className="s-link text-[14px] font-semibold"
-            >
+            <Link href="/blogs" className="s-link text-[14px] font-semibold">
               ← Back to Journal
             </Link>
             <Link
@@ -101,9 +104,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       {related.length > 0 && (
         <section aria-label="Related articles" className="mx-auto max-w-7xl px-5 py-14 md:px-8">
           <Reveal>
-            <h2 className="font-display text-3xl text-[#1d1d1f]">
-              Keep reading
-            </h2>
+            <h2 className="font-display text-3xl text-[#1d1d1f]">Keep reading</h2>
           </Reveal>
           <div className="mt-6 grid gap-6 md:grid-cols-2">
             {related.map((p, i) => (

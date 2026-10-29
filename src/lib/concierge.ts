@@ -124,7 +124,10 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
       venues: [slim(venue)],
       links: [
         { label: `View ${venue.name}`, href: `/venues/${venue.slug}` },
-        { label: "Check availability", href: `/contact?message=${encodeURIComponent(`Hi, please check availability for ${venue.name}.`)}` },
+        {
+          label: "Check availability",
+          href: `/contact?message=${encodeURIComponent(`Hi, please check availability for ${venue.name}.`)}`,
+        },
       ],
       suggest: ["Request callback", `Venues in ${venue.city}`, "How do I book?"],
     };
@@ -132,7 +135,31 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
 
   // 2. City venues
   const city = matchCity(input, venues);
-  if (city && has(low, "venue", "wedding", "place", "hall", "resort", "palace", "lawn", "show", "list", "option", "best", "top", "udaipur", "jaipur", "goa", "delhi", "mumbai", "bangalore", "jodhpur")) {
+  if (
+    city &&
+    has(
+      low,
+      "venue",
+      "wedding",
+      "place",
+      "hall",
+      "resort",
+      "palace",
+      "lawn",
+      "show",
+      "list",
+      "option",
+      "best",
+      "top",
+      "udaipur",
+      "jaipur",
+      "goa",
+      "delhi",
+      "mumbai",
+      "bangalore",
+      "jodhpur"
+    )
+  ) {
     const list = venuesInCity(venues, city);
     if (list.length > 0) {
       return {
@@ -150,7 +177,19 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 3. Greetings
-  if (has(low, "hello", "hi", "hey", "namaste", "good morning", "good evening", "good afternoon", "ram ram")) {
+  if (
+    has(
+      low,
+      "hello",
+      "hi",
+      "hey",
+      "namaste",
+      "good morning",
+      "good evening",
+      "good afternoon",
+      "ram ram"
+    )
+  ) {
     return {
       text: "Namaste! I am Plate, your venue expert. I can suggest venues by city and budget, explain pricing, check availability, plan visits — or connect you to a human. What are you celebrating?",
       links: [{ label: "Browse all venues", href: "/venues" }],
@@ -159,7 +198,21 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 4. Price / cost
-  if (has(low, "price", "pricing", "cost", "rate", "charge", "budget", "expensive", "cheap", "fee", "rent")) {
+  if (
+    has(
+      low,
+      "price",
+      "pricing",
+      "cost",
+      "rate",
+      "charge",
+      "budget",
+      "expensive",
+      "cheap",
+      "fee",
+      "rent"
+    )
+  ) {
     return {
       text: "Every venue here is quote-led, not fixed-price: the final number moves with your date, guest count, functions, rooms and menu. As a guide, heritage palaces and luxury resorts sit at the Premium–Luxury end, while banquet estates are friendlier for large guest lists. A 20–30% advance usually locks your date. Share your city and budget and I will point you at the right set.",
       links: CONTACT_LINKS,
@@ -168,7 +221,22 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 5. Availability / dates
-  if (has(low, "availab", "available", "free on", "booked", "dates?", "december", "january", "february", "november", "wedding date", "slot")) {
+  if (
+    has(
+      low,
+      "availab",
+      "available",
+      "free on",
+      "booked",
+      "dates?",
+      "december",
+      "january",
+      "february",
+      "november",
+      "wedding date",
+      "slot"
+    )
+  ) {
     return {
       text: "Peak dates (Nov–Feb weekends) sell out 6–9 months ahead, especially in Udaipur and Jaipur. If you tell me your city and tentative date, our team will confirm real availability with 2–3 matching venues within one business day — free.",
       links: CONTACT_LINKS,
@@ -177,7 +245,18 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 6. Booking process
-  if (has(low, "how do i book", "how to book", "booking process", "process", "how it works", "steps", "procedure")) {
+  if (
+    has(
+      low,
+      "how do i book",
+      "how to book",
+      "booking process",
+      "process",
+      "how it works",
+      "steps",
+      "procedure"
+    )
+  ) {
     return {
       text: "Three refined steps: (1) share your brief — city, date, guests, mood; (2) receive a bespoke shortlist with private quotes in one business day; (3) visit with us and confirm with a written quote and advance. I can start step one right now.",
       links: CONTACT_LINKS,
@@ -235,7 +314,25 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 11. Catering / food / menu
-  if (has(low, "food", "cater", "menu", "veg", "non-veg", "nonveg", "jain", "sattvik", "cuisine", "dinner", "lunch", "breakfast", "chaat", "live counter")) {
+  if (
+    has(
+      low,
+      "food",
+      "cater",
+      "menu",
+      "veg",
+      "non-veg",
+      "nonveg",
+      "jain",
+      "sattvik",
+      "cuisine",
+      "dinner",
+      "lunch",
+      "breakfast",
+      "chaat",
+      "live counter"
+    )
+  ) {
     return {
       text: "Catering is in-house or through preferred partners at most luxury venues, with tastings arranged before you confirm. Jain, sattvik and continental formats are planned per function. Live counters and chaat stations are crowd favourites for sangeet evenings — confirm kitchen placement and staff ratios in your written quote.",
       links: CONTACT_LINKS,
@@ -244,7 +341,19 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 12. Rooms / stay
-  if (has(low, "room", "stay", "accommodat", "suite", "bridal suite", "villa", "guest rooms", "night halt")) {
+  if (
+    has(
+      low,
+      "room",
+      "stay",
+      "accommodat",
+      "suite",
+      "bridal suite",
+      "villa",
+      "guest rooms",
+      "night halt"
+    )
+  ) {
     return {
       text: "Most palace and resort venues bundle bridal suites plus room blocks for family; city banquets partner with nearby hotels. Always lock the room count, check-in times and complimentary suites in writing — wedding mornings live or die by this.",
       links: CONTACT_LINKS,
@@ -253,7 +362,20 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 13. Decor / mandap / flowers
-  if (has(low, "decor", "mandap", "flower", "floral", "stage", "theme", "lighting", "entry", "varmala")) {
+  if (
+    has(
+      low,
+      "decor",
+      "mandap",
+      "flower",
+      "floral",
+      "stage",
+      "theme",
+      "lighting",
+      "entry",
+      "varmala"
+    )
+  ) {
     return {
       text: "Venues offer in-house decor panels and also allow outside decorators. Floral mandaps, pastel sangeet stages and mirrored entries photograph best in daylight venues; confirm load-in times, power points and open-flame rules in advance.",
       links: [{ label: "See decor inspiration", href: "/blogs" }, ...CONTACT_LINKS],
@@ -262,7 +384,20 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 14. Season / weather
-  if (has(low, "season", "best time", "weather", "monsoon", "summer", "winter", "month", "october", "peak")) {
+  if (
+    has(
+      low,
+      "season",
+      "best time",
+      "weather",
+      "monsoon",
+      "summer",
+      "winter",
+      "month",
+      "october",
+      "peak"
+    )
+  ) {
     return {
       text: "October–March is peak for Rajasthan (cool evenings, clear skies); Goa shines November–February. June–September brings monsoon discounts of up to 30% at indoor-capable venues, and May–early-June has the sharpest deals if your guests can handle the heat.",
       links: [{ label: "Explore destinations", href: "/cities" }],
@@ -271,8 +406,25 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 15. Sangeet / dance / music / baraat
-  if (has(low, "sangeet", "dance", "music", "dj", "baraat", "bharat", "dhol", "singer", "concert", "party")) {
-    const sangeet = venues.filter((v) => v.eventTypes.some((e) => /sangeet|reception|cocktail/i.test(e))).slice(0, 3).map(slim);
+  if (
+    has(
+      low,
+      "sangeet",
+      "dance",
+      "music",
+      "dj",
+      "baraat",
+      "bharat",
+      "dhol",
+      "singer",
+      "concert",
+      "party"
+    )
+  ) {
+    const sangeet = venues
+      .filter((v) => v.eventTypes.some((e) => /sangeet|reception|cocktail/i.test(e)))
+      .slice(0, 3)
+      .map(slim);
     return {
       text: "For sangeet nights pick ballrooms or sound-permitted lawns — many cities enforce a 10pm outdoor music curfew, so indoor after-parties matter. These handle sangeet beautifully:",
       venues: sangeet.length > 0 ? sangeet : topVenues(venues),
@@ -291,25 +443,67 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 17. Corporate
-  if (has(low, "corporate", "conference", "offsite", "meeting", "mice", "team", "workshop", "dealer meet")) {
+  if (
+    has(
+      low,
+      "corporate",
+      "conference",
+      "offsite",
+      "meeting",
+      "mice",
+      "team",
+      "workshop",
+      "dealer meet"
+    )
+  ) {
     return {
       text: "For corporate offsites prioritise pillarless halls, AV, strong Wi-Fi and room inventory over sheer beauty — day packages with conferencing + lunch often beat wedding quotes. Tell me headcount and I will shortlist.",
-      links: [{ label: "Corporate venues", href: "/venues?event=Corporate%20event" }, ...CONTACT_LINKS],
+      links: [
+        { label: "Corporate venues", href: "/venues?event=Corporate%20event" },
+        ...CONTACT_LINKS,
+      ],
       suggest: ["Venues in Jodhpur", "Request callback"],
     };
   }
 
   // 18. Birthday / anniversary / private party
-  if (has(low, "birthday", "anniversary", "private party", "roka", "engagement", "bachelor", "cocktail")) {
+  if (
+    has(
+      low,
+      "birthday",
+      "anniversary",
+      "private party",
+      "roka",
+      "engagement",
+      "bachelor",
+      "cocktail"
+    )
+  ) {
     return {
       text: "Milestone celebrations shine in intimate formats — 80–250 guests in villas, terraces and boutique ballrooms. Rooftops at golden hour plus a live counter beat a half-empty big hall every time.",
-      links: [{ label: "Private party venues", href: "/venues?event=Birthday%20%2F%20Anniversary" }],
+      links: [
+        { label: "Private party venues", href: "/venues?event=Birthday%20%2F%20Anniversary" },
+      ],
       suggest: ["Venues in Jaisalmer", "What are prices like?"],
     };
   }
 
   // 19. Photographer / vendors
-  if (has(low, "photograph", "videograph", "makeup", "mua", "vendor", "planner", "outside vendor", "photo", "candid", "traditional")) {
+  if (
+    has(
+      low,
+      "photograph",
+      "videograph",
+      "makeup",
+      "mua",
+      "vendor",
+      "planner",
+      "outside vendor",
+      "photo",
+      "candid",
+      "traditional"
+    )
+  ) {
     return {
       text: "We work with candid and traditional photography teams, makeup artists and planners in every circuit — briefed on your venues and light before the day. Share your city and functions and we will suggest 2–3 options inside your budget.",
       links: CONTACT_LINKS,
@@ -318,7 +512,20 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 20. Budget optimisation / negotiation
-  if (has(low, "negotiat", "better price", "discount", "deal", "offers?", "price beat", "best deal", "benchmark", "budget optim")) {
+  if (
+    has(
+      low,
+      "negotiat",
+      "better price",
+      "discount",
+      "deal",
+      "offers?",
+      "price beat",
+      "best deal",
+      "benchmark",
+      "budget optim"
+    )
+  ) {
     return {
       text: "That is our favourite part — share any quote you already have and we will benchmark it across 2–3 comparable venues and negotiate inclusions (rooms, decor, sound, taxes), not just the headline number. Peak dates have less room; off-season has plenty.",
       links: CONTACT_LINKS,
@@ -327,7 +534,24 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   }
 
   // 22. Human / contact
-  if (has(low, "human", "agent", "person", "call me", "phone", "number", "contact", "talk", "callback", "whatsapp", "email", "address", "office")) {
+  if (
+    has(
+      low,
+      "human",
+      "agent",
+      "person",
+      "call me",
+      "phone",
+      "number",
+      "contact",
+      "talk",
+      "callback",
+      "whatsapp",
+      "email",
+      "address",
+      "office"
+    )
+  ) {
     return {
       text: "Of course — our team takes every enquiry personally: +91 94624 60555 (Mon–Sat, 10am–7pm IST). We reply within one business day, usually much faster. Or leave your details and we will call you.",
       links: CONTACT_LINKS,
@@ -354,6 +578,11 @@ export function conciergeReply(raw: string, venues: Venue[]): BotReply {
   return {
     text: "I want to get this exactly right — could you tell me a little more? Your city, occasion and guest count work beautifully. Or pick a topic below.",
     links: CONTACT_LINKS,
-    suggest: ["Wedding venues in Udaipur", "What are prices like?", "How do I book?", "Talk to a human"],
+    suggest: [
+      "Wedding venues in Udaipur",
+      "What are prices like?",
+      "How do I book?",
+      "Talk to a human",
+    ],
   };
 }

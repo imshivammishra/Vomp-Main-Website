@@ -6,8 +6,14 @@ import { MapPin } from "lucide-react";
 import { formatGuests } from "@/lib/utils";
 
 const COUNTRY_FLAGS: Record<string, string> = {
-  IN: "🇮🇳", IT: "🇮🇹", FR: "🇫🇷", AE: "🇦🇪",
-  TH: "🇹🇭", US: "🇺🇸", GB: "🇬🇧", MV: "🇲🇻",
+  IN: "🇮🇳",
+  IT: "🇮🇹",
+  FR: "🇫🇷",
+  AE: "🇦🇪",
+  TH: "🇹🇭",
+  US: "🇺🇸",
+  GB: "🇬🇧",
+  MV: "🇲🇻",
 };
 
 export default function VenueCard({ venue }: { venue: import("@/types").Venue; index?: number }) {
@@ -18,7 +24,12 @@ export default function VenueCard({ venue }: { venue: import("@/types").Venue; i
   return (
     <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-[18px] bg-white ring-1 ring-black/[0.06] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_48px_-16px_rgba(0,0,0,0.18)] hover:ring-black/10">
       {/* Image */}
-      <Link href={`/venues/${venue.slug}`} className="relative block overflow-hidden bg-[#f5f5f7]" aria-label={`View ${venue.name}`} tabIndex={-1}>
+      <Link
+        href={`/venues/${venue.slug}`}
+        className="relative block overflow-hidden bg-[#f5f5f7]"
+        aria-label={`View ${venue.name}`}
+        tabIndex={-1}
+      >
         <div className="relative aspect-[16/10]">
           <Image
             src={venue.image}
@@ -35,7 +46,10 @@ export default function VenueCard({ venue }: { venue: import("@/types").Venue; i
               {venue.type}
             </span>
             {isInternational && flag && (
-              <span className="rounded-full bg-white/90 px-2.5 py-1 text-[13px] backdrop-blur-sm ring-1 ring-black/5" title={venue.country}>
+              <span
+                className="rounded-full bg-white/90 px-2.5 py-1 text-[13px] backdrop-blur-sm ring-1 ring-black/5"
+                title={venue.country}
+              >
                 {flag}
               </span>
             )}
@@ -54,7 +68,9 @@ export default function VenueCard({ venue }: { venue: import("@/types").Venue; i
       <div className="flex min-w-0 flex-1 flex-col px-5 pt-4 pb-5">
         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#86868b]">
           <MapPin size={12} className="shrink-0" aria-hidden />
-          <span className="truncate">{venue.area}, {venue.city}</span>
+          <span className="truncate">
+            {venue.area}, {venue.city}
+          </span>
         </div>
 
         <h3 className="mt-1.5 line-clamp-2 min-h-[2.8rem] min-w-0 text-[18px] leading-snug font-bold tracking-tight text-[#1d1d1f]">
@@ -66,7 +82,10 @@ export default function VenueCard({ venue }: { venue: import("@/types").Venue; i
         </p>
 
         {venue.amenities.length > 0 && (
-          <p className="mt-2 truncate text-[11px] text-[#b8b8bd]" title={venue.amenities.join(", ")}>
+          <p
+            className="mt-2 truncate text-[11px] text-[#b8b8bd]"
+            title={venue.amenities.join(", ")}
+          >
             {venue.amenities.slice(0, 3).join("  ·  ")}
           </p>
         )}
@@ -81,10 +100,16 @@ export default function VenueCard({ venue }: { venue: import("@/types").Venue; i
 
         {/* Actions */}
         <div className="mt-auto flex items-center gap-3 pt-4">
-          <Link href={`/contact?venue=${venue.slug}`} className="s-btn-dark btn-sheen flex-1 px-4 py-2.5 text-center text-[13px] font-semibold">
+          <Link
+            href={`/contact?venue=${venue.slug}`}
+            className="s-btn-dark btn-sheen flex-1 px-4 py-2.5 text-center text-[13px] font-semibold"
+          >
             Get quote
           </Link>
-          <Link href={`/venues/${venue.slug}`} className="shrink-0 px-3 py-2.5 text-[13px] font-medium text-[#424245] underline decoration-black/20 underline-offset-4 hover:text-[#1d1d1f] hover:decoration-black">
+          <Link
+            href={`/venues/${venue.slug}`}
+            className="shrink-0 px-3 py-2.5 text-[13px] font-medium text-[#424245] underline decoration-black/20 underline-offset-4 hover:text-[#1d1d1f] hover:decoration-black"
+          >
             Details →
           </Link>
         </div>

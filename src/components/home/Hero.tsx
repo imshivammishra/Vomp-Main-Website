@@ -63,15 +63,20 @@ export default function Hero({
   const activeSlides = slides.length > 0 ? slides : SLIDES;
   const slideCount = activeSlides.length;
   const activeVideo =
-    video && video.startsWith("/") && /\.(mp4|webm|mov|m4v)(\?|$)/i.test(video) ? video : HERO_VIDEO;
+    video && video.startsWith("/") && /\.(mp4|webm|mov|m4v)(\?|$)/i.test(video)
+      ? video
+      : HERO_VIDEO;
   const activePoster =
     poster && poster.startsWith("/") ? poster : activeSlides[0]?.image || "/images/hero-poster.jpg";
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const go = useCallback((dir: 1 | -1) => {
-    setIndex((i) => (i + dir + slideCount) % slideCount);
-  }, [slideCount]);
+  const go = useCallback(
+    (dir: 1 | -1) => {
+      setIndex((i) => (i + dir + slideCount) % slideCount);
+    },
+    [slideCount]
+  );
 
   useEffect(() => {
     setIndex(0);
@@ -98,7 +103,9 @@ export default function Hero({
         }}
       />
       <div className="relative mx-auto max-w-[1024px] px-5 pt-14 pb-10 text-center md:pt-20">
-        <p className="text-[13px] font-semibold tracking-[0.2em] text-[#a67c1a] uppercase">{slide.eyebrow}</p>
+        <p className="text-[13px] font-semibold tracking-[0.2em] text-[#a67c1a] uppercase">
+          {slide.eyebrow}
+        </p>
         <h1
           key={slide.title}
           className="font-display mx-auto mt-2 max-w-3xl text-[44px] leading-[1.02] font-semibold text-balance text-[#1d1d1f] md:text-[72px]"
@@ -113,7 +120,10 @@ export default function Hero({
           <Link href={slide.secondary.href} className="s-btn-dark px-6 py-2.5 text-[15px]">
             {slide.secondary.label}
           </Link>
-          <Link href={slide.primary.href} className="px-2 py-2 text-[15px] text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black">
+          <Link
+            href={slide.primary.href}
+            className="px-2 py-2 text-[15px] text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black"
+          >
             {slide.primary.label} &rsaquo;
           </Link>
         </div>
@@ -163,10 +173,20 @@ export default function Hero({
             onPlaying={() => setPlaying(true)}
           />
           <div className="absolute bottom-4 left-4 z-10 flex gap-2">
-            <button type="button" onClick={() => go(-1)} aria-label="Previous slide" className="grid h-9 w-9 place-items-center rounded-full bg-white/85 text-[#1d1d1f] backdrop-blur transition hover:bg-white">
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              aria-label="Previous slide"
+              className="grid h-9 w-9 place-items-center rounded-full bg-white/85 text-[#1d1d1f] backdrop-blur transition hover:bg-white"
+            >
               <ChevronLeft size={17} />
             </button>
-            <button type="button" onClick={() => go(1)} aria-label="Next slide" className="grid h-9 w-9 place-items-center rounded-full bg-white/85 text-[#1d1d1f] backdrop-blur transition hover:bg-white">
+            <button
+              type="button"
+              onClick={() => go(1)}
+              aria-label="Next slide"
+              className="grid h-9 w-9 place-items-center rounded-full bg-white/85 text-[#1d1d1f] backdrop-blur transition hover:bg-white"
+            >
               <ChevronRight size={17} />
             </button>
           </div>
@@ -183,7 +203,11 @@ export default function Hero({
               { label: "Jaisalmer", href: "/venues?city=Jaisalmer" },
               { label: "Goa", href: "/venues?city=Goa" },
             ].map((p) => (
-              <Link key={p.label} href={p.href} className="text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black">
+              <Link
+                key={p.label}
+                href={p.href}
+                className="text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black"
+              >
                 {p.label}
               </Link>
             ))}

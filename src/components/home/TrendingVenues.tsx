@@ -17,7 +17,6 @@ export default function TrendingVenues({ venues }: { venues: Venue[] }) {
       className="relative overflow-hidden bg-white py-24 md:py-32 border-y border-[#f1eae0]"
     >
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
-
         {/* Header */}
         <Reveal>
           <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:mb-24">
@@ -28,11 +27,15 @@ export default function TrendingVenues({ venues }: { venues: Venue[] }) {
                   Trending now
                 </p>
               </div>
-              <h2 id="trending-heading" className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]">
+              <h2
+                id="trending-heading"
+                className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]"
+              >
                 Most loved venues<span className="text-[#7f0f2e]">.</span>
               </h2>
               <p className="mt-6 text-[15px] leading-relaxed text-[#4a3a3c] max-w-lg">
-                Venues couples and planners are shortlisting this season — from lakefront palaces to garden lawns.
+                Venues couples and planners are shortlisting this season — from lakefront palaces to
+                garden lawns.
               </p>
             </div>
             <Link
@@ -53,7 +56,12 @@ export default function TrendingVenues({ venues }: { venues: Venue[] }) {
                 key={venue.slug}
                 className="ps-masonry-item mb-8 relative block overflow-hidden rounded-[24px] border border-[#e8ded2] bg-white transition-all duration-500 hover:border-[#c6a04a]/50 hover:-translate-y-1 hover:shadow-[0_28px_48px_-16px_rgba(15,8,10,0.08)]"
               >
-                <Link href={`/venues/${venue.slug}`} className="relative block overflow-hidden" aria-label={`View ${venue.name}`} tabIndex={-1}>
+                <Link
+                  href={`/venues/${venue.slug}`}
+                  className="relative block overflow-hidden"
+                  aria-label={`View ${venue.name}`}
+                  tabIndex={-1}
+                >
                   <div className="relative aspect-[4/5] overflow-hidden bg-[#f1eae0]">
                     <Image
                       src={venue.image}
@@ -99,7 +107,9 @@ export default function TrendingVenues({ venues }: { venues: Venue[] }) {
                 <div className="p-6">
                   <div className="flex items-center gap-1.5 mb-2.5 text-[10px] text-[#8c736f] uppercase tracking-[0.15em]">
                     <MapPin size={11} className="shrink-0" aria-hidden />
-                    <span className="truncate">{venue.area}, {venue.city}</span>
+                    <span className="truncate">
+                      {venue.area}, {venue.city}
+                    </span>
                   </div>
                   <h3 className="font-display text-[17px] leading-snug text-[#1a0a0d] mb-2.5 group-hover:text-[#7f0f2e]/70 transition-colors">
                     <Link href={`/venues/${venue.slug}`}>{venue.name}</Link>

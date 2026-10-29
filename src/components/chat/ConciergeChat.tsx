@@ -31,7 +31,10 @@ function VenueMini({ v }: { v: ChatVenue }) {
         {v.capacityMin}–{v.capacityMax} guests{v.priceHint ? ` · ${v.priceHint}` : ""}
       </p>
       <div className="mt-2 flex gap-4">
-        <Link href={`/venues/${v.slug}`} className="text-[12px] text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black">
+        <Link
+          href={`/venues/${v.slug}`}
+          className="text-[12px] text-[#1d1d1f] underline decoration-black/30 underline-offset-4 hover:decoration-black"
+        >
           View venue &rsaquo;
         </Link>
         <Link
@@ -59,8 +62,10 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
   useEffect(() => {
     if (initialVenues.length > 0) return;
     fetch("/api/v1/public/venues?limit=500")
-      .then((r) => r.ok ? r.json() : null)
-      .then((d) => { if (d?.data?.length) setVenues(d.data); })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.data?.length) setVenues(d.data);
+      })
       .catch(() => {});
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [leadData, setLeadData] = useState({ name: "", phone: "", city: "" });
@@ -87,15 +92,19 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
           if (lead === "awaitName") {
             setLeadData((d) => ({ ...d, name: trimmed }));
             setLead("awaitPhone");
-            pushBot({ text: `Lovely to meet you, ${trimmed.split(" ")[0]}. What is the best 10-digit mobile number to reach you on?` });
+            pushBot({
+              text: `Lovely to meet you, ${trimmed.split(" ")[0]}. What is the best 10-digit mobile number to reach you on?`,
+            });
           } else if (lead === "awaitPhone") {
             const digits = trimmed.replace(/\D/g, "").replace(/^(91|0)/, "");
             if (!/^[6-9]\d{9}$/.test(digits)) {
-              pushBot({ text: "That number does not look quite right — please share a 10-digit Indian mobile number." });
+              pushBot({
+                text: "That number does not look quite right — please share a 10-digit Indian mobile number.",
+              });
             } else {
               setLeadData((d) => ({ ...d, phone: digits }));
               setLead("awaitCity");
-              pushBot({ text: "Noted. And which city is the celebration in?", });
+              pushBot({ text: "Noted. And which city is the celebration in?" });
               setChips(["Udaipur", "Jaipur", "Jodhpur", "Jaisalmer", "Goa", "Somewhere else"]);
             }
           } else if (lead === "awaitCity") {
@@ -146,7 +155,9 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
         setTimeout(() => {
           setTyping(false);
           setLead("awaitName");
-          pushBot({ text: "With pleasure — I will arrange a callback from our team. What is your name?" });
+          pushBot({
+            text: "With pleasure — I will arrange a callback from our team. What is your name?",
+          });
         }, 800);
         return;
       }
@@ -184,7 +195,7 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
     if (open || greeted.current) return;
     const t = setTimeout(() => setNudge(true), 12000);
     return () => clearTimeout(t);
-  }, [open ]);
+  }, [open]);
 
   // Autoscroll
   useEffect(() => {
@@ -245,15 +256,25 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
           className="chat-pop fixed inset-x-4 bottom-24 z-50 flex max-h-[72vh] min-h-[480px] flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_36px_90px_-24px_rgba(92,10,32,0.4)] ring-1 ring-[#d4a437]/40 md:inset-x-auto md:right-6 md:bottom-6 md:w-[392px]"
         >
           {/* Header */}
-          <div className="px-4 py-3.5 text-white" style={{ backgroundImage: "linear-gradient(135deg, #5c0a20, #7f0f2e)" }}>
+          <div
+            className="px-4 py-3.5 text-white"
+            style={{ backgroundImage: "linear-gradient(135deg, #5c0a20, #7f0f2e)" }}
+          >
             <div className="relative flex items-center gap-3">
               <span className="grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full bg-[#fffaf0]">
-                <Image src="/images/brand-mark.png" alt="" width={44} height={44} className="h-10 w-10 object-contain" />
+                <Image
+                  src="/images/brand-mark.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-10 w-10 object-contain"
+                />
               </span>
               <div className="min-w-0 flex-1">
                 <p className="text-[15px] font-semibold leading-tight">Plate · Venue Expert</p>
                 <p className="flex items-center gap-1.5 text-[12px] text-white/70">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400" /> Online · replies instantly
+                  <span className="h-2 w-2 rounded-full bg-emerald-400" /> Online · replies
+                  instantly
                 </p>
               </div>
               <a
@@ -292,11 +313,19 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
                         <div className="mt-2.5 flex flex-wrap gap-2">
                           {m.links.map((l) =>
                             l.href.startsWith("tel:") ? (
-                              <a key={l.label} href={l.href} className="s-btn-dark btn-sheen rounded-full px-4 py-1.5 text-[13px]">
+                              <a
+                                key={l.label}
+                                href={l.href}
+                                className="s-btn-dark btn-sheen rounded-full px-4 py-1.5 text-[13px]"
+                              >
                                 {l.label}
                               </a>
                             ) : (
-                              <Link key={l.label} href={l.href} className="rounded-full bg-black px-4 py-1.5 text-[13px] text-white transition hover:bg-neutral-800">
+                              <Link
+                                key={l.label}
+                                href={l.href}
+                                className="rounded-full bg-black px-4 py-1.5 text-[13px] text-white transition hover:bg-neutral-800"
+                              >
                                 {l.label}
                               </Link>
                             )
@@ -304,16 +333,25 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
                         </div>
                       )}
                     </div>
-                    {m.venues?.map((v) => <VenueMini key={v.slug} v={v} />)}
+                    {m.venues?.map((v) => (
+                      <VenueMini key={v.slug} v={v} />
+                    ))}
                   </div>
                 </div>
               )
             )}
             {typing && (
               <div className="flex justify-start">
-                <div className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-white px-4 py-3 shadow-sm" aria-label="Concierge is typing">
+                <div
+                  className="flex items-center gap-1.5 rounded-2xl rounded-bl-md bg-white px-4 py-3 shadow-sm"
+                  aria-label="Concierge is typing"
+                >
                   {[0, 1, 2].map((i) => (
-                    <span key={i} className="typing-dot h-2 w-2 rounded-full bg-[#86868b]" style={{ animationDelay: `${i * 0.18}s` }} />
+                    <span
+                      key={i}
+                      className="typing-dot h-2 w-2 rounded-full bg-[#86868b]"
+                      style={{ animationDelay: `${i * 0.18}s` }}
+                    />
                   ))}
                 </div>
               </div>
@@ -359,7 +397,6 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
           </form>
         </section>
       )}
-
     </>
   );
 }

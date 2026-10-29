@@ -13,9 +13,18 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const STEPS = [
-  ["Tell us about your property", "Capacity, spaces, rooms, catering formats, cut-off timings and best seasons."],
-  ["We visit and verify", "A short walkthrough so our recommendations stay honest about access, power, kitchens and guest flow."],
-  ["Receive structured enquiries", "Date, guest count and function flow included — no back-and-forth for basics."],
+  [
+    "Tell us about your property",
+    "Capacity, spaces, rooms, catering formats, cut-off timings and best seasons.",
+  ],
+  [
+    "We visit and verify",
+    "A short walkthrough so our recommendations stay honest about access, power, kitchens and guest flow.",
+  ],
+  [
+    "Receive structured enquiries",
+    "Date, guest count and function flow included — no back-and-forth for basics.",
+  ],
 ] as Array<[string, string]>;
 
 const CHIPS = ["Structured dates", "Guest counts", "Clear budgets"];
@@ -36,9 +45,9 @@ export default async function PartnerPage() {
                 </h1>
                 <div aria-hidden="true" className="mt-5 h-px w-32 bg-white/20" />
                 <p className="mt-4 text-[15px] leading-relaxed text-white/70">
-                  We send structured requirements — city, event, date window, guest count — so
-                  your team quotes once, accurately. No listing fees are described here;
-                  commercial terms are shared directly and transparently.
+                  We send structured requirements — city, event, date window, guest count — so your
+                  team quotes once, accurately. No listing fees are described here; commercial terms
+                  are shared directly and transparently.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {CHIPS.map((c) => (
@@ -51,13 +60,11 @@ export default async function PartnerPage() {
                   ))}
                 </div>
                 <div className="mt-8 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur">
-                  <p className="text-[13px] font-semibold text-white/60">
-                    Apply by email
-                  </p>
+                  <p className="text-[13px] font-semibold text-white/60">Apply by email</p>
                   <p className="mt-1 text-sm font-medium break-all text-white">{settings.email}</p>
                   <p className="mt-1 text-[13px] leading-relaxed text-white/70">
-                    Subject <em>Venue partnership — [Property name, City]</em> with capacity,
-                    spaces and 5–6 recent photographs.
+                    Subject <em>Venue partnership — [Property name, City]</em> with capacity, spaces
+                    and 5–6 recent photographs.
                   </p>
                 </div>
               </div>
@@ -78,8 +85,8 @@ export default async function PartnerPage() {
             <Reveal delay={120}>
               <div className="mt-6 rounded-[18px] bg-[#f5f5f7] p-6 text-sm leading-relaxed text-[#424245]">
                 To apply, write to <strong className="text-[#1d1d1f]">{settings.email}</strong> with
-                the subject <em>Venue partnership — [Property name, City]</em> and include
-                capacity, spaces and 5–6 recent photographs.
+                the subject <em>Venue partnership — [Property name, City]</em> and include capacity,
+                spaces and 5–6 recent photographs.
               </div>
               <Link
                 href="/contact"

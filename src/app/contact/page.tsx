@@ -34,14 +34,18 @@ export default async function ContactPage() {
             <Reveal>
               <div className="flex items-center gap-3 text-[#a67c1a]">
                 <span className="h-px w-8 bg-[#a67c1a] opacity-70" />
-                <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">Expert venue advisory</p>
+                <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">
+                  Expert venue advisory
+                </p>
               </div>
               <h1 className="font-display mt-4 text-[36px] leading-tight text-[#1d1d1f] md:text-[48px]">
                 Tell us the occasion.
               </h1>
               <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#424245]">
                 Share the essentials below. For anything urgent, write to{" "}
-                <a href={`mailto:${settings.email}`} className="link-elegant">{settings.email}</a>{" "}
+                <a href={`mailto:${settings.email}`} className="link-elegant">
+                  {settings.email}
+                </a>{" "}
                 with your event date in the subject.
               </p>
             </Reveal>
@@ -49,17 +53,25 @@ export default async function ContactPage() {
             <Reveal delay={80}>
               <dl className="mt-10 space-y-0 divide-y divide-[#e8e8ed] rounded-2xl border border-[#e8e8ed] bg-[#fdf9f4] overflow-hidden">
                 <div className="px-6 py-5">
-                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Email</dt>
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">
+                    Email
+                  </dt>
                   <dd className="mt-1.5 font-medium text-[#1d1d1f] break-all">{settings.email}</dd>
                 </div>
                 <div className="px-6 py-5">
-                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Phone</dt>
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">
+                    Phone
+                  </dt>
                   <dd className="mt-1.5">
-                    <a href={phoneHref} className="link-elegant font-medium">{settings.phone}</a>
+                    <a href={phoneHref} className="link-elegant font-medium">
+                      {settings.phone}
+                    </a>
                   </dd>
                 </div>
                 <div className="px-6 py-5">
-                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">Hours</dt>
+                  <dt className="text-[11px] font-semibold tracking-[0.18em] text-[#86868b] uppercase">
+                    Hours
+                  </dt>
                   <dd className="mt-1.5 text-[#424245]">{settings.hours}</dd>
                 </div>
               </dl>
@@ -74,7 +86,10 @@ export default async function ContactPage() {
                   "No booking fees — ever",
                 ].map((signal) => (
                   <div key={signal} className="flex items-start gap-3">
-                    <span aria-hidden="true" className="mt-1 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#a67c1a]" />
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 h-1.5 w-1.5 shrink-0 rotate-45 bg-[#a67c1a]"
+                    />
                     <p className="text-[14px] text-[#424245]">{signal}</p>
                   </div>
                 ))}
@@ -97,9 +112,13 @@ export default async function ContactPage() {
               <div className="border-b border-[#e8e8ed] bg-[#fdf9f4] px-7 py-6">
                 <div className="flex items-center gap-3 text-[#a67c1a]">
                   <span className="h-px w-6 bg-[#a67c1a] opacity-70" />
-                  <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">Request proposal</p>
+                  <p className="text-[10px] font-semibold tracking-[0.28em] uppercase">
+                    Request proposal
+                  </p>
                 </div>
-                <h2 className="font-display mt-2 text-[26px] text-[#1d1d1f]">Your celebration, in brief</h2>
+                <h2 className="font-display mt-2 text-[26px] text-[#1d1d1f]">
+                  Your celebration, in brief
+                </h2>
                 <p className="mt-1 text-[13px] text-[#86868b]">{settings.responseNote}</p>
               </div>
               <div className="px-7 py-7">

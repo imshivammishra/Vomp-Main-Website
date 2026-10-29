@@ -18,7 +18,10 @@ export default function CTASection({
   secondaryLabel?: string;
 }) {
   return (
-    <section aria-label="Call to action" className="relative overflow-hidden bg-[#faf7f2] border-t border-[#f1eae0]">
+    <section
+      aria-label="Call to action"
+      className="relative overflow-hidden bg-[#faf7f2] border-t border-[#f1eae0]"
+    >
       {/* Warm side glow */}
       <div
         aria-hidden
@@ -26,7 +29,6 @@ export default function CTASection({
       />
 
       <div className="relative mx-auto flex max-w-[860px] flex-col items-center px-6 py-24 text-center md:py-32">
-
         {/* Gold ornament */}
         <div className="mb-8 flex items-center gap-4">
           <div className="h-px w-10 bg-[#c6a04a]/50" />

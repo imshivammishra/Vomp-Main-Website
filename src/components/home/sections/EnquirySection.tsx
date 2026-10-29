@@ -15,12 +15,22 @@ export default function EnquirySection({
   heading: { eyebrow: string; title: string; copy?: string };
 }) {
   return (
-    <section aria-labelledby="enquiry-heading" className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20">
+    <section
+      aria-labelledby="enquiry-heading"
+      className="mx-auto max-w-[1440px] px-5 py-14 md:px-8 md:py-20"
+    >
       <Reveal>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading align="left" eyebrow={heading.eyebrow} title={heading.title} copy={heading.copy} />
-            <h2 id="enquiry-heading" className="sr-only">Enquiry form</h2>
+            <SectionHeading
+              align="left"
+              eyebrow={heading.eyebrow}
+              title={heading.title}
+              copy={heading.copy}
+            />
+            <h2 id="enquiry-heading" className="sr-only">
+              Enquiry form
+            </h2>
             <div className="mt-8">
               <FAQ faqs={faqs} />
             </div>

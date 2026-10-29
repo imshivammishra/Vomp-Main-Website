@@ -21,8 +21,16 @@ const NAV_LEFT: NavItem[] = [
     children: [
       { label: "All venues", href: "/venues", note: "The full curated collection" },
       { label: "Wedding venues", href: "/wedding-venues", note: "Palaces, lawns & ballrooms" },
-      { label: "Corporate & conferences", href: "/venues?event=Corporate", note: "Retreats, offsites & annual days" },
-      { label: "Private parties", href: "/venues?event=Birthday", note: "Birthdays & anniversaries" },
+      {
+        label: "Corporate & conferences",
+        href: "/venues?event=Corporate",
+        note: "Retreats, offsites & annual days",
+      },
+      {
+        label: "Private parties",
+        href: "/venues?event=Birthday",
+        note: "Birthdays & anniversaries",
+      },
     ],
   },
   {
@@ -42,9 +50,21 @@ const NAV_LEFT: NavItem[] = [
     href: "/wedding-venues",
     children: [
       { label: "Weddings", href: "/wedding-venues", note: "Pheras, receptions & sangeet" },
-      { label: "Sangeet & haldi", href: "/venues?event=Wedding", note: "Colour, music & morning light" },
-      { label: "Corporate events", href: "/venues?event=Corporate", note: "Conferences & leadership offsites" },
-      { label: "Celebrations", href: "/venues?event=Birthday", note: "Birthdays, anniversaries & more" },
+      {
+        label: "Sangeet & haldi",
+        href: "/venues?event=Wedding",
+        note: "Colour, music & morning light",
+      },
+      {
+        label: "Corporate events",
+        href: "/venues?event=Corporate",
+        note: "Conferences & leadership offsites",
+      },
+      {
+        label: "Celebrations",
+        href: "/venues?event=Birthday",
+        note: "Birthdays, anniversaries & more",
+      },
     ],
   },
 ];
@@ -85,7 +105,10 @@ function DesktopNav({ items }: { items: NavItem[] }) {
   const isActive = useIsActive();
 
   return (
-    <nav aria-label="Primary" className="hidden min-w-0 items-center gap-0.5 whitespace-nowrap xl:flex">
+    <nav
+      aria-label="Primary"
+      className="hidden min-w-0 items-center gap-0.5 whitespace-nowrap xl:flex"
+    >
       {items.map((item) => {
         const hasChildren = Boolean(item.children?.length);
         const active = isActive(item.href);
@@ -197,11 +220,17 @@ export default function Header() {
       {/* Announcement strip */}
       <div className="border-b border-[#b89345]/70 bg-[#f4e6c9] text-center text-[#4a0719]">
         <p className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 py-2 text-[9px] font-semibold tracking-[0.22em] uppercase sm:text-[10px] md:text-[10.5px]">
-          <span aria-hidden="true" className="text-[12px] leading-none text-[#9a7224]">❖</span>
+          <span aria-hidden="true" className="text-[12px] leading-none text-[#9a7224]">
+            ❖
+          </span>
           Wedding &amp; celebration venues across India
-          <span aria-hidden="true" className="text-[#b89345]">◆</span>
+          <span aria-hidden="true" className="text-[#b89345]">
+            ◆
+          </span>
           <span className="hidden sm:inline">Private venue advisory</span>
-          <span aria-hidden="true" className="hidden text-[#b89345] sm:inline">◆</span>
+          <span aria-hidden="true" className="hidden text-[#b89345] sm:inline">
+            ◆
+          </span>
           <a
             href="tel:+919462460555"
             className="hidden underline decoration-[#b89345]/80 underline-offset-4 transition hover:text-[#7f0f2e] md:inline"
@@ -219,10 +248,7 @@ export default function Header() {
             : "shadow-[0_10px_30px_-24px_rgba(24,2,9,0.7)]"
         )}
       >
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-px bg-[#f0d790]/55"
-        />
+        <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-[#f0d790]/55" />
 
         <div className="relative mx-auto grid h-[84px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 md:h-[100px] md:px-6 xl:px-8">
           <div className="flex min-w-0 items-center justify-start gap-1">
@@ -242,7 +268,10 @@ export default function Header() {
           </div>
 
           <div className="flex min-w-0 items-center justify-end gap-1">
-            <nav aria-label="Secondary" className="hidden items-center gap-0.5 whitespace-nowrap xl:flex">
+            <nav
+              aria-label="Secondary"
+              className="hidden items-center gap-0.5 whitespace-nowrap xl:flex"
+            >
               {NAV_RIGHT.map((item) => (
                 <Link
                   key={item.label}
@@ -315,7 +344,9 @@ export default function Header() {
               </div>
 
               <div className="mt-5 flex items-center gap-2 text-[9px] font-semibold tracking-[0.3em] text-[#e7c77e] uppercase">
-                <span aria-hidden="true" className="text-[12px] leading-none">❖</span>
+                <span aria-hidden="true" className="text-[12px] leading-none">
+                  ❖
+                </span>
                 Wedding &amp; celebration venues
                 <span className="h-px flex-1 bg-[#e7c77e]/35" />
               </div>

@@ -40,9 +40,7 @@ export default function Logo({
         <span
           className={cn(
             "relative grid place-items-center rounded-full border p-[2px] shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)] md:p-[3px]",
-            light
-              ? "border-[#e7c77e]/75 bg-[#fff8e8]"
-              : "border-[#c6a04a]/65 bg-[#fffaf0]"
+            light ? "border-[#e7c77e]/75 bg-[#fff8e8]" : "border-[#c6a04a]/65 bg-[#fffaf0]"
           )}
         >
           <Image

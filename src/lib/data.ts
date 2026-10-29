@@ -16,8 +16,7 @@ export const cities: City[] = [
     tagline: "Lakes, palaces and golden-hour pheras.",
     description:
       "Udaipur remains India's most loved destination-wedding city — lake-facing palaces, heritage havelis and open courtyards that glow at sunset. Most large weddings here run across 2–3 days with separate venues for haldi, sangeet and pheras.",
-    image:
-      "/images/udaipur-city.jpg",
+    image: "/images/udaipur-city.jpg",
     imageAlt: "Lake Palace reflecting on Lake Pichola, Udaipur",
     venueCountLabel: "Curated venue selection",
     popularTypes: ["Heritage Palace", "Lakeside Lawns", "Heritage Haveli", "Resort"],
@@ -100,13 +99,13 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "udaipur-destination-wedding-cost-guide",
     title: "Udaipur destination wedding: a practical cost guide",
-    excerpt: "What a 2-day palace wedding actually involves — venues, rooms, logistics and where couples overspend.",
+    excerpt:
+      "What a 2-day palace wedding actually involves — venues, rooms, logistics and where couples overspend.",
     category: "Destination weddings",
     author: "Venue On My Plate Studio",
     publishedOn: "2026-09-02",
     readingMinutes: 10,
-    image:
-      "/images/udaipur-palace2.jpg",
+    image: "/images/udaipur-palace2.jpg",
     imageAlt: "City Palace architecture in Udaipur",
     body: [
       "Udaipur weddings typically split across a welcome dinner, haldi/sangeet and the wedding day. Room inventory near Lake Pichola sells out first — lock rooms before you lock decor.",
@@ -117,7 +116,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "outdoor-vs-indoor-wedding-venue",
     title: "Outdoor vs indoor venue: making the right call",
-    excerpt: "Weather risk, sound limits and guest comfort — how to decide between lawns and ballrooms.",
+    excerpt:
+      "Weather risk, sound limits and guest comfort — how to decide between lawns and ballrooms.",
     category: "Planning",
     author: "Venue On My Plate Studio",
     publishedOn: "2026-07-20",

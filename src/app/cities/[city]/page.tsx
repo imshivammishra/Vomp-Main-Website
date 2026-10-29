@@ -73,12 +73,19 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           sizes="100vw"
           className="kenburns object-cover"
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/40" />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/40"
+        />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pt-32 pb-12 text-center md:px-8">
           <Reveal>
             <div className="[&_ol]:justify-center [&_ol]:text-white/70">
               <Breadcrumbs
-                items={[{ name: "Home", href: "/" }, { name: "Cities", href: "/venues" }, { name: data.name }]}
+                items={[
+                  { name: "Home", href: "/" },
+                  { name: "Cities", href: "/venues" },
+                  { name: data.name },
+                ]}
               />
             </div>
             <p className="mt-4 text-[15px] font-semibold text-white/70">
@@ -97,9 +104,15 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
             <Reveal>
               <div>
-                <SectionHeading align="left" eyebrow="Destination guide" title={`Planning in ${data.name}`} />
+                <SectionHeading
+                  align="left"
+                  eyebrow="Destination guide"
+                  title={`Planning in ${data.name}`}
+                />
                 <p className="mt-5 leading-relaxed text-[#424245]">{data.description}</p>
-                <h2 className="mt-8 text-[15px] font-semibold text-[#6e6e73]">Popular venue types</h2>
+                <h2 className="mt-8 text-[15px] font-semibold text-[#6e6e73]">
+                  Popular venue types
+                </h2>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {data.popularTypes.map((t) => (
                     <li
@@ -117,9 +130,20 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 <div aria-hidden="true" className="h-1 rounded-t-[18px] bg-black" />
                 <p className="text-[15px] font-semibold text-[#6e6e73]">At a glance</p>
                 <dl className="mt-4 space-y-3 text-sm">
-                  <div className="flex justify-between gap-4"><dt className="text-[#6e6e73]">Curated venues</dt><dd className="font-semibold text-[#1d1d1f]">{data.venueCountLabel}</dd></div>
-                  <div className="flex justify-between gap-4"><dt className="text-[#6e6e73]">Best season</dt><dd className="font-medium text-[#1d1d1f]">Oct – Mar</dd></div>
-                  <div className="flex justify-between gap-4"><dt className="text-[#6e6e73]">Suits</dt><dd className="text-right font-medium text-[#1d1d1f]">Weddings & celebrations</dd></div>
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-[#6e6e73]">Curated venues</dt>
+                    <dd className="font-semibold text-[#1d1d1f]">{data.venueCountLabel}</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-[#6e6e73]">Best season</dt>
+                    <dd className="font-medium text-[#1d1d1f]">Oct – Mar</dd>
+                  </div>
+                  <div className="flex justify-between gap-4">
+                    <dt className="text-[#6e6e73]">Suits</dt>
+                    <dd className="text-right font-medium text-[#1d1d1f]">
+                      Weddings & celebrations
+                    </dd>
+                  </div>
                 </dl>
                 <div aria-hidden="true" className="my-5 border-t border-black/10" />
                 <Link
@@ -135,7 +159,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           <Reveal delay={100}>
             <section aria-labelledby="city-venues" className="mt-14">
               <div aria-hidden="true" className="mb-10 border-t border-black/10" />
-              <h2 id="city-venues" className="font-display text-center text-3xl text-[#1d1d1f] md:text-4xl">
+              <h2
+                id="city-venues"
+                className="font-display text-center text-3xl text-[#1d1d1f] md:text-4xl"
+              >
                 Featured venues in {data.name}
               </h2>
               <div className="mt-8">
@@ -144,8 +171,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               {featured.length === 0 && (
                 <p className="mx-auto mt-4 max-w-xl text-center text-sm text-[#424245]">
                   New {data.name} venues are being onboarded.{" "}
-                  <Link href="/contact" className="s-link">Ask us directly ›</Link> — we often have
-                  options before they appear online.
+                  <Link href="/contact" className="s-link">
+                    Ask us directly ›
+                  </Link>{" "}
+                  — we often have options before they appear online.
                 </p>
               )}
             </section>
@@ -157,7 +186,9 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 {data.name} FAQs
               </h2>
               <div aria-hidden="true" className="mt-6 border-t border-black/10" />
-              <div className="mt-6"><FAQ faqs={faqs} /></div>
+              <div className="mt-6">
+                <FAQ faqs={faqs} />
+              </div>
             </section>
           </Reveal>
         </div>

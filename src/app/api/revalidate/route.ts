@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 /**
  * On-demand cache revalidation endpoint.
  * Called by the admin panel after publishing content changes.
- * 
+ *
  * POST /api/revalidate
  * Headers: x-revalidate-token: <REVALIDATE_SECRET>
  */

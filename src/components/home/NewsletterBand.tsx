@@ -15,7 +15,10 @@ export default function NewsletterBand() {
   const [subscribed, setSubscribed] = useState(false);
 
   return (
-    <section aria-labelledby="newsletter-heading" className="mt-20 bg-[#45081b] text-white md:mt-28">
+    <section
+      aria-labelledby="newsletter-heading"
+      className="mt-20 bg-[#45081b] text-white md:mt-28"
+    >
       <div className="mx-auto grid max-w-[1440px] items-center gap-8 px-5 py-8 md:grid-cols-[1fr_auto] md:gap-16 md:px-10 md:py-9">
         <div>
           <p

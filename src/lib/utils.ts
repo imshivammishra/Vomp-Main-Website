@@ -6,7 +6,8 @@ export function cn(...classes: Array<string | false | null | undefined>): string
 
 export function formatGuests(min: number, max: number): string {
   if (min >= 1000 || max >= 1000) {
-    const f = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n % 1000 === 0 ? 0 : 1)}k` : `${n}`);
+    const f = (n: number) =>
+      n >= 1000 ? `${(n / 1000).toFixed(n % 1000 === 0 ? 0 : 1)}k` : `${n}`;
     return `${f(min)}–${f(max)} guests`;
   }
   return `${min}–${max} guests`;

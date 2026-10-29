@@ -88,7 +88,9 @@ export default async function WeddingCityPage({ params }: { params: Promise<{ ci
           <Reveal delay={150}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 rounded-[18px] bg-[#f5f5f7] px-6 py-5">
               <div className="text-center">
-                <p className="font-display text-2xl font-bold text-[#1d1d1f]">{venues.length || data.venueCountLabel}</p>
+                <p className="font-display text-2xl font-bold text-[#1d1d1f]">
+                  {venues.length || data.venueCountLabel}
+                </p>
                 <p className="mt-1 text-sm text-[#6e6e73]">Wedding-ready venues</p>
               </div>
               <div aria-hidden="true" className="hidden h-10 w-px bg-[#e8e8ed] sm:block" />
@@ -107,7 +109,9 @@ export default async function WeddingCityPage({ params }: { params: Promise<{ ci
           <Reveal delay={100}>
             <div className="mt-12">
               <SectionHeading eyebrow="Wedding-ready" title={`Celebrate in ${data.name}`} />
-              <div className="mt-8"><VenueGrid venues={venues} /></div>
+              <div className="mt-8">
+                <VenueGrid venues={venues} />
+              </div>
             </div>
           </Reveal>
 
@@ -115,25 +119,54 @@ export default async function WeddingCityPage({ params }: { params: Promise<{ ci
             <section aria-labelledby="plan" className="mt-14 grid gap-10 md:grid-cols-2">
               <div aria-hidden="true" className="mb-2 border-t border-black/10 md:col-span-2" />
               <div className="s-card p-6 md:p-8">
-                <h2 id="plan" className="font-display text-3xl text-[#1d1d1f]">How to plan here</h2>
+                <h2 id="plan" className="font-display text-3xl text-[#1d1d1f]">
+                  How to plan here
+                </h2>
                 <ol className="mt-5 space-y-4 text-sm leading-relaxed text-[#424245]">
                   <li className="flex gap-3">
-                    <span aria-hidden="true" className="font-display text-lg leading-none font-bold text-[#1d1d1f]">1</span>
-                    <span><strong className="text-[#1d1d1f]">Fix functions first.</strong> Decide which functions need which mood — haldi wants daylight, sangeet wants sound permission, pheras want the view.</span>
+                    <span
+                      aria-hidden="true"
+                      className="font-display text-lg leading-none font-bold text-[#1d1d1f]"
+                    >
+                      1
+                    </span>
+                    <span>
+                      <strong className="text-[#1d1d1f]">Fix functions first.</strong> Decide which
+                      functions need which mood — haldi wants daylight, sangeet wants sound
+                      permission, pheras want the view.
+                    </span>
                   </li>
                   <li className="flex gap-3">
-                    <span aria-hidden="true" className="font-display text-lg leading-none font-bold text-[#1d1d1f]">2</span>
-                    <span><strong className="text-[#1d1d1f]">Lock rooms early.</strong> Especially in {data.name}, rooms near the venue go before the venue does in season.</span>
+                    <span
+                      aria-hidden="true"
+                      className="font-display text-lg leading-none font-bold text-[#1d1d1f]"
+                    >
+                      2
+                    </span>
+                    <span>
+                      <strong className="text-[#1d1d1f]">Lock rooms early.</strong> Especially in{" "}
+                      {data.name}, rooms near the venue go before the venue does in season.
+                    </span>
                   </li>
                   <li className="flex gap-3">
-                    <span aria-hidden="true" className="font-display text-lg leading-none font-bold text-[#1d1d1f]">3</span>
-                    <span><strong className="text-[#1d1d1f]">Confirm cut-offs in writing.</strong> Music timings, vendor access and baraat movement vary by property.</span>
+                    <span
+                      aria-hidden="true"
+                      className="font-display text-lg leading-none font-bold text-[#1d1d1f]"
+                    >
+                      3
+                    </span>
+                    <span>
+                      <strong className="text-[#1d1d1f]">Confirm cut-offs in writing.</strong> Music
+                      timings, vendor access and baraat movement vary by property.
+                    </span>
                   </li>
                 </ol>
               </div>
               <div>
                 <h2 className="font-display text-3xl text-[#1d1d1f]">FAQs</h2>
-                <div className="mt-5"><FAQ faqs={faqs} /></div>
+                <div className="mt-5">
+                  <FAQ faqs={faqs} />
+                </div>
               </div>
             </section>
           </Reveal>

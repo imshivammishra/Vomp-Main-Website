@@ -75,7 +75,8 @@ const SETTINGS_FALLBACK: SiteSettings = {
   hours: SITE.hours,
   responseNote: SITE.responseNote,
   instagram: "https://instagram.com/venueonmyplate",
-  footerNote: "Luxury venue discovery, bespoke proposal support, and partner onboarding across India.",
+  footerNote:
+    "Luxury venue discovery, bespoke proposal support, and partner onboarding across India.",
 };
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -92,7 +93,9 @@ export async function getContentBlocks(): Promise<ContentBlock[]> {
 }
 
 export async function getReviews(venue?: string): Promise<Review[]> {
-  const path = venue ? `/api/v1/public/reviews?venue=${encodeURIComponent(venue)}` : "/api/v1/public/reviews";
+  const path = venue
+    ? `/api/v1/public/reviews?venue=${encodeURIComponent(venue)}`
+    : "/api/v1/public/reviews";
   return (await backend<Review[]>(path)) ?? [];
 }
 

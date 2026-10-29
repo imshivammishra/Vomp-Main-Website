@@ -40,7 +40,9 @@ export default function VenueFilters({
       // Reset city when country changes
       if (key === "country") next.delete("city");
       startTransition(() => {
-        router.push(`${pathname}${next.toString() ? `?${next.toString()}` : ""}`, { scroll: false });
+        router.push(`${pathname}${next.toString() ? `?${next.toString()}` : ""}`, {
+          scroll: false,
+        });
       });
     },
     [params, pathname, router]
@@ -61,8 +63,12 @@ export default function VenueFilters({
   }
 
   const hasFilters =
-    params.get("country") || params.get("city") || params.get("guests") ||
-    params.get("type") || params.get("event") || params.get("q");
+    params.get("country") ||
+    params.get("city") ||
+    params.get("guests") ||
+    params.get("type") ||
+    params.get("event") ||
+    params.get("q");
 
   const filterLabel = "text-[11px] font-semibold tracking-[0.14em] text-[#86868b] uppercase";
   const filterSelect =
@@ -103,7 +109,10 @@ export default function VenueFilters({
         {countries.length > 1 && (
           <div className="flex flex-col gap-1.5">
             <label className={filterLabel}>
-              <span className="flex items-center gap-1.5"><Globe size={11} aria-hidden="true" />Country</span>
+              <span className="flex items-center gap-1.5">
+                <Globe size={11} aria-hidden="true" />
+                Country
+              </span>
             </label>
             <select
               className={filterSelect}
@@ -113,7 +122,9 @@ export default function VenueFilters({
             >
               <option value="">All countries</option>
               {countries.map((c) => (
-                <option key={c.code} value={c.code}>{c.name}</option>
+                <option key={c.code} value={c.code}>
+                  {c.name}
+                </option>
               ))}
             </select>
           </div>
@@ -128,7 +139,9 @@ export default function VenueFilters({
           >
             <option value="">All cities</option>
             {cities.map((c) => (
-              <option key={c} value={c}>{c}</option>
+              <option key={c} value={c}>
+                {c}
+              </option>
             ))}
           </select>
         </div>
@@ -141,7 +154,9 @@ export default function VenueFilters({
             onChange={(e) => set("guests", e.target.value)}
           >
             {GUEST_OPTIONS.map((g) => (
-              <option key={g || "any"} value={g}>{g || "Any size"}</option>
+              <option key={g || "any"} value={g}>
+                {g || "Any size"}
+              </option>
             ))}
           </select>
         </div>
@@ -155,7 +170,9 @@ export default function VenueFilters({
           >
             <option value="">All types</option>
             {types.map((t) => (
-              <option key={t} value={t}>{t}</option>
+              <option key={t} value={t}>
+                {t}
+              </option>
             ))}
           </select>
         </div>
@@ -169,7 +186,9 @@ export default function VenueFilters({
           >
             <option value="">All occasions</option>
             {EVENT_OPTIONS.map((t) => (
-              <option key={t} value={t}>{t}</option>
+              <option key={t} value={t}>
+                {t}
+              </option>
             ))}
           </select>
         </div>

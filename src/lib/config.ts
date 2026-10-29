@@ -22,12 +22,8 @@ export type Config = {
 export function getConfig(): Config {
   return {
     publicApiBase: (process.env.NEXT_PUBLIC_API_URL || "/").replace(/\/+$/, ""),
-    internalApiBase:
-      (process.env.API_INTERNAL_URL || "http://127.0.0.1:3101").replace(/\/+$/, ""),
-    siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://venueonmyplate.in").replace(
-      /\/$/,
-      ""
-    ),
+    internalApiBase: (process.env.API_INTERNAL_URL || "http://127.0.0.1:3101").replace(/\/+$/, ""),
+    siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://venueonmyplate.in").replace(/\/$/, ""),
     cspUpgradeInsecureRequests: process.env.CSP_UPGRADE_INSECURE_REQUESTS === "1",
   };
 }

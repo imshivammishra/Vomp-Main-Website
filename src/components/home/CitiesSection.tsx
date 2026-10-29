@@ -15,7 +15,6 @@ export default function CitiesSection({ cities }: { cities: City[] }) {
       className="relative overflow-hidden bg-[#faf7f2] py-24 md:py-32 border-y border-[#f1eae0]"
     >
       <div className="relative mx-auto max-w-7xl px-6 md:px-10">
-
         {/* Header */}
         <Reveal>
           <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between md:mb-28">
@@ -26,11 +25,15 @@ export default function CitiesSection({ cities }: { cities: City[] }) {
                   Where to celebrate
                 </p>
               </div>
-              <h2 id="cities-heading" className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]">
+              <h2
+                id="cities-heading"
+                className="font-display text-[40px] leading-[1.02] text-[#1a0a0d] md:text-[54px]"
+              >
                 Celebrate anywhere<span className="text-[#7f0f2e]">.</span>
               </h2>
               <p className="mt-6 text-[15px] leading-relaxed text-[#4a3a3c] max-w-lg">
-                From Udaipur&apos;s lake palaces to Goa&apos;s beach villas — discover the best celebration destinations across India.
+                From Udaipur&apos;s lake palaces to Goa&apos;s beach villas — discover the best
+                celebration destinations across India.
               </p>
             </div>
             <Link
@@ -65,7 +68,13 @@ export default function CitiesSection({ cities }: { cities: City[] }) {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#1a0a0d]/30 via-[#1a0a0d]/8 to-transparent" />
                   <div className="absolute inset-0 bg-[#000]/3" />
                   <div className="absolute top-6 left-6 z-10">
-                    <span className="font-display text-[64px] leading-none font-semibold" style={{ color: "rgba(212,164,55,0.08)", WebkitTextStroke: "1px rgba(212,164,55,0.12)" }}>
+                    <span
+                      className="font-display text-[64px] leading-none font-semibold"
+                      style={{
+                        color: "rgba(212,164,55,0.08)",
+                        WebkitTextStroke: "1px rgba(212,164,55,0.12)",
+                      }}
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
@@ -75,13 +84,18 @@ export default function CitiesSection({ cities }: { cities: City[] }) {
                     <MapPin size={11} className="shrink-0" aria-hidden />
                     <span>{city.name}</span>
                   </div>
-                  <h3 className="font-display text-[22px] leading-tight text-[#1a0a0d] mb-2">{city.tagline}</h3>
+                  <h3 className="font-display text-[22px] leading-tight text-[#1a0a0d] mb-2">
+                    {city.tagline}
+                  </h3>
                   <p className="text-[14px] leading-relaxed text-[#4a3a3c] line-clamp-3 mb-5">
                     {city.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {city.popularTypes.slice(0, 3).map((t) => (
-                      <span key={t} className="rounded-full border border-[#e8ded2] bg-[#faf7f2] px-3 py-1 text-[10px] font-medium text-[#8c736f] tracking-tight uppercase">
+                      <span
+                        key={t}
+                        className="rounded-full border border-[#e8ded2] bg-[#faf7f2] px-3 py-1 text-[10px] font-medium text-[#8c736f] tracking-tight uppercase"
+                      >
                         {t}
                       </span>
                     ))}

@@ -8,12 +8,17 @@ export default function Breadcrumbs({
   light?: boolean;
 }) {
   return (
-    <nav aria-label="Breadcrumb" className={`text-[13px] ${light ? "text-white/50" : "text-[#6e6e73]"}`}>
+    <nav
+      aria-label="Breadcrumb"
+      className={`text-[13px] ${light ? "text-white/50" : "text-[#6e6e73]"}`}
+    >
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, i) => (
           <li key={item.name} className="flex items-center gap-2">
             {i > 0 && (
-              <span aria-hidden="true" className={light ? "text-white/30" : "text-black/30"}>/</span>
+              <span aria-hidden="true" className={light ? "text-white/30" : "text-black/30"}>
+                /
+              </span>
             )}
             {item.href ? (
               <Link

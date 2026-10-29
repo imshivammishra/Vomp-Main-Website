@@ -25,7 +25,9 @@ export default function Testimonials() {
             ].map(([n, t, d]) => (
               <li key={n} className="bg-black p-8">
                 <p className="text-4xl font-bold tracking-tight text-white">{n}</p>
-                <p className="mt-3 text-sm font-semibold tracking-[0.16em] text-white uppercase">{t}</p>
+                <p className="mt-3 text-sm font-semibold tracking-[0.16em] text-white uppercase">
+                  {t}
+                </p>
                 <p className="mt-2 text-sm leading-relaxed text-white/65">{d}</p>
               </li>
             ))}

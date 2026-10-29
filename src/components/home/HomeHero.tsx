@@ -5,10 +5,9 @@ export default function HomeHero() {
   return (
     <section aria-label="Find a venue" className="bg-white">
       <div className="mx-auto max-w-[1440px] px-5 pt-12 md:px-10 md:pt-16">
-        <h1 className="mx-auto max-w-[1040px] text-center text-[29px] leading-[1.22] font-bold tracking-[-0.025em] text-[#141414] md:text-[46px]">
+        <h1 className="lux-text-in mx-auto max-w-[1040px] text-center text-[29px] leading-[1.22] font-bold tracking-[-0.025em] text-[#141414] md:text-[46px]">
           Every Celebration Starts Here.
-          <br className="hidden sm:block" />{" "}
-          Find the Perfect Venue in One Search.
+          <br className="hidden sm:block" /> Find the Perfect Venue in One Search.
         </h1>
 
         <div className="mx-auto mt-8 w-full max-w-[780px] md:mt-10">
@@ -27,9 +26,7 @@ export default function HomeHero() {
           className="object-cover"
         />
       </div>
-      <p className="py-3 text-center text-[10px] text-[#8a8a8a]">
-        Photo by Venue On My Plate
-      </p>
+      <p className="py-3 text-center text-[10px] text-[#8a8a8a]">Photo by Venue On My Plate</p>
     </section>
   );
 }

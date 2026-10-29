@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 
-
 export default function VideoShowcase() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -23,20 +22,26 @@ export default function VideoShowcase() {
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.02]"
-        style={{ backgroundImage: "radial-gradient(circle, #d4a437 1px, transparent 1px)", backgroundSize: "32px 32px" }}
+        style={{
+          backgroundImage: "radial-gradient(circle, #d4a437 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
       />
 
       <div className="relative mx-auto max-w-[1260px] px-5 md:px-8">
-
         {/* Header — magazine-style two columns */}
         <div className="mb-10 grid items-end gap-6 md:mb-12 md:grid-cols-[1fr_auto]">
           <div>
             <div className="mb-4 flex items-center gap-3">
               <div className="h-px w-5 bg-[#d4a437]/50" />
-              <p className="text-[8px] font-semibold tracking-[0.5em] text-[#d4a437]/60 uppercase">Venue reel</p>
+              <p className="text-[8px] font-semibold tracking-[0.5em] text-[#d4a437]/60 uppercase">
+                Venue reel
+              </p>
             </div>
             <h2 className="font-display text-[40px] leading-[0.95] text-white md:text-[58px] lg:text-[68px]">
-              Celebrations<br />in motion<span className="text-[#d4a437]">.</span>
+              Celebrations
+              <br />
+              in motion<span className="text-[#d4a437]">.</span>
             </h2>
           </div>
           <p className="max-w-[260px] text-[13px] leading-[1.8] text-white/30 md:text-right">
@@ -47,7 +52,12 @@ export default function VideoShowcase() {
         {/* Video — gold ring container */}
         <div
           className="relative overflow-hidden rounded-2xl md:rounded-[22px]"
-          style={{ padding: "1.5px", background: "linear-gradient(135deg, rgba(212,164,55,0.5) 0%, rgba(212,164,55,0.06) 45%, rgba(212,164,55,0.35) 100%)", boxShadow: "0 40px 80px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,164,55,0.05)" }}
+          style={{
+            padding: "1.5px",
+            background:
+              "linear-gradient(135deg, rgba(212,164,55,0.5) 0%, rgba(212,164,55,0.06) 45%, rgba(212,164,55,0.35) 100%)",
+            boxShadow: "0 40px 80px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(212,164,55,0.05)",
+          }}
         >
           <div className="relative overflow-hidden rounded-2xl md:rounded-[21px] bg-[#0c0507]">
             <div className="relative w-full aspect-[16/9] md:aspect-[21/9]">
@@ -68,11 +78,16 @@ export default function VideoShowcase() {
               <div
                 aria-hidden
                 className="pointer-events-none absolute inset-0"
-                style={{ background: "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(8,3,5,0.5) 100%)" }}
+                style={{
+                  background:
+                    "radial-gradient(ellipse 100% 100% at 50% 50%, transparent 50%, rgba(8,3,5,0.5) 100%)",
+                }}
               />
               {/* Bottom watermark */}
               <div className="absolute bottom-4 right-5">
-                <p className="text-[8px] font-semibold tracking-[0.22em] text-white/15 uppercase">Venue On My Plate</p>
+                <p className="text-[8px] font-semibold tracking-[0.22em] text-white/15 uppercase">
+                  Venue On My Plate
+                </p>
               </div>
             </div>
           </div>

@@ -1,8 +1,4 @@
-export default function SEOSection({
-  seo,
-}: {
-  seo: { title: string; paragraphs: string[] };
-}) {
+export default function SEOSection({ seo }: { seo: { title: string; paragraphs: string[] } }) {
   return (
     <section aria-label="About finding venues in India" className="border-t border-black/10">
       <div className="mx-auto max-w-4xl px-5 py-14 text-center md:py-20">

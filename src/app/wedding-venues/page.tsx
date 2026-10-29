@@ -49,7 +49,10 @@ export default async function WeddingVenuesPage() {
               <Link href="/venues" className="s-btn-dark px-6 py-3 text-[14px] font-semibold">
                 Browse all venues
               </Link>
-              <Link href="/cities" className="rounded-full border border-[#d4a437]/50 bg-white/70 px-6 py-3 text-[14px] font-semibold text-[#5c0a20] transition hover:bg-white">
+              <Link
+                href="/cities"
+                className="rounded-full border border-[#d4a437]/50 bg-white/70 px-6 py-3 text-[14px] font-semibold text-[#5c0a20] transition hover:bg-white"
+              >
                 Explore destinations
               </Link>
             </div>
@@ -60,7 +63,11 @@ export default async function WeddingVenuesPage() {
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
         <SectionHeading
           eyebrow="Wedding collection"
-          title={venues.length > 0 ? `${venues.length} wedding-ready venues` : "A private wedding shortlist"}
+          title={
+            venues.length > 0
+              ? `${venues.length} wedding-ready venues`
+              : "A private wedding shortlist"
+          }
           copy="Use the filters to compare by city, guest count and style — or send us your brief and we will do the shortlisting."
         />
         <div className="mt-10">
