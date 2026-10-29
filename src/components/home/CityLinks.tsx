@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import Reveal from "@/components/ui/Reveal";
 import type { City } from "@/types";
 
 const EXTRA_CITIES = [
@@ -34,29 +36,59 @@ export default function CityLinks({ cities }: { cities: City[] }) {
   const all = [...known, ...extras].slice(0, 20);
 
   return (
-    <section aria-labelledby="cities-heading" className="bg-white pt-16 md:pt-24">
+    <section aria-labelledby="cities-heading" className="bg-white pt-20 md:pt-28">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="text-center">
-          <span aria-hidden className="mx-auto block h-[2px] w-[18px] bg-[#7f0f2e]" />
-          <h2
-            id="cities-heading"
-            className="mt-5 text-[26px] leading-tight font-bold tracking-[-0.02em] text-[#141414] md:text-[34px]"
-          >
-            Find Venues &amp; Event Spaces by City
-          </h2>
-        </div>
-
-        <div className="mx-auto mt-10 grid max-w-[1220px] grid-cols-2 gap-x-6 gap-y-5 text-left sm:grid-cols-3 md:mt-14 md:grid-cols-5 md:gap-x-10 md:gap-y-6">
-          {all.map((city) => (
-            <Link
-              key={city.label}
-              href={city.href}
-              className="text-[13px] text-[#1f1f1f] underline-offset-4 transition-colors hover:text-[#7f0f2e] hover:underline md:text-[14px]"
+        <Reveal>
+          <div className="text-center">
+            <div className="mb-4 flex items-center justify-center gap-3">
+              <span className="h-px w-8 bg-[#d4a437]/50" />
+              <p className="text-[10px] font-semibold tracking-[0.34em] text-[#a67c1a] uppercase">
+                Destinations
+              </p>
+              <span className="h-px w-8 bg-[#d4a437]/50" />
+            </div>
+            <h2
+              id="cities-heading"
+              className="font-display text-[34px] leading-[1.04] text-[#1d1d1f] md:text-[52px]"
             >
-              {city.label}
+              Find venues by city
+              <span className="text-[#a67c1a]">.</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-relaxed text-[#6b6b6b] md:text-[16px]">
+              From lake palaces to coastal estates — explore celebration spaces across India.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="mx-auto mt-12 grid max-w-[1180px] grid-cols-2 gap-x-6 gap-y-0 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-x-10">
+            {all.map((city) => (
+              <Link
+                key={city.label}
+                href={city.href}
+                className="group flex items-center justify-between border-b border-[#f0ece4] py-4 text-[14px] text-[#2b1218] transition-colors hover:text-[#7f0f2e] md:text-[15px]"
+              >
+                <span className="lux-underline font-medium">{city.label}</span>
+                <ChevronRight
+                  size={15}
+                  className="shrink-0 -translate-x-1 text-[#c6a04a] opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+                />
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div className="mt-12 text-center">
+            <Link
+              href="/cities"
+              className="inline-flex items-center gap-2 rounded-full border border-[#7f0f2e]/25 bg-white px-8 py-3 text-[12px] font-semibold tracking-[0.1em] text-[#7f0f2e] uppercase shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#7f0f2e]/55 hover:bg-[#fdf6e7]"
+            >
+              View all destinations
+              <ChevronRight size={15} />
             </Link>
-          ))}
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

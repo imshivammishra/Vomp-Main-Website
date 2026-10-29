@@ -3,6 +3,9 @@ import { getCities, getReviews } from "@/lib/api";
 import HomeSubnav from "@/components/home/HomeSubnav";
 import HomeHero from "@/components/home/HomeHero";
 import PhotoTiles, { type PhotoTile } from "@/components/home/PhotoTiles";
+import PromiseBand from "@/components/home/PromiseBand";
+import ParallaxVideo from "@/components/home/ParallaxVideo";
+import FilmReel from "@/components/home/FilmReel";
 import CityLinks from "@/components/home/CityLinks";
 import NewsletterBand from "@/components/home/NewsletterBand";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
@@ -77,18 +80,23 @@ export default async function HomePage() {
       <HomeHero />
       <PhotoTiles
         id="venues-worth-booking"
-        title="Venues Worth Booking"
+        eyebrow="By Occasion"
+        title="Venues worth booking"
         subtitle="Discover spaces for weddings, corporate events, galas, and more."
         tiles={BOOKING_TILES}
       />
+      <ParallaxVideo />
+      <PromiseBand />
       <PhotoTiles
         id="curated-destinations"
-        title="Curated Destinations"
+        eyebrow="By Destination"
+        title="Curated destinations"
         subtitle="Palaces, beaches, forts, and desert escapes across India."
         tiles={DESTINATION_TILES}
       />
+      <FilmReel />
       <CityLinks cities={cities} />
-      {reviews.length > 0 && <TestimonialsSection reviews={reviews} />}
+      <TestimonialsSection reviews={reviews} />
       <NewsletterBand />
     </>
   );
