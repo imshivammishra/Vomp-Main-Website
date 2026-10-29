@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { submitEnquiry } from "@/lib/api";
 import { CITIES, enquirySchema, EVENT_TYPES, GUEST_BANDS } from "@/lib/validations";
 
-type Status = "idle" | "sending" | "success" | "error";
+type Status = "idle" | "sending" | "success" | "error" | "rateLimited";
 
 export default function EnquiryForm({ venueName }: { venueName?: string }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -37,8 +37,14 @@ export default function EnquiryForm({ venueName }: { venueName?: string }) {
         ? `[${venueName}] ${raw.message ?? ""}`
         : raw.message;
     const result = await submitEnquiry(venueName ? { ...parsed.data, message } : parsed.data);
-    setStatus(result.ok ? "success" : "error");
-    if (result.ok) (e.target as HTMLFormElement).reset();
+    if (result.ok) {
+      setStatus("success");
+      (e.target as HTMLFormElement).reset();
+    } else if (result.status === 429) {
+      setStatus("rateLimited");
+    } else {
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -193,10 +199,19 @@ export default function EnquiryForm({ venueName }: { venueName?: string }) {
           contact@venueonmyplate.in.
         </p>
       )}
+      {status === "rateLimited" && (
+        <p
+          role="alert"
+          className="border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+        >
+          You&apos;ve sent a few enquiries recently. Please wait a few minutes and try again — or
+          email us directly at contact@venueonmyplate.in.
+        </p>
+      )}
       <button
         type="submit"
         disabled={status === "sending"}
-        className="s-btn-dark btn-sheen rounded-full px-8 py-3 text-[15px] disabled:cursor-wait disabled:opacity-70"
+        className="s-btn-dark btn-sheen w-full rounded-full px-8 py-3.5 text-[15px] disabled:cursor-wait disabled:opacity-70 sm:w-auto"
       >
         {status === "sending" ? "Sending…" : "Get my venue options"}
       </button>

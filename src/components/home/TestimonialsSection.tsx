@@ -135,7 +135,7 @@ export default function TestimonialsSection({ reviews }: { reviews: Review[] }) 
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className="relative overflow-hidden bg-[#fdf9f2] py-24 md:py-32"
+      className="relative overflow-hidden bg-[#fdf9f2] py-16 md:py-32"
     >
       <div
         aria-hidden
@@ -153,7 +153,7 @@ export default function TestimonialsSection({ reviews }: { reviews: Review[] }) 
             </div>
             <h2
               id="testimonials-heading"
-              className="font-display text-[34px] leading-[1.04] text-[#1a0a0d] md:text-[52px]"
+              className="font-display text-[30px] leading-[1.06] text-[#1a0a0d] sm:text-[34px] md:text-[52px]"
             >
               Trusted with life&apos;s biggest days
               <span className="text-[#a67c1a]">.</span>

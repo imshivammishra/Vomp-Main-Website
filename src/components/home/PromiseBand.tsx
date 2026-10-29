@@ -24,7 +24,7 @@ export default function PromiseBand() {
   return (
     <section
       aria-labelledby="promise-heading"
-      className="relative overflow-hidden bg-[#fdf9f2] pt-20 pb-20 md:pt-28 md:pb-28"
+      className="relative overflow-hidden bg-[#fdf9f2] pt-14 pb-14 md:pt-28 md:pb-28"
     >
       <div
         aria-hidden
@@ -42,12 +42,12 @@ export default function PromiseBand() {
             </div>
             <h2
               id="promise-heading"
-              className="font-display mx-auto max-w-[760px] text-[34px] leading-[1.06] text-[#1a0a0d] md:text-[52px]"
+              className="font-display mx-auto max-w-[760px] text-[30px] leading-[1.08] text-[#1a0a0d] sm:text-[34px] md:text-[52px]"
             >
               Luxury is in the details we handle for you
               <span className="text-[#a67c1a]">.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[560px] text-[15px] leading-relaxed text-[#6b5b5d]">
+            <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#6b5b5d] md:mt-4 md:text-[15px]">
               A quieter, more considered way to find a venue worthy of your occasion.
             </p>
           </div>

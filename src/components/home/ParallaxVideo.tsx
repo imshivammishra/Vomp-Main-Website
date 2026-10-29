@@ -62,7 +62,7 @@ export default function ParallaxVideo() {
     <section
       ref={sectionRef}
       aria-label="Celebrations, beautifully staged"
-      className="parallax-stage mt-20 flex min-h-[72vh] items-center md:mt-28"
+      className="parallax-stage mt-14 flex min-h-[64vh] items-center md:mt-28 md:min-h-[72vh]"
     >
       <video
         ref={videoRef}
@@ -79,7 +79,7 @@ export default function ParallaxVideo() {
       </video>
       <div aria-hidden className="parallax-scrim" />
 
-      <div className="relative z-[2] mx-auto w-full max-w-[1180px] px-5 py-24 text-center md:px-10 md:py-32">
+      <div className="relative z-[2] mx-auto w-full max-w-[1180px] px-5 py-16 text-center md:px-10 md:py-32">
         <div className="mb-5 flex items-center justify-center gap-3">
           <span className="h-px w-8 bg-[#d4a437]/60" />
           <p className="text-[10px] font-semibold tracking-[0.4em] text-[#f6de9a] uppercase">
@@ -87,11 +87,11 @@ export default function ParallaxVideo() {
           </p>
           <span className="h-px w-8 bg-[#d4a437]/60" />
         </div>
-        <h2 className="font-display mx-auto max-w-[840px] text-[38px] leading-[1.04] text-white md:text-[66px]">
+        <h2 className="font-display mx-auto max-w-[840px] text-[32px] leading-[1.06] text-white sm:text-[38px] md:text-[66px]">
           Celebrations, beautifully staged
           <span className="text-[#d4a437]">.</span>
         </h2>
-        <p className="mx-auto mt-5 max-w-[560px] text-[15px] leading-relaxed text-white/70 md:text-[17px]">
+        <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-relaxed text-white/70 md:mt-5 md:text-[17px]">
           From the first baraat to the final toast — we match the mood of your moment to a setting
           that makes it unforgettable.
         </p>

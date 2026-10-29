@@ -99,7 +99,9 @@ export async function getReviews(venue?: string): Promise<Review[]> {
   return (await backend<Review[]>(path)) ?? [];
 }
 
-export async function submitEnquiry(payload: Record<string, string>): Promise<{ ok: boolean }> {
+export async function submitEnquiry(
+  payload: Record<string, string>
+): Promise<{ ok: boolean; status?: number }> {
   const body = JSON.stringify({ ...payload, source: "website" });
   const headers = { "Content-Type": "application/json" };
   // Try the same-origin path first: in every environment /api is proxied to the
@@ -109,6 +111,7 @@ export async function submitEnquiry(payload: Record<string, string>): Promise<{ 
   const endpoints = Array.from(
     new Set(["/api/v1/public/enquiries", `${PUBLIC_BASE}/api/v1/public/enquiries`])
   );
+  let lastStatus: number | undefined;
   for (const url of endpoints) {
     try {
       const res = await fetch(url, {
@@ -117,10 +120,14 @@ export async function submitEnquiry(payload: Record<string, string>): Promise<{ 
         headers,
         body,
       });
-      if (res.ok) return { ok: true };
+      lastStatus = res.status;
+      if (res.ok) return { ok: true, status: res.status };
+      // A rate-limit (429) or validation (4xx) response is a definitive answer
+      // from the backend — retrying the other endpoint would hit the same limit.
+      if (res.status >= 400 && res.status < 500) return { ok: false, status: res.status };
     } catch {
       // Network/CORS failure — try the next candidate endpoint.
     }
   }
-  return { ok: false };
+  return { ok: false, status: lastStatus };
 }

@@ -36,7 +36,7 @@ export default function CityLinks({ cities }: { cities: City[] }) {
   const all = [...known, ...extras].slice(0, 20);
 
   return (
-    <section aria-labelledby="cities-heading" className="bg-white pt-20 md:pt-28">
+    <section aria-labelledby="cities-heading" className="bg-white pt-14 md:pt-28">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <Reveal>
           <div className="text-center">
@@ -49,19 +49,19 @@ export default function CityLinks({ cities }: { cities: City[] }) {
             </div>
             <h2
               id="cities-heading"
-              className="font-display text-[34px] leading-[1.04] text-[#1d1d1f] md:text-[52px]"
+              className="font-display text-[30px] leading-[1.06] text-[#1d1d1f] sm:text-[34px] md:text-[52px]"
             >
               Find venues by city
               <span className="text-[#a67c1a]">.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-relaxed text-[#6b6b6b] md:text-[16px]">
+            <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#6b6b6b] md:mt-4 md:text-[16px]">
               From lake palaces to coastal estates — explore celebration spaces across India.
             </p>
           </div>
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="mx-auto mt-12 grid max-w-[1180px] grid-cols-2 gap-x-6 gap-y-0 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-x-10">
+          <div className="mx-auto mt-10 grid max-w-[1180px] grid-cols-2 gap-x-6 gap-y-0 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-x-10">
             {all.map((city) => (
               <Link
                 key={city.label}

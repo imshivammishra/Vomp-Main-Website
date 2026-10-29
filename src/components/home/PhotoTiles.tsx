@@ -24,7 +24,7 @@ export default function PhotoTiles({
   tiles: PhotoTile[];
 }) {
   return (
-    <section aria-labelledby={id} className="bg-white pt-20 md:pt-28">
+    <section aria-labelledby={id} className="bg-white pt-14 md:pt-28">
       <div className="mx-auto max-w-[1440px] px-5 md:px-10">
         <Reveal>
           <div className="text-center">
@@ -37,18 +37,18 @@ export default function PhotoTiles({
             </div>
             <h2
               id={id}
-              className="font-display text-[34px] leading-[1.04] text-[#1d1d1f] md:text-[52px]"
+              className="font-display text-[30px] leading-[1.06] text-[#1d1d1f] sm:text-[34px] md:text-[52px]"
             >
               {title}
               <span className="text-[#a67c1a]">.</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-[560px] text-[14px] leading-relaxed text-[#6b6b6b] md:text-[16px]">
+            <p className="mx-auto mt-3 max-w-[560px] text-[14px] leading-relaxed text-[#6b6b6b] md:mt-4 md:text-[16px]">
               {subtitle}
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-4 md:mt-16 md:grid-cols-4 md:gap-6">
+        <div className="mt-10 grid grid-cols-2 gap-4 md:mt-16 md:grid-cols-4 md:gap-6">
           {tiles.map((tile, i) => (
             <Reveal key={tile.label} delay={i * 90} scale>
               <Link href={tile.href} className="group block">

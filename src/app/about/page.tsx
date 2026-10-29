@@ -149,7 +149,7 @@ export default async function AboutPage() {
       </div>
 
       {/* ── Approach / story ── */}
-      <div className="mx-auto max-w-7xl px-5 pt-20 md:px-8 md:pt-28">
+      <div className="mx-auto max-w-7xl px-5 pt-14 md:px-8 md:pt-28">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal scale>
             <div className="img-zoom relative aspect-[5/4] overflow-hidden rounded-[22px] border border-[#ece0cc] shadow-[0_26px_60px_-30px_rgba(92,10,32,0.3)]">
@@ -189,7 +189,7 @@ export default async function AboutPage() {
       </div>
 
       {/* ── Values ── */}
-      <div className="mx-auto max-w-7xl px-5 pt-20 md:px-8 md:pt-28">
+      <div className="mx-auto max-w-7xl px-5 pt-14 md:px-8 md:pt-28">
         <Reveal>
           <div className="text-center">
             <div className="mb-4 flex items-center justify-center gap-3">
@@ -227,7 +227,7 @@ export default async function AboutPage() {
       </div>
 
       {/* ── How we work ── */}
-      <div className="relative mt-20 overflow-hidden bg-[#fdf9f2] py-20 md:mt-28 md:py-28">
+      <div className="relative mt-14 overflow-hidden bg-[#fdf9f2] py-14 md:mt-28 md:py-28">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_70%_at_50%_-10%,rgba(212,164,55,0.1),transparent_70%)]"
@@ -265,7 +265,7 @@ export default async function AboutPage() {
       </div>
 
       {/* ── Film / visual ── */}
-      <div className="mx-auto max-w-7xl px-5 pt-20 md:px-8 md:pt-28">
+      <div className="mx-auto max-w-7xl px-5 pt-14 md:px-8 md:pt-28">
         <Reveal>
           <div className="mb-10 text-center">
             <div className="mb-4 flex items-center justify-center gap-3">
@@ -288,7 +288,7 @@ export default async function AboutPage() {
         </div>
       </div>
 
-      <div className="mt-20">
+      <div className="mt-14 md:mt-20">
         <CTASection
           title="Meet us over your requirements."
           copy="Two minutes of details — one business day to a shortlist."

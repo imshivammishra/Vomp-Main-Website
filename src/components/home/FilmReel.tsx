@@ -82,22 +82,22 @@ export default function FilmReel() {
   return (
     <section
       aria-label="Celebrations in motion"
-      className="relative mt-20 overflow-hidden bg-[#140308] md:mt-28"
-      style={{ paddingTop: "clamp(72px, 8vw, 128px)", paddingBottom: "clamp(72px, 8vw, 128px)" }}
+      className="relative mt-14 overflow-hidden bg-[#140308] md:mt-28"
+      style={{ paddingTop: "clamp(56px, 8vw, 128px)", paddingBottom: "clamp(56px, 8vw, 128px)" }}
     >
       <div aria-hidden className="lux-glow-wine -left-32 top-10 h-[420px] w-[420px]" />
       <div aria-hidden className="lux-glow-gold -right-24 bottom-0 h-[360px] w-[360px]" />
 
       <div className="relative mx-auto max-w-[1280px] px-5 md:px-10">
-        <div className="mb-12 grid items-end gap-6 md:mb-16 md:grid-cols-[1fr_auto]">
+        <div className="mb-10 grid items-end gap-5 md:mb-16 md:grid-cols-[1fr_auto] md:gap-6">
           <div>
-            <div className="mb-5 flex items-center gap-3">
+            <div className="mb-4 flex items-center gap-3 md:mb-5">
               <span className="h-px w-8 bg-[#d4a437]/60" />
               <p className="text-[10px] font-semibold tracking-[0.4em] text-[#d4a437]/80 uppercase">
                 Venue Films
               </p>
             </div>
-            <h2 className="font-display text-[40px] leading-[0.98] text-white md:text-[64px]">
+            <h2 className="font-display text-[34px] leading-[1.0] text-white sm:text-[40px] md:text-[64px]">
               Celebrations in motion
               <span className="text-[#d4a437]">.</span>
             </h2>
