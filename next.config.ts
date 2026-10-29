@@ -46,11 +46,18 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   experimental: { optimizePackageImports: ["lucide-react"] },
 
+  // Disable webpack persistent filesystem cache to avoid OneDrive EPERM crashes
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  webpack: (config: any, { dev }: { dev: boolean }) => {
+    if (dev) {
+      config.cache = false;
+    }
+    return config;
+  },
+
   images: {
     loader: "custom",
     loaderFile: "./src/lib/image-loader.ts",
-    // Declare all quality values used across the project
-    qualities: [70, 72, 75, 80, 85, 88, 90, 95],
   },
   async rewrites() {
     return [

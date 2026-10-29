@@ -76,7 +76,7 @@ function useIsActive() {
 
 const navLinkClass = (active: boolean) =>
   cn(
-    "group relative flex items-center gap-1 px-3 py-2 font-display text-[17px] font-semibold tracking-[0.015em] transition-colors duration-200 xl:px-3.5",
+    "group relative flex items-center gap-1 px-3 py-2 text-[15px] font-semibold tracking-[0.02em] transition-colors duration-200 xl:px-3.5",
     active ? "text-[#f4d88e]" : "text-[#fbf3df]/78 hover:text-[#fff8e8]"
   );
 
@@ -132,7 +132,7 @@ function DesktopNav({ items }: { items: NavItem[] }) {
                     <p className="text-[9px] font-semibold tracking-[0.32em] text-[#e7c77e] uppercase">
                       {item.label}
                     </p>
-                    <p className="mt-1 font-display text-[19px] text-[#fff8e8]">
+                    <p className="mt-1 text-[17px] font-semibold text-[#fff8e8]">
                       Choose your celebration
                     </p>
                   </div>
@@ -144,7 +144,7 @@ function DesktopNav({ items }: { items: NavItem[] }) {
                         className="group/item flex items-center justify-between border-b border-[#c6a04a]/15 px-3 py-2.5 transition last:border-0 hover:bg-[#f3e3c4]"
                       >
                         <span>
-                          <span className="block font-display text-[16px] font-semibold text-[#4a0719] group-hover/item:text-[#7f0f2e]">
+                          <span className="block text-[15px] font-semibold text-[#4a0719] group-hover/item:text-[#7f0f2e]">
                             {child.label}
                           </span>
                           {child.note && (
@@ -280,7 +280,7 @@ export default function Header() {
             </a>
             <Link
               href="/contact"
-              className="ml-2 hidden items-center gap-2 border border-[#f0d790] bg-[#d9b45b] px-5 py-2.5 font-display text-[16px] font-semibold whitespace-nowrap text-[#3b0514] shadow-[0_10px_24px_-16px_rgba(0,0,0,0.9)] transition hover:bg-[#f0d790] xl:inline-flex"
+              className="ml-2 hidden items-center gap-2 border border-[#f0d790] bg-[#d9b45b] px-5 py-2.5 text-[14px] font-semibold tracking-[0.02em] whitespace-nowrap text-[#3b0514] shadow-[0_10px_24px_-16px_rgba(0,0,0,0.9)] transition hover:bg-[#f0d790] xl:inline-flex"
             >
               Request a proposal
               <ArrowRight size={14} />
@@ -332,7 +332,7 @@ export default function Header() {
                     <span>
                       <span
                         className={cn(
-                          "font-display block text-[26px] leading-tight font-semibold transition-colors group-hover:text-[#f4d88e]",
+                          "block text-[22px] leading-tight font-semibold tracking-[-0.01em] transition-colors group-hover:text-[#f4d88e]",
                           isActive(link.href) ? "text-[#f4d88e]" : "text-[#fff8e8]"
                         )}
                       >
@@ -354,7 +354,7 @@ export default function Header() {
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-center gap-2 border border-[#f0d790] bg-[#d9b45b] px-6 py-3.5 font-display text-[17px] font-semibold text-[#3b0514]"
+                  className="flex items-center justify-center gap-2 border border-[#f0d790] bg-[#d9b45b] px-6 py-3.5 text-[15px] font-semibold tracking-[0.02em] text-[#3b0514]"
                 >
                   Request a proposal
                   <ArrowRight size={15} />

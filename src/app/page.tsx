@@ -1,34 +1,95 @@
 ﻿import type { Metadata } from "next";
-import { getCities, getVenues } from "@/lib/api";
+import { getCities, getReviews } from "@/lib/api";
+import HomeSubnav from "@/components/home/HomeSubnav";
 import HomeHero from "@/components/home/HomeHero";
-import CategoryTiles from "@/components/home/CategoryTiles";
-import TrendingVenues from "@/components/home/TrendingVenues";
-import CitiesSection from "@/components/home/CitiesSection";
-import CTASection from "@/components/home/CTASection";
+import PhotoTiles, { type PhotoTile } from "@/components/home/PhotoTiles";
+import CityLinks from "@/components/home/CityLinks";
+import NewsletterBand from "@/components/home/NewsletterBand";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 
 export const metadata: Metadata = {
-  title: "Venue On My Plate — The perfect venue for your celebration",
+  title: "Venue On My Plate — Every Celebration Starts Here",
   description:
     "Discover curated palaces, resorts, lawns and ballrooms for weddings, birthdays and corporate events across India. Every venue personally visited or vetted.",
   alternates: { canonical: "https://venueonmyplate.in/" },
 };
 
-export default async function HomePage() {
-  const [venues, cities] = await Promise.all([getVenues(), getCities()]);
+const BOOKING_TILES: PhotoTile[] = [
+  {
+    label: "Wedding Venues",
+    href: "/wedding-venues",
+    image: "/images/ps/weddings.jpg",
+    alt: "Crystal chandeliers above a luxury wedding banquet hall",
+  },
+  {
+    label: "Birthday Venues",
+    href: "/venues?event=Birthday",
+    image: "/images/ps/birthdays.jpg",
+    alt: "Birthday celebration with a candlelit cake",
+  },
+  {
+    label: "Sangeet & Haldi",
+    href: "/venues?event=Pre-wedding",
+    image: "/images/ps/sangeet.jpg",
+    alt: "Marigold and bangle details from a haldi ceremony",
+  },
+  {
+    label: "Corporate Venues",
+    href: "/venues?event=Corporate",
+    image: "/images/ps/corporate.jpg",
+    alt: "Audience at a corporate conference",
+  },
+];
 
-  const featured = venues.filter((v) => v.featured);
-  const trending = featured.length >= 6 ? featured.slice(0, 9) : venues.slice(0, 9);
+const DESTINATION_TILES: PhotoTile[] = [
+  {
+    label: "Udaipur",
+    href: "/cities/udaipur",
+    image: "/images/ps/hero-c.jpg",
+    alt: "Palace courtyard wedding venue in Udaipur",
+  },
+  {
+    label: "Jaipur",
+    href: "/cities/jaipur",
+    image: "/images/ps/jaipur.jpg",
+    alt: "Jaipur fort glowing at sunset",
+  },
+  {
+    label: "Goa",
+    href: "/cities/goa",
+    image: "/images/ps/resort.jpg",
+    alt: "Palm-lined beach resort in Goa",
+  },
+  {
+    label: "Jaisalmer",
+    href: "/cities/jaisalmer",
+    image: "/images/ps/jaisalmer.jpg",
+    alt: "Golden sand dunes in Jaisalmer",
+  },
+];
+
+export default async function HomePage() {
+  const [cities, reviews] = await Promise.all([getCities(), getReviews()]);
 
   return (
     <>
+      <HomeSubnav />
       <HomeHero />
-      <CategoryTiles />
-      <TrendingVenues venues={trending} />
-      {cities.length > 0 && <CitiesSection cities={cities} />}
-      <CTASection
-        title="Can't find the right venue?"
-        copy="Share your date and guest count — we will send a personal shortlist within one business day."
+      <PhotoTiles
+        id="venues-worth-booking"
+        title="Venues Worth Booking"
+        subtitle="Discover spaces for weddings, corporate events, galas, and more."
+        tiles={BOOKING_TILES}
       />
+      <PhotoTiles
+        id="curated-destinations"
+        title="Curated Destinations"
+        subtitle="Palaces, beaches, forts, and desert escapes across India."
+        tiles={DESTINATION_TILES}
+      />
+      <CityLinks cities={cities} />
+      {reviews.length > 0 && <TestimonialsSection reviews={reviews} />}
+      <NewsletterBand />
     </>
   );
 }

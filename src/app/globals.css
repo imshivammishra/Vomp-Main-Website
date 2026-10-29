@@ -701,61 +701,6 @@ details[open] .faq-a {
   page-break-inside: avoid;
 }
 
-/* Luxury button */
-.lux-btn {
-  @apply inline-flex items-center justify-center rounded-full border border-[#7f0f2e]/30 bg-white px-9 py-3.5 text-[14px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:bg-[#f5efe6] hover:border-[#7f0f2e]/60 hover:-translate-y-0.5 active:scale-[0.98];
-}
-
-/* Luxury outline button */
-.lux-btn-outline {
-  @apply inline-flex items-center justify-center rounded-full border border-[#e8ded2] bg-white px-8 py-3 text-[12px] font-semibold text-[#1a0a0d] tracking-[0.1em] uppercase shadow-sm transition-all duration-300 hover:border-[#c6a04a]/60 hover:text-[#7f0f2e] hover:-translate-y-0.5 active:scale-[0.98];
-}
-
-/* Luxury link */
-.lux-link {
-  @apply text-[#8c736f] underline decoration-[#c6a04a]/30 underline-offset-4 transition-all duration-300 hover:text-[#7f0f2e] hover:decoration-[#7f0f2e]/60;
-}
-
-/* Hairline divider */
-.lux-hairline {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
-}
-
-/* Ornamental divider */
-.lux-ornament-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  color: #c6a04a;
-}
-.lux-ornament-divider::before,
-.lux-ornament-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #e8ded2, transparent);
-}
-
-/* Luxury card */
-.lux-card {
-  @apply rounded-[24px] border border-[#e8ded2] bg-white transition-all duration-500 hover:border-[#c6a04a]/40 hover:-translate-y-1 hover:shadow-[0_24px_48px_-16px_rgba(15,8,10,0.06)];
-}
-
-/* Body text colors */
-.lux-text-body {
-  color: #4a3a3c;
-}
-.lux-text-muted {
-  color: #8c736f;
-}
-
-/* Elegant input */
-.lux-input {
-  @apply w-full rounded-[14px] border border-[#e8ded2] bg-[#fffaf0] px-5 py-3.5 text-[14px] text-[#1a0a0d] placeholder:text-[#8c736f] focus:outline-none focus:ring-2 focus:ring-[#7f0f2e]/30 focus:border-[#7f0f2e] transition-all duration-300;
-}
-
 /* ── Partyslate-inspired utilities ── */
 
 /* Clean primary button */
