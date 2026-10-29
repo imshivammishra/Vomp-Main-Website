@@ -55,13 +55,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: production
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST || secrets.CONTABO_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER || secrets.CONTABO_USER }}
+      VPS_PORT: ${{ secrets.VPS_PORT || secrets.CONTABO_PORT }}
+      VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY || secrets.CONTABO_SSH_KEY || secrets.SSH_PRIVATE_KEY }}
 
     steps:
       - name: Validate deployment secrets
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
         run: |
           test -n "$VPS_HOST" || {
             echo "::error::Missing VPS_HOST"
@@ -77,10 +78,6 @@ jobs:
           }
 
       - name: Configure SSH
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
-          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
         run: |
           install -m 700 -d ~/.ssh
           printf '%s\n' "$VPS_SSH_KEY" > ~/.ssh/vomp_deploy
@@ -91,10 +88,6 @@ jobs:
             >> ~/.ssh/known_hosts
 
       - name: Deploy website
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PORT: ${{ secrets.VPS_PORT }}
         run: |
           PORT="${VPS_PORT:-22}"
 
