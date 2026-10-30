@@ -104,12 +104,16 @@ export async function submitEnquiry(
 ): Promise<{ ok: boolean; status?: number }> {
   const body = JSON.stringify({ ...payload, source: "website" });
   const headers = { "Content-Type": "application/json" };
-  // Try the same-origin path first: in every environment /api is proxied to the
-  // backend (Next.js rewrites in dev, Nginx in production), so the browser never
-  // makes a cross-origin request and cannot be blocked by CORS. Fall back to the
-  // configured public API base only if the same-origin attempt is unavailable.
+  // Try same-origin first (rewritten/proxied in every environment), then fall back
+  // to direct API-base URLs. Support both the public-v1 endpoint and the admin
+  // ingress endpoint so website submissions keep working across backend rollouts.
   const endpoints = Array.from(
-    new Set(["/api/v1/public/enquiries", `${PUBLIC_BASE}/api/v1/public/enquiries`])
+    new Set([
+      "/api/v1/public/enquiries",
+      "/api/enquiries",
+      `${PUBLIC_BASE}/api/v1/public/enquiries`,
+      `${PUBLIC_BASE}/api/enquiries`,
+    ])
   );
   let lastStatus: number | undefined;
   for (const url of endpoints) {

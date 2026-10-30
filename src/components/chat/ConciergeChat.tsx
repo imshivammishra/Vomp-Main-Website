@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Phone, Send, X } from "lucide-react";
 import { conciergeReply, QUICK_QUESTIONS, type BotLink, type ChatVenue } from "@/lib/concierge";
-import { getConfig } from "@/lib/config";
+import { submitEnquiry } from "@/lib/api";
 import type { Venue } from "@/types";
 
 interface Msg {
@@ -111,26 +111,16 @@ export default function ConciergeChat({ venues: initialVenues = [] }: { venues?:
             const done = { ...leadData, city: trimmed };
             setLead("idle");
             // Forward lead to the workspace API (same-origin in production).
-            try {
-              const API = getConfig().publicApiBase;
-              fetch(`${API}/api/v1/public/enquiries`, {
-                method: "POST",
-                credentials: "same-origin",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  name: done.name,
-                  phone: done.phone,
-                  city: done.city,
-                  eventType: "Wedding",
-                  eventDate: "",
-                  guestCount: "",
-                  message: `Hi, please call me about venues in ${done.city}. (via concierge chat)`,
-                  source: "concierge-chat",
-                }),
-              }).catch(() => {});
-            } catch {
-              /* workspace offline */
-            }
+            submitEnquiry({
+              name: done.name,
+              phone: done.phone,
+              email: "not-provided@venueonmyplate.in",
+              city: done.city,
+              eventType: "Wedding",
+              eventDate: "Flexible",
+              guestCount: "Not specified",
+              message: `Hi, please call me about venues in ${done.city}. (via concierge chat)`,
+            }).catch(() => {});
             const q = new URLSearchParams({
               name: done.name,
               phone: done.phone,
